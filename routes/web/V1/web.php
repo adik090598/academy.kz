@@ -20,9 +20,11 @@ Route::get('/secure/config/cache-clear', ['uses' => 'ConfigController@cacheClear
 Route::get('/secure/config/key-generate', ['uses' => 'ConfigController@keyGenerate']);
 Route::get('/secure/config/optimize', ['uses' => 'ConfigController@optimize']);
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     //Quizzes
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'quiz.index']);
+    Route::get('/quiz/create', ['uses' => 'QuizController@create', 'as' => 'quiz.create']);
+    Route::get('/quiz/edit', ['uses' => 'QuizController@edit', 'as' => 'quiz.edit']);
     Route::post('/store', ['uses' => 'QuizController@store', 'as' => 'quiz.store']);
     Route::post('/update', ['uses' => 'QuizController@update', 'as' => 'quiz.update']);
     Route::post('/delete', ['uses' => 'QuizController@delete', 'as' => 'quiz.delete']);
@@ -34,3 +36,9 @@ Route::group(['namespace' => 'Core', 'middleware' => 'auth'], function () {
 
 
 });
+
+Route::group(['namespace' => 'Front', 'middleware' => 'auth'], function () {
+    Route::get('/welcome', ['uses' => 'HomeController@index', 'as' => 'welcome']);
+
+});
+

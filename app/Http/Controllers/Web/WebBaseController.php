@@ -35,4 +35,14 @@ class WebBaseController extends Controller
     {
         return view("modules.admin.pages.$viewPath", $compact);
     }
+
+    public function frontPagesView($viewPath, $compact = [])
+    {
+        return view("modules.front.pages.$viewPath", $compact);
+    }
+
+    public function frontView($viewPath, $compact = [])
+    {
+        return view("modules.front.$viewPath", $compact);
+    }
 }

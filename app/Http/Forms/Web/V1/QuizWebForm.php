@@ -20,6 +20,8 @@ class QuizWebForm implements WithForm
         return array_merge(
             $array,
             FormUtil::input('name', 'Математика', 'Название',
-                'text', false, $value ? $value->name : ''));
+                'text', false, $value ? $value->name : ''),
+        FormUtil::input('image', '', 'Фото',
+            'file', !$value ? true : false));
     }
 }

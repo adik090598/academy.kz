@@ -16,6 +16,7 @@ class CreateQuizzesTable extends Migration
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('image_path');
             $table->timestamps();
             $table->softDeletes();
         });

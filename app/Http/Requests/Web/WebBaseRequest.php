@@ -35,6 +35,10 @@ abstract class WebBaseRequest extends BaseRequest
         return strpos(request()->route()->getName(), 'delete');
     }
 
+    public function isEdit() {
+        return strpos(request()->route()->getName(), 'edit');
+    }
+
     public function isEditOrUpdate() {
         return strpos(request()->route()->getName(), 'edit') || strpos(request()->route()->getName(), 'update');
 

@@ -10,5 +10,8 @@ class Quiz extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['name'];
+
+    public const IMAGE_DIRECTORY = "images/quizzes";
+
+    protected $fillable = ['name', 'image_path'];
 }

@@ -12,8 +12,10 @@
             <div class="card h-100">
                 <header class="card-header">
                     <h2 class="h4 card-header-title">Тесты</h2>
-                    <button class="btn btn-outline-primary mt-3" data-toggle="modal"
-                            data-target="#addquiz">Добавить <i class="ti ti-plus"></i></button>
+                    <a href="{{route('quiz.create')}}" class="btn btn-outline-primary mt-3">
+                        Добавить
+                        <i class="ti ti-plus"></i>
+                    </a>
                 </header>
                 <div class="card-body pt-0">
                     @if($quizzes->items())
@@ -33,9 +35,9 @@
                                     <td>{{$quiz->name}}</td>
                                     <td>{{$quiz->created_at}}</td>
                                     <td class="d-inline-block">
-                                        <button class="btn btn-outline-primary btn-sm" data-toggle="modal"
-                                                data-target="#editquiz{{$quiz->id}}"><i class="ti ti-pencil"></i>
-                                        </button>
+                                        <a href="{{route('quiz.edit', ['id' => $quiz->id])}}" class="btn btn-outline-primary btn-sm">
+                                            <i class="ti ti-pencil"></i>
+                                        </a>
                                         <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
                                                 data-target="#delete{{$quiz->id}}"><i class="ti ti-trash"></i>
                                         </button>
