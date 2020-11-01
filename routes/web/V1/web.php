@@ -37,7 +37,7 @@ Route::group(['namespace' => 'Core', 'middleware' => 'auth'], function () {
 
 });
 
-Route::group(['namespace' => 'Front', 'middleware' => 'auth'], function () {
+Route::group(['namespace' => 'Front',], function () {
     Route::get('/welcome', ['uses' => 'HomeController@index', 'as' => 'welcome']);
 
 });

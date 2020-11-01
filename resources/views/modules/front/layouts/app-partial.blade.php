@@ -6,7 +6,9 @@
     @yield('styles')
 </head>
 <body>
+
 <main class="d-flex flex-column u-hero u-hero--end mnh-100vh">
+    @include('modules.front.parts.navigation')
     <div class="container py-11 my-auto">
         @yield('content')
     </div>

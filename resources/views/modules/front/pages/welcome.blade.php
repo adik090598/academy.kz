@@ -1,29 +1,25 @@
 @extends('modules.front.layouts.app-partial')
-@section('content')
-    <div class="row">
-        <div class="col-md-6 offset-3">
-            <div class="card">
-                <div class="card-header">
-                    <h1 class="text-center">Test</h1>
-                </div>
-                <div class="card-body">
-                    @auth
-                        <a href="{{route('home')}}"
-                           class="btn btn-primary btn-block">Система</a>
-                    @endauth
+@section('styles')
+    <link rel="stylesheet" href="{{asset('modules/front/assets/css/welcome.css')}}">
+    @endsection
 
-                    @guest
-                        @if(Route::has('login'))
-                            <a href="{{route('login')}}"
-                               class="btn btn-primary btn-block">Вход</a>
-                        @endif
-                        @if(Route::has('register'))
-                            <a href="{{route('register')}}"
-                               class="btn btn-primary btn-block">Регистрация</a>
-                        @endif
-                    @endguest
-                </div>
+@section('content')
+<header>
+    <div class="row">
+        <div class="col-7">
+            <div class="row justify-content-center">
+                <p class="academykz"> AcademyKZ </p>
             </div>
+            <p class="h1">Білім әлеміне қош келдіңіздер!</p>
+            <p>
+                Сіз мүнда ашық сабактар, сабақ жоспары, тәрбие сағаттарды,<br>
+                және басқа да мұғалімдерге керекті құжаттарды таба аласыз.
+            </p>
+
+        </div>
+        <div class="col-5">
+
         </div>
     </div>
+</header>
 @endsection
