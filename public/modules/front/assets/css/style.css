@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+    margin: 0 0 70px 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    background: #FAFBFF;
+    padding: 50px;
+}
+
+.homeNAvigation{
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 5px;
+    width: 100%;
+    height: 60px;
+    background: #00A0A3;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.homeNAvigation .container{
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.homeNAvigation .logo a{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    /* identical to box height */
+
+    color: #FFFFFF;
+}
+
+.homeNAvigation .nav ul{
+
+}
+
+.homeNAvigation .nav ul li{
+    display:inline;
+    margin-right: 32px;
+
+}
+
+.homeNAvigation .nav ul li a{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+/* identical to box height */
+
+
+    color: #FFFFFF;}
+
+.homeNAvigation .nav ul li:last-child{
+    margin-right: 0;
+}
+
+
+
+
+.account{
+    position: fixed;
+    padding: 20px 20px;
+    height: 260px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 32px;
+}
+
+.userInformation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.userInformation .userName{
+    width: 50%;
+}
+
+.userInformation .userProfile{
+    width: 40%;
+}
+
+.userProfile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.userProfile .userRank {
+    position: relative;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #323232;
+    border-radius: 100%;
+}
+
+.accountNav ul{
+    margin: 0 10px;
+    padding: 0;
+}
+
+.accountNav ul li{
+    list-style: none;
+    margin: 10px 0;
+    transition: 0.3s;
+}
+
+.accountNav ul li:hover{
+    margin: 10px 5px;
+    transition: 0.3s;
+}
+
+.accountNav ul li img{
+    margin: 1px 5px;
+    width: 20px;
+}
+.accountNav ul li a{
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #323232;
+}
+
+
+.text-medium-14{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+    color: #545252;
+}
+
+

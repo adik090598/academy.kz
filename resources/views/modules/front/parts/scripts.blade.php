@@ -5,7 +5,7 @@
 <script src="{{asset('modules/admin/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 <script src="{{asset('modules/admin/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
 <script src="{{asset('modules/admin/assets/vendor/chartjs-plugin-style/dist/chartjs-plugin-style.min.js')}}"></script>
-<script src="{{asset('modules/admin/assets/js/sidebar-nav.js')}}"></script>
+<script src="{{asset('modules/front/assets/js/sidebar-nav.js')}}"></script>
 <script src="{{asset('modules/admin/assets/js/main.js')}}"></script>
 <script src="{{asset('modules/admin/assets/js/charts/area-chart.js')}}"></script>
 <script src="{{asset('modules/admin/assets/js/charts/area-chart-small.js')}}"></script>

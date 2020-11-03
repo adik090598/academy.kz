@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-    @include('modules.admin.parts.head')
-    @include('modules.admin.parts.styles')
+    @include('modules.front.parts.head')
+    @include('modules.front.parts.styles')
     @yield('styles')
+    <link rel="stylesheet" href="{{asset('modules/front/assets/css/style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
-<x-admin.header :user="auth()->user()"/>
-<main class="u-main">
-    <x-admin.sidebar :user="auth()->user()"/>
-    <div class="u-content">
-        <div class="u-body">
-            @yield('content')
-        </div>
-        <x-admin.footer/>
-    </div>
-</main>
-@include('modules.admin.parts.scripts')
+@include('modules.front.parts.homeNavigation')
+<div class="container">
+    <main class="d-flex flex-column u-hero u-hero--end mnh-100vh">
+        @yield('content')
+    </main>
+</div>
+
+@include('modules.front.parts.scripts')
 @yield('scripts')
 </body>
 </html>

@@ -6,6 +6,9 @@ Route::group(['namespace' => 'Auth', 'verify' => true], function () {
 
     Route::get('/login', ['as' => 'login', 'uses' => 'LoginController@showLoginForm']);
     Route::post('/login', ['as' => 'login.post', 'uses' => 'LoginController@login']);
+    Route::get('/register', ['as' => 'register', 'uses' => 'RegisterController@showRegistrationForm']);
+    Route::post('/register', ['as' => 'register.post', 'uses' => 'RegisterController@create']);
+
     Route::group(['middleware' => 'auth'], function () {
         Route::post('logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
     });
@@ -21,6 +24,9 @@ Route::get('/secure/config/key-generate', ['uses' => 'ConfigController@keyGenera
 Route::get('/secure/config/optimize', ['uses' => 'ConfigController@optimize']);
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
+    //Users
+    Route::get('/user/edit', ['uses' => 'UserController@edit', 'as' => 'user.edit']);
+
     //Quizzes
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'quiz.index']);
     Route::get('/quiz/create', ['uses' => 'QuizController@create', 'as' => 'quiz.create']);
@@ -33,12 +39,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
 Route::group(['namespace' => 'Core', 'middleware' => 'auth'], function () {
     Route::get('/home', ['uses' => 'PageController@home', 'as' => 'home']);
     Route::get('/', ['uses' => 'PageController@home']);
-
-
 });
 
 Route::group(['namespace' => 'Front',], function () {
     Route::get('/welcome', ['uses' => 'HomeController@index', 'as' => 'welcome']);
-
+    Route::get('/home', ['uses' => 'HomeController@home', 'as' => 'homeFront']);
 });
 

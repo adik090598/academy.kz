@@ -11,4 +11,8 @@ class HomeController extends WebBaseController
     public function index() {
         return $this->frontPagesView('welcome');
     }
+
+    public function home() {
+        return $this->frontPagesView('home');
+    }
 }

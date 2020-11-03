@@ -60,12 +60,10 @@ class LoginController extends WebBaseController
 
     protected function validateLogin(Request $request)
     {
-
             $request->validate([
                 $this->username() => ['required','string',new IsAdmin()],
                 'password' => ['required','string'],
             ]);
-
     }
 
     protected function attemptLogin(Request $request)
