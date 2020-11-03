@@ -38,7 +38,6 @@ class QuizController extends WebBaseController
     {
         try {
             $path = $this->fileService->store($request->image, Quiz::IMAGE_DIRECTORY);
-            $path->asd;
             Quiz::create([
                 'name' => $request->name,
                 'image_path' => $path
@@ -55,7 +54,6 @@ class QuizController extends WebBaseController
         $quiz = Quiz::find($request->id);
         $quiz_web_form = QuizWebForm::inputGroups($quiz);
         return $this->adminPagesView('quiz.edit', compact( 'quiz_web_form', 'quiz'));
-
     }
 
     public function update(QuizWebRequest $request)

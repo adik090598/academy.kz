@@ -31,7 +31,7 @@
                    aria-haspopup="true" aria-expanded="false"
                    data-toggle="dropdown"
                    data-offset="0">
-                    <img class="u-header-avatar img-fluid rounded-circle mr-md-3" src="{{$user->avatar_path}}"
+                    <img class="u-header-avatar img-fluid rounded-circle mr-md-3" src="{{$user->profile_photo_path}}"
                          alt="User Profile">
                     <span class="text-dark d-none d-md-inline-flex align-items-center">
 								{{$user->name}}
@@ -52,8 +52,13 @@
                                             </a>
                                         </li>
                                     @endif
-
                                 @endforeach
+                                <li>
+                                    @csrf
+                                    <a href="{{route('user.edit', ['id' => $user->id])}}" class="link-dark">
+                                        Профиль
+                                    </a>
+                                </li> 
                                 <li>
                                     <form action="{{route('logout')}}" method="post" id="signOutForm">
                                         @csrf
@@ -62,7 +67,7 @@
                                             Выйти
                                         </a>
                                     </form>
-                                </li>
+                                </li> 
                             </ul>
                         </div>
                     </div>
