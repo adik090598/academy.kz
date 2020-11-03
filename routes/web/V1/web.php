@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Auth', 'verify' => true], function () {
+
     Route::get('/login', ['as' => 'login', 'uses' => 'LoginController@showLoginForm']);
     Route::post('/login', ['as' => 'login.post', 'uses' => 'LoginController@login']);
     Route::group(['middleware' => 'auth'], function () {
@@ -27,15 +28,17 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::post('/store', ['uses' => 'QuizController@store', 'as' => 'quiz.store']);
     Route::post('/update', ['uses' => 'QuizController@update', 'as' => 'quiz.update']);
     Route::post('/delete', ['uses' => 'QuizController@delete', 'as' => 'quiz.delete']);
-    Route::get('/user/edit', ['uses' => 'UserController@edit', 'as' => 'user.edit']);
-    Route::post('/user/update', ['uses' => 'UserController@update', 'as' => 'user.update']);
+
 });
 Route::group(['namespace' => 'Core', 'middleware' => 'auth'], function () {
     Route::get('/home', ['uses' => 'PageController@home', 'as' => 'home']);
     Route::get('/', ['uses' => 'PageController@home']);
+
+
 });
 
-Route::group(['namespace' => 'Front'], function () {
+Route::group(['namespace' => 'Front',], function () {
     Route::get('/welcome', ['uses' => 'HomeController@index', 'as' => 'welcome']);
+
 });
 
