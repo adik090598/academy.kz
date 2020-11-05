@@ -30,7 +30,7 @@ footer ul{
 }
 
 
-ul li{
+footer ul li{
     margin-top: 20px;
     font-family: 'Be Vietnam', sans-serif;
     font-style: normal;
@@ -41,12 +41,12 @@ ul li{
 }
 
 
-li a:link{
+footer li a:link{
     color:#323232;
     text-decoration: none;
 }
 
-li a:hover{
+footer li a:hover{
     color:#ff0000;
     text-decoration: none;
 }
