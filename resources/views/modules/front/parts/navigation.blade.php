@@ -15,7 +15,7 @@
                     <a class="nav-link" href="#">журнал</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">курстар</a>
+                    <a class="nav-link" href="{{route('test.index')}}">Тестар</a>
                 </li>
             </ul>
             <ul class="navbar-nav absolute-right">

@@ -8,6 +8,8 @@ body{
     padding: 50px;
 }
 
+/* CLient home page */
+
 .homeNAvigation{
     margin: 0;
     margin-bottom: 20px;
@@ -146,5 +148,55 @@ body{
     /* identical to box height */
     color: #545252;
 }
+
+
+/* Client test page */
+
+.quiz-box{
+    position: relative;
+    margin: 26px 0;
+    padding: 0;
+    height: 215px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 32px;
+    display: flex;
+    flex-direction: row;
+}
+
+.quiz-box .content{
+    padding: 10px 20px;
+}
+
+.quiz-box .content .text_header{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #222222;
+}
+
+.quiz-box .description{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    padding: 0;
+    border-radius: 10px;
+    right: 10px;
+    top: 10px;
+    background-color: #0abee5;
+    clip-path: circle(4% at 97% 18%);
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.quiz-box .description:hover {
+    width: 480px;
+    border-radius: 32px;
+    clip-path: circle(75%);
+    background: #00B6FF;
+}
+
 
 

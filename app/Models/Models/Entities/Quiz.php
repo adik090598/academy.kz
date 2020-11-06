@@ -13,5 +13,5 @@ class Quiz extends Model
 
     public const IMAGE_DIRECTORY = "images/quizzes";
 
-    protected $fillable = ['name', 'image_path'];
+    protected $fillable = ['name', 'description', 'duration', 'price', 'subject_id', 'image_path'];
 }

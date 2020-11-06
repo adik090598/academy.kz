@@ -20,7 +20,7 @@ class User extends Authenticatable
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
-   
+
 
     public const IMAGE_DIRECTORY = "images/users";
 
@@ -82,4 +82,10 @@ class User extends Authenticatable
     {
         return $this->role_id == Role::ADMIN_ID;
     }
+
+    public function isClient()
+    {
+        return $this->role_id == Role::CLIENT_ID;
+    }
+
 }

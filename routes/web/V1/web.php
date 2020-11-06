@@ -35,6 +35,23 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::post('/update', ['uses' => 'QuizController@update', 'as' => 'quiz.update']);
     Route::post('/delete', ['uses' => 'QuizController@delete', 'as' => 'quiz.delete']);
 
+    //Questions
+    Route::get('/question/{id}', ['uses' => 'QuestionController@index', 'as' => 'question.index']);
+    Route::get('/question/create', ['uses' => 'QuestionController@create', 'as' => 'question.create']);
+    Route::get('/question/edit', ['uses' => 'QuestionController@edit', 'as' => 'question.edit']);
+    Route::post('/store', ['uses' => 'QuestionController@store', 'as' => 'question.store']);
+    Route::post('/update', ['uses' => 'QuestionController@update', 'as' => 'question.update']);
+    Route::post('/delete', ['uses' => 'QuestionController@delete', 'as' => 'question.delete']);
+
+    //Answer
+    Route::get('/answers/{id}', ['uses' => 'AnswerController@index', 'as' => 'answer.index']);
+    Route::get('/answer/create', ['uses' => 'AnswerController@create', 'as' => 'answer.create']);
+    Route::get('/answer/edit', ['uses' => 'AnswerController@edit', 'as' => 'answer.edit']);
+    Route::post('/store', ['uses' => 'AnswerController@store', 'as' => 'answer.store']);
+    Route::post('/update', ['uses' => 'AnswerController@update', 'as' => 'answer.update']);
+    Route::post('/delete', ['uses' => 'AnswerController@delete', 'as' => 'answer.delete']);
+
+
 });
 Route::group(['namespace' => 'Core', 'middleware' => 'auth'], function () {
     Route::get('/home', ['uses' => 'PageController@home', 'as' => 'home']);
@@ -43,6 +60,10 @@ Route::group(['namespace' => 'Core', 'middleware' => 'auth'], function () {
 
 Route::group(['namespace' => 'Front',], function () {
     Route::get('/welcome', ['uses' => 'HomeController@index', 'as' => 'welcome']);
-    Route::get('/home', ['uses' => 'HomeController@home', 'as' => 'homeFront']);
+    Route::get('/homeClient', ['uses' => 'HomeController@home', 'as' => 'homeFront']);
+    Route::get('/test', ['uses' => 'TestController@index', 'as' => 'test.index']);
+
 });
+
+
 

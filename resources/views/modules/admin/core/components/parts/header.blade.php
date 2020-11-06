@@ -58,7 +58,7 @@
                                     <a href="{{route('user.edit', ['id' => $user->id])}}" class="link-dark">
                                         Профиль
                                     </a>
-                                </li> 
+                                </li>
                                 <li>
                                     <form action="{{route('logout')}}" method="post" id="signOutForm">
                                         @csrf
@@ -67,7 +67,7 @@
                                             Выйти
                                         </a>
                                     </form>
-                                </li> 
+                                </li>
                             </ul>
                         </div>
                     </div>

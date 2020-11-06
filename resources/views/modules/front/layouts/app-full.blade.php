@@ -11,7 +11,12 @@
 @include('modules.front.parts.homeNavigation')
 <div class="container">
     <main class="d-flex flex-column u-hero u-hero--end mnh-100vh">
-        @yield('content')
+        <div class="row justify-content-between">
+            @include('modules.front.parts.account')
+            <div class="mainPart col-md-8" style="width: 100%">
+                @yield('content')
+            </div>
+        </div>
     </main>
 </div>
 

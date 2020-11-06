@@ -38,9 +38,17 @@ class QuizController extends WebBaseController
     {
         try {
             $path = $this->fileService->store($request->image, Quiz::IMAGE_DIRECTORY);
+            $price = (float)$request->price;
+            $description = $request->description;
+            $duration = $request->duration;
+            $subject_id = (int)$request->subject;
             Quiz::create([
                 'name' => $request->name,
-                'image_path' => $path
+                'image_path' => $path,
+                'description' => $description,
+                'price' => $price,
+                'duration' =>$duration,
+                'subject_id' => $subject_id
             ]);
         } catch (\Exception $exception) {
             if($path) $this->fileService->remove($path);
