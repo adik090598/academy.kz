@@ -19,7 +19,6 @@ class QuizWebForm implements WithForm
                 $value->id, null, null, true);
         }
         $subjects = Subject::all();
-        $selected = false;
         $subject_selects = [];
         foreach ($subjects as $subject) {
             $subject_selects[] = ['value' => $subject->id, 'title' => $subject->name,
