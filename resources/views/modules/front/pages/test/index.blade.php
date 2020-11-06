@@ -3,7 +3,7 @@
 @section('content')
     @foreach($quizzes as $quiz)
         <div class="quiz-box">
-            <img src="{{ $quiz->image_path }}" alt="{{$quiz->name}}">
+            <img src="{{ $quiz->image_path }}" class="p-1 ml-2" style="height: 100%; width: 200px" alt="{{$quiz->name}}">
             <div class="content">
                 <h4 class="text_header">{{$quiz->name}}</h4>
             </div>
