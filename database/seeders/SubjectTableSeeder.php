@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Subject;
+use App\Models\Entities\Subject;
 use Illuminate\Database\Seeder;
 
 

@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Entities\Core\Role;
+use App\Models\Entities\Category;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder

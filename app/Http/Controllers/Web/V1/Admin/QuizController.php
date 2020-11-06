@@ -8,7 +8,7 @@ use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\QuizWebForm;
 use App\Http\Requests\Web\V1\QuizEditWebRequest;
 use App\Http\Requests\Web\V1\QuizWebRequest;
-use App\Models\Models\Entities\Quiz;
+use App\Models\Entities\Quiz;
 use App\Services\Common\V1\Support\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,17 +38,14 @@ class QuizController extends WebBaseController
     {
         try {
             $path = $this->fileService->store($request->image, Quiz::IMAGE_DIRECTORY);
-            $price = (float)$request->price;
-            $description = $request->description;
-            $duration = $request->duration;
-            $subject_id = (int)$request->subject;
+
             Quiz::create([
                 'name' => $request->name,
                 'image_path' => $path,
-                'description' => $description,
-                'price' => $price,
-                'duration' =>$duration,
-                'subject_id' => $subject_id
+                'description' => $request->description,
+                'price' => $request->price,
+                'duration' =>$request->duration,
+                'subject_id' => $request->subject_id
             ]);
         } catch (\Exception $exception) {
             if($path) $this->fileService->remove($path);
@@ -75,7 +72,11 @@ class QuizController extends WebBaseController
         try {
             $quiz->update([
                 'name' => $request->name,
-                'image_path' => $path ? $path : $old_path
+                'image_path' => $path ? $path : $old_path,
+                'description' => $request->description,
+                'price' => $request->price,
+                'duration' =>$request->duration,
+                'subject_id' => $request->subject_id
             ]);
             $this->edited();
             return redirect()->route('quiz.index');
