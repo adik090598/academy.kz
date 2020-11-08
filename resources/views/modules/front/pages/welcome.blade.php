@@ -2,38 +2,44 @@
 @section('styles')
     <link rel="stylesheet" href="{{asset('modules/front/assets/css/welcome.css')}}">
     @endsection
-
 @section('content')
 <header>
     <div class="container">
     <div class="row">
         <div class="col-xl-7 col-sm-7 col-md-7 col-lg-7">
-            <div class="text-center text-academy">
-                <p class="academykz"> AcademyKZ </p>
-                <p class="h1 mb-5 header-text1">Білім әлеміне қош келдіңіздер!</p>
+            <h2 class="academykz text-center">AcademyKZ</h2>
+            <div class="text-left text-academy">
+                <h4 class="header-text1">Білім әлеміне қош келдіңіздер!</h4>
                 <p>
-                    Сіз мүнда ашық сабактар, сабақ жоспары, тәрбие сағаттарды,<br>
+                    Сіз мүнда ашық сабактар, сабақ жоспары, тәрбие сағаттарды,
                     және басқа да мұғалімдерге керекті құжаттарды таба аласыз.
                 </p>
             </div>
         </div>
+        @if(!$agent->isMobile())
         <div class="col-xl-5 col-sm-5 col-md-5 col-lg-5">
             <img class="img-responsive teacher-img" src="{{asset('modules/front/assets/img/header/teacher.png')}}" alt="Teacher">
         </div>
+        @else
+            <div class="teacher-img-box">
+                <img class="img-responsive teacher-img" src="{{asset('modules/front/assets/img/header/teacher.png')}}" alt="Teacher">
+            </div>
+        @endif
     </div>
     </div>
+    @if(!$agent->isMobile())
     <div class="float-right">
         <img class="img-responsive dids-img" src="{{asset('modules/front/assets/img/header/dids.png')}}" alt="Dids">
     </div>
+    @endif
 
 </header>
-
     <section class="students">
         <div class="students-text">
             <h1>оқушылар</h1>
-            <p>Біздің портал арқылы түрлі байқау, жарыстар мен <br>
-                олимпиадаларға қатысып ТӨСБЕЛГІ, СЕРТИФИКАТ, <br>
-                ДИПЛОМ, АЛҒЫС ХАТТАРҒА ие болуға мүмкіндік бар.</p>
+            <p>Біздің портал арқылы түрлі байқау, жарыстар мен
+                олимпиадаларға қатысып ТӨСБЕЛГІ, СЕРТИФИКАТ,
+                ДИПЛОМ, АЛҒЫС ХАТТАРҒА ие болуға мүмкіндік бар.
         </div>
         <img class="img-responsive student-img" src="{{asset('modules/front/assets/img/header/student.png')}}" alt="Student">
         <img class="float-right trophy-img" src="{{asset('modules/front/assets/img/header/trophy.png')}}" alt="Trophy">
@@ -46,18 +52,17 @@
     </section>
 
     <section class="teachers">
-        <h1 class="teachers-p">Педагогтар</h1>
-                    <p>- Біздің портал арқылы түрлі бағытта тәжірибе <br>
-                        алмасып, байқаулар мен жарыстар, <br>
-                        олимпиадаларға қатыса отырып, білімдерін <br>
-                        шыңдап, жеңімпаз атануға зор мүмкіндіктер бар. <br>
-                        Әр педагог жеткен жетістігіне сәйкес түрлі мақтау <br>
-                        қағаздары мен төсбелгімен марапатталады.</p>
-        <div class="float-right">
-        <img class="teachers-image" src="{{asset('modules/front/assets/img/header/teachers-image.png')}}" alt="Teachers Image">
+        <h1 class="teachers-p">ПЕДАГОГТАР</h1>
+            <p>- Біздің портал арқылы түрлі бағытта тәжірибе
+                алмасып, байқаулар мен жарыстар,
+                олимпиадаларға қатыса отырып, білімдерін
+                шыңдап, жеңімпаз атануға зор мүмкіндіктер бар.
+                Әр педагог жеткен жетістігіне сәйкес түрлі мақтау
+                қағаздары мен төсбелгімен марапатталады.</p>
+        <div class="teacher-img-box">
+            <img class="teachers-image" src="{{asset('modules/front/assets/img/header/teachers-image.png')}}" alt="Teachers Image">
         </div>
     </section>
-
     <section class="tests">
         <div class="container" style="margin-top: 150px">
             <div class="row">
@@ -65,11 +70,9 @@
                     <h1>Тесттар</h1>
                 </div>
                 <div class="col-xl-6 col-sm-6 col-md-6 col-lg-6">
-
                 </div>
             </div>
         </div>
-
         <div class="test-items" style="background-image: url({{asset('modules/front/assets/img/header/rectangle-image.png')}})">
             <div class="float-left rectangle-image">
                 {{--<img class="img-responsive" src="{{asset('modules/front/assets/img/header/rectangle-image.png')}}" alt="Rectangle Image">--}}
@@ -140,10 +143,6 @@
             <div class="float-right">
                 <img class="material-image img-responsive" src="{{asset('modules/front/assets/img/header/material-image.png')}}" alt="Material Image">
             </div>
-
         </div>
-
     </section>
-
-
 @endsection

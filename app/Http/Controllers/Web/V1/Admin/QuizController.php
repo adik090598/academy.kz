@@ -9,6 +9,8 @@ use App\Http\Forms\Web\V1\QuizWebForm;
 use App\Http\Requests\Web\V1\QuizEditWebRequest;
 use App\Http\Requests\Web\V1\QuizWebRequest;
 use App\Models\Entities\Quiz;
+use App\Models\Entities\Question;
+use App\Models\Entities\Answer;
 use App\Services\Common\V1\Support\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -93,5 +95,30 @@ class QuizController extends WebBaseController
         return redirect()->route('quiz.index');
     }
 
+    public function getQuizById(Request $request)
+    {
+        $quiz1 = Quiz::with('questions')->find($request->id);
+
+        $questions = Question::select('question_text')->with('answers')
+            ->inRandomOrder()
+            ->where('quiz_id',$request->id)
+            ->get();
+        dd($questions);
+        return $this->adminPagesView('quiz.quiz', compact('questions'));
+    }
+
+    public function getQuestions($id)
+    {
+        $quiztest = Question::select('question_text')->where('test_id',$id)
+            ->with(['answers' => function ($query) {
+                $query->select('answer','points')->inRandomOrder();
+            }])
+            ->inRandomOrder()
+            ->whereHas('answers')
+            ->get();
+
+        return $quiztest;
+
+    }
 
 }

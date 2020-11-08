@@ -8,17 +8,17 @@
                 </div>
                 <div class="card-body">
                     @auth
-                        <a href="{{route('home')}}"
+                        <a href="{{route('admin.home')}}"
                            class="btn btn-primary btn-block">Система</a>
                     @endauth
 
                     @guest
-                        @if(Route::has('login'))
-                            <a href="{{route('login')}}"
+                        @if(Route::has('admin.login'))
+                            <a href="{{route('admin.login')}}"
                                class="btn btn-primary btn-block">Вход</a>
                         @endif
-                        @if(Route::has('register'))
-                            <a href="{{route('register')}}"
+                        @if(Route::has('admin.register'))
+                            <a href="{{route('admin.register')}}"
                                class="btn btn-primary btn-block">Регистрация</a>
                         @endif
                     @endguest

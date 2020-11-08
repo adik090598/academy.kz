@@ -11,6 +11,6 @@ class Answer extends Model
 
     public function question()
     {
-        return $this->belongsTo('App\Models\Models\Entities\Question');
+        return $this->belongsTo('App\Models\Entities\Question');
     }
 }

@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body p-4 p-lg-7">
             <h2 class="text-center mb-4">Создать аккаунт</h2>
-            <form action="{{route('register.post')}}" method="post">
+            <form action="{{route('admin.register.post')}}" method="post">
                 <x-admin.input-form-group-list
                         :errors="$errors"
                         :elements="$register_web_form"/>

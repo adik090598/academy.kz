@@ -2,22 +2,12 @@
 <html lang="en" class="no-js">
 <head>
     @include('modules.front.parts.head')
-    @include('modules.front.parts.styles')
-    @yield('styles')
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('modules/front/assets/css/auth.css')}}">
 </head>
 <body>
-<main class="d-flex flex-column u-hero u-hero--end mnh-100vh"
-      style="background-image: url({{asset('modules/admin/assets/img-temp/bg/bg-1.png')}});">
-    <div class="container py-11 my-auto">
-        <div class="row align-items-center">
-            <div class="col-md-12 col-lg-6 offset-lg-3 mb-4 mb-md-0">
-                @yield('content')
-            </div>
-        </div>
-    </div>
-    <x-admin.footer/>
-</main>
-@include('modules.front.parts.scripts')
-@yield('scripts')
+<div class="wrapper">
+    @yield('content')
+<div>
 </body>
 </html>

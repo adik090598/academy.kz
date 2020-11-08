@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.wrapper{
+    width: 100vw;
+    height: 100vh;
+    background: url("../img/background_login.png") no-repeat;
+    background-position: 0 50%;
+}
+
+.auth-form{
+    position: absolute;
+    top: 20%;
+    right: 30%;
+}
+
+.auth-form .header-text .logo-text{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 72px;
+    line-height: 72px;
+}
+
+.auth-form .header-text h5{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.auth-form .btn{
+    color: #FFFFFF;
+    background-color: #00A0A3;
+}

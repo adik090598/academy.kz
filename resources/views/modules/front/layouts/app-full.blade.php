@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
-@include('modules.front.parts.homeNavigation')
+@include('modules.front.parts.top-banner')
+@if($agent->isDesktop())
+    @include('modules.front.parts.navigation')
+@elseif($agent->isMobile())
+    @include('modules.front.parts.mobile.mobileNav')
+@endif
 <div class="container">
     <main class="d-flex flex-column u-hero u-hero--end mnh-100vh">
         <div class="row justify-content-between">
-            @include('modules.front.parts.account')
+            @if(!$agent->isMobile())
+                @include('modules.front.parts.account')
+            @endif
             <div class="mainPart col-md-8" style="width: 100%">
                 @yield('content')
             </div>

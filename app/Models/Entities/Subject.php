@@ -9,3 +9,4 @@ class Subject extends Model
 {
     use HasFactory;
 }
+

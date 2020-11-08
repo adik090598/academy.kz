@@ -32,7 +32,7 @@
                             @foreach($quizzes as $quiz)
                                 <tr>
                                     <td>{{$quiz->id}}</td>
-                                    <td>{{$quiz->name}}</td>
+                                    <td><a href="{{route('quiz.get', ['id' => $quiz->id])}}">{{$quiz->name}}</a></td>
                                     <td>{{$quiz->created_at}}</td>
                                     <td class="d-inline-block">
                                         <a href="{{route('quiz.edit', ['id' => $quiz->id])}}" class="btn btn-outline-primary btn-sm">
@@ -107,7 +107,7 @@
             </div>
         </div>
     </div>
-    <div class="modal modal-backdrop" id="addquiz" tabindex="-1"
+    <div class="modal modal-backdrop" id="addQuiz" tabindex="-1"
          role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -130,7 +130,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger-soft btn-sm" data-dismiss="modal">
                         <i class="ti ti-close"></i> Закрыть</button>
-                </div>
+                </div>+
             </div>
         </div>
     </div>

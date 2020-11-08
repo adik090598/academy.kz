@@ -3,12 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Auth', 'verify' => true], function () {
-
-    Route::get('/login', ['as' => 'login', 'uses' => 'LoginController@showLoginForm']);
-    Route::post('/login', ['as' => 'login.post', 'uses' => 'LoginController@login']);
-    Route::get('/register', ['as' => 'register', 'uses' => 'RegisterController@showRegistrationForm']);
-    Route::post('/register', ['as' => 'register.post', 'uses' => 'RegisterController@create']);
-
+    Route::get('/admin/login', ['as' => 'admin.login', 'uses' => 'LoginController@showLoginForm']);
+    Route::post('/admin/login', ['as' => 'admin.login.post', 'uses' => 'LoginController@login']);
+    Route::get('/admin/register', ['as' => 'admin.register', 'uses' => 'RegisterController@showRegistrationForm']);
+    Route::post('/admin/register', ['as' => 'admin.register.post', 'uses' => 'RegisterController@create']);
     Route::group(['middleware' => 'auth'], function () {
         Route::post('logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
     });
@@ -26,10 +24,10 @@ Route::get('/secure/config/optimize', ['uses' => 'ConfigController@optimize']);
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     //Users
     Route::get('/user/edit', ['uses' => 'UserController@edit', 'as' => 'user.edit']);
-
     //Quizzes
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'quiz.index']);
     Route::get('/quiz/create', ['uses' => 'QuizController@create', 'as' => 'quiz.create']);
+    Route::get('/quiz/get', ['uses' => 'QuizController@getQuizById', 'as' => 'quiz.get']);
     Route::get('/quiz/edit', ['uses' => 'QuizController@edit', 'as' => 'quiz.edit']);
     Route::post('/store', ['uses' => 'QuizController@store', 'as' => 'quiz.store']);
     Route::post('/update', ['uses' => 'QuizController@update', 'as' => 'quiz.update']);
@@ -50,19 +48,19 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::post('/answer/store', ['uses' => 'AnswerController@store', 'as' => 'answer.store']);
     Route::post('/answer/update', ['uses' => 'AnswerController@update', 'as' => 'answer.update']);
     Route::post('/answer/delete', ['uses' => 'AnswerController@delete', 'as' => 'answer.delete']);
-
-
 });
 Route::group(['namespace' => 'Core', 'middleware' => 'auth'], function () {
-    Route::get('/home', ['uses' => 'PageController@home', 'as' => 'home']);
-    Route::get('/', ['uses' => 'PageController@home']);
+    Route::get('/admin/home', ['uses' => 'PageController@home', 'as' => 'admin.home']);
+    Route::get('/admin', ['uses' => 'PageController@home']);
 });
 
 Route::group(['namespace' => 'Front',], function () {
-    Route::get('/welcome', ['uses' => 'HomeController@index', 'as' => 'welcome']);
-    Route::get('/homeClient', ['uses' => 'HomeController@home', 'as' => 'homeFront']);
+    Route::get('/', ['uses' => 'HomeController@index']);
+    Route::get('/welcome', [ 'as' => 'welcome', 'uses' => 'HomeController@index']);
+    Route::get('/homeClient', ['as' => 'homeFront', 'uses' => 'HomeController@home']);
+    Route::get('/login', ['as' => 'login', 'uses' => 'HomeController@login']);
+    Route::get('/register', ['as' => 'register', 'uses' => 'HomeController@register', ]);
     Route::get('/test', ['uses' => 'TestController@index', 'as' => 'test.index']);
-
 });
 
 

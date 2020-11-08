@@ -58,7 +58,6 @@ body{
     line-height: 22px;
 /* identical to box height */
 
-
     color: #FFFFFF;}
 
 .homeNAvigation .nav ul li:last-child{
@@ -162,6 +161,13 @@ body{
     border-radius: 32px;
     display: flex;
     flex-direction: row;
+}
+
+.quiz-box img{
+    width: 218px;
+    height: 215px;
+    border-bottom-left-radius: 32px;
+    border-top-left-radius: 32px;
 }
 
 .quiz-box .content{

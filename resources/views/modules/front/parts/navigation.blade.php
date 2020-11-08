@@ -22,21 +22,18 @@
                 @if (Route::has('login'))
                     @auth
                         <li class="nav-item">
-                            {{--<a class="nav-link" href="{{ url('/home') }}">Home</a>--}}
                             <a style="color: #fff;" href="{{ route('homeFront') }}">Басты бет</a>
                         </li>
                     @else
                         <li class="nav-item">
-                            {{--<a style="color: #fff;" href="{{ route('homeFront') }}">Абайлап кіру</a> /--}}
-                            <a style="color: #fff;" href="{{ route('login') }}">Кіру</a> /
+                            <a style="color: #fff;" href="{{ route('clogin') }}">Кіру</a> /
                             @if (Route::has('register'))
-                                <a style="color: #fff;" href="{{ route('register') }}">Тіркелу</a>
+                                <a style="color: #fff;" href="{{ route('сregister') }}">Тіркелу</a>
                             @endif
                         </li>
                     @endauth
                 @endif
             </ul>
-
         </div>
     </div>
 </nav>
