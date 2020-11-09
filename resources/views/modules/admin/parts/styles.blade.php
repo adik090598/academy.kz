@@ -3,3 +3,4 @@
 <link rel="stylesheet" href="{{asset('modules/admin/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css')}}">
 <link rel="stylesheet" href="{{asset('modules/admin/assets/css/theme.css')}}">
 <link rel="stylesheet" href="{{asset('modules/admin/assets/css/toastr.css')}}">
+<link rel="stylesheet" href="{{asset('modules/admin/assets/css/quiz.css')}}">

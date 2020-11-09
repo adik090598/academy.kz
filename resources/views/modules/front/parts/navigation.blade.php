@@ -26,9 +26,9 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a style="color: #fff;" href="{{ route('clogin') }}">Кіру</a> /
+                            <a style="color: #fff;" href="{{ route('login') }}">Кіру</a> /
                             @if (Route::has('register'))
-                                <a style="color: #fff;" href="{{ route('сregister') }}">Тіркелу</a>
+                                <a style="color: #fff;" href="{{ route('register') }}">Тіркелу</a>
                             @endif
                         </li>
                     @endauth

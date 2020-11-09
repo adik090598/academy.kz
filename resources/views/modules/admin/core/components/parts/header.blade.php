@@ -1,6 +1,6 @@
 <header class="u-header">
     <div class="u-header-left">
-        <a class="u-header-logo" href="{{route('home')}}">
+        <a class="u-header-logo" href="{{route('admin.index')}}">
             <img class="u-header-logo__icon" src="{{asset('modules/admin/assets/svg/logo-mini.svg')}}"
                  alt="Awesome Icon">
             <img class="u-header-logo__text" src="{{asset('modules/admin/assets/svg/logo-text-light.svg')}}"

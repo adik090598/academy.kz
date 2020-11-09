@@ -44,7 +44,7 @@ class UserController extends WebBaseController
                 'profile_photo_path' => $path
             ]);
             $this->edited();
-            return redirect()->route('home');
+            return redirect()->route('admin.index');
         } catch (\Exception $exception) {
             if($path) $this->fileService->remove($path);
             throw new WebServiceExplainedException($exception->getMessage());

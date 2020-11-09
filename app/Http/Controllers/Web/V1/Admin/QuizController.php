@@ -6,6 +6,7 @@ use App\Exceptions\Web\WebServiceExplainedException;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\QuizWebForm;
+use App\Http\Forms\Web\V1\QuestionWebForm;
 use App\Http\Requests\Web\V1\QuizEditWebRequest;
 use App\Http\Requests\Web\V1\QuizWebRequest;
 use App\Models\Entities\Quiz;
@@ -97,14 +98,9 @@ class QuizController extends WebBaseController
 
     public function getQuizById(Request $request)
     {
-        $quiz1 = Quiz::with('questions')->find($request->id);
-
-        $questions = Question::select('question_text')->with('answers')
-            ->inRandomOrder()
-            ->where('quiz_id',$request->id)
-            ->get();
-        dd($questions);
-        return $this->adminPagesView('quiz.quiz', compact('questions'));
+        $questions = Quiz::with('questions')->find($request->id);
+        $question_web_form = QuestionWebForm::inputGroups(null);
+        return $this->adminPagesView('quiz.quiz', compact('questions','question_web_form'));
     }
 
     public function getQuestions($id)

@@ -1,3 +1,7 @@
+html,body{
+    min-width: 375px;
+}
+
 div, header {
     font-family: 'Be Vietnam', sans-serif;
 }

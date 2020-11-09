@@ -6,7 +6,7 @@
 
         @auth
             <h4 class="font-weight-semi-bold mb-0">
-                <a href="{{route('home')}}">Пройти на главную страницу</a>
+                <a href="{{route('admin.index')}}">Пройти на главную страницу</a>
             </h4>
         @endauth
         @guest

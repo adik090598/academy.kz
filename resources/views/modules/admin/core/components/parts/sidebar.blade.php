@@ -1,7 +1,7 @@
 <aside id='sidebar' class='u-sidebar'>
     <div class='u-sidebar-inner'>
         <header class='u-sidebar-header'>
-            <a class='u-sidebar-logo' href='{{route('home')}}'>
+            <a class='u-sidebar-logo' href='{{route('admin.index')}}'>
                 <img class='u-sidebar-logo__icon' alt='Awesome Icon'
                      src='{{asset('modules/admin/assets/svg/logo-mini.svg')}}'>
                 <img class='u-sidebar-logo__text' alt='Awesome'

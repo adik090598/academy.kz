@@ -50,8 +50,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::post('/answer/delete', ['uses' => 'AnswerController@delete', 'as' => 'answer.delete']);
 });
 Route::group(['namespace' => 'Core', 'middleware' => 'auth'], function () {
-    Route::get('/admin/home', ['uses' => 'PageController@home', 'as' => 'admin.home']);
-    Route::get('/admin', ['uses' => 'PageController@home']);
+    Route::get('/admin/home', ['as' => 'admin.index', 'uses' => 'PageController@home']);
+    Route::get('/admin/', ['uses' => 'PageController@home']);
 });
 
 Route::group(['namespace' => 'Front',], function () {
