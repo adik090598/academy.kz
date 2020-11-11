@@ -48,7 +48,8 @@ class QuizController extends WebBaseController
                 'description' => $request->description,
                 'price' => $request->price,
                 'duration' =>$request->duration,
-                'subject_id' => $request->subject_id
+                'subject_id' => $request->subject_id,
+                'category_id' => $request->category_id
             ]);
         } catch (\Exception $exception) {
             if($path) $this->fileService->remove($path);
@@ -79,7 +80,9 @@ class QuizController extends WebBaseController
                 'description' => $request->description,
                 'price' => $request->price,
                 'duration' =>$request->duration,
-                'subject_id' => $request->subject_id
+                'subject_id' => $request->subject_id,
+                'category_id' => $request->category_id
+
             ]);
             $this->edited();
             return redirect()->route('quiz.index');

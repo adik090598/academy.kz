@@ -6,6 +6,7 @@ namespace App\Http\Forms\Web\V1;
 
 use App\Core\Interfaces\WithForm;
 use App\Http\Forms\Web\FormUtil;
+use App\Models\Entities\Category;
 use App\Models\Entities\Subject;
 
 class QuizWebForm implements WithForm
@@ -24,6 +25,13 @@ class QuizWebForm implements WithForm
             $subject_selects[] = ['value' => $subject->id, 'title' => $subject->name,
                 'selected' => $value ? $value->subject_id == $subject->id ? 'selected' : '' : ''];
         }
+
+        $categories = Category::all();
+        $category_selects = [];
+        foreach ($categories as $category) {
+            $category_selects[] = ['value' => $category->id, 'title' => $category->name,
+                'selected' => $value ? $value->category_id == $category->id ? 'selected' : '' : ''];
+        }
         return array_merge(
             $array,
             FormUtil::input('name', 'Тест по физике', 'Название',
@@ -34,10 +42,12 @@ class QuizWebForm implements WithForm
                 'text', false, $value ? $value->description : ''),
             FormUtil::input('duration', 'Время в минутах', 'Продолжительность теста',
                 'number', false, $value ? $value->duration : ''),
-            FormUtil::select('subject_id', 'Физика', 'Предмет',
-                'text', $subject_selects),
+            FormUtil::select('subject_id', '', 'Предмет',
+                true, $subject_selects),
+            FormUtil::select('category_id', '', 'Категория',
+                true, $category_selects),
             FormUtil::input('price', '1800', 'Стоимость',
-                'text', false, $value ? $value->price : ''),
+                'number', false, $value ? $value->price : '')
         );
     }
 }

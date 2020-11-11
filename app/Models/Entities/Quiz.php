@@ -12,11 +12,12 @@ class Quiz extends Model
 
     public const IMAGE_DIRECTORY = "images/quizzes";
 
-    protected $fillable = ['name', 'description', 'duration', 'price', 'subject_id', 'image_path'];
+    protected $fillable = ['name', 'description', 'duration', 'price',
+        'subject_id', 'image_path', 'category_id'];
 
     public function questions()
     {
-        return $this->hasMany('App\Models\Entities\Question');
+        return $this->hasMany(Question::class, 'quiz_id', 'id');
     }
 
 }

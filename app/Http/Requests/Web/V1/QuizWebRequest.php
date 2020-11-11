@@ -15,6 +15,7 @@ class QuizWebRequest extends WebBaseRequest
             'duration' => ['required', 'numeric', 'min:0'],
             'price' => ['required', 'numeric', 'min:0'],
             'subject_id' => ['required', 'exists:subjects,id'],
+            'category_id' => ['required', 'exists:categories,id'],
             'image' => [!$this->isEditOrUpdate() ? 'required' : '', 'image'],
             'id' => ['numeric', 'exists:quizzes,id', !$this->isStore() ? 'required' : '']
         ];

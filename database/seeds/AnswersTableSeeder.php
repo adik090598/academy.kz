@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\Entities\Answer;
 
-class AnswerTableSeeder extends Seeder
+class AnswersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
