@@ -37,6 +37,14 @@ Route::group(['namespace' => 'Auth', 'verify' => true, 'prefix' => 'admin'], fun
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin'], function () {
     //Users
     Route::get('/user/edit', ['uses' => 'UserController@edit', 'as' => 'user.edit']);
+
+    //Subjects
+    Route::get('/subject/', ['uses' => 'SubjectController@index', 'as' => 'subject.index']);
+    Route::get('/subject/edit', ['uses' => 'SubjectController@edit', 'as' => 'subject.edit']);
+    Route::post('/subject/store', ['uses' => 'SubjectController@store', 'as' => 'subject.store']);
+    Route::post('/subject/update', ['uses' => 'SubjectController@update', 'as' => 'subject.update']);
+    Route::post('/subject/delete', ['uses' => 'SubjectController@delete', 'as' => 'subject.delete']);
+
     //Quizzes
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'quiz.index']);
     Route::get('/quiz/create', ['uses' => 'QuizController@create', 'as' => 'quiz.create']);

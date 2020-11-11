@@ -35,8 +35,8 @@ class QuizController extends WebBaseController
     public function create() {
         $quiz_web_form = QuizWebForm::inputGroups(null);
         return $this->adminPagesView('quiz.create', compact( 'quiz_web_form'));
-
     }
+
     public function store(QuizWebRequest $request)
     {
         try {
@@ -101,7 +101,7 @@ class QuizController extends WebBaseController
 
     public function getQuizById(Request $request)
     {
-        $questions = Quiz::with('questions')->find($request->id);
+        $questions = Quiz::with('questions.answers')->find($request->id);
         $question_web_form = QuestionWebForm::inputGroups(null);
         return $this->adminPagesView('quiz.quiz', compact('questions','question_web_form'));
     }

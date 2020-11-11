@@ -4,3 +4,5 @@
 <link rel="stylesheet" href="{{asset('modules/admin/assets/css/theme.css')}}">
 <link rel="stylesheet" href="{{asset('modules/admin/assets/css/toastr.css')}}">
 <link rel="stylesheet" href="{{asset('modules/admin/assets/css/quiz.css')}}">
+<script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+

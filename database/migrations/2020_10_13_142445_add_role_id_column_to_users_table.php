@@ -14,7 +14,7 @@ class AddRoleIdColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')->constrained('roles', 'id')->after('profile_photo_path');
+            $table->foreignId('role_id')->constrained('roles', 'id');
         });
     }
 
