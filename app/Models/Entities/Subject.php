@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
+    protected $fillable = ['name'];
+
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class, 'quiz_id', 'id');
+    }
 
 }
 

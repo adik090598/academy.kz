@@ -17,7 +17,7 @@ class CreateAnswersTable extends Migration
             $table->id();
             $table->foreignId('question_id')->constrained('questions');
             $table->text('answer');
-            $table->integer('points');
+            $table->tinyInteger('is_right');
             $table->timestamps();
         });
     }
