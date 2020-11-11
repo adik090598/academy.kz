@@ -6,11 +6,8 @@
 </head>
 <body>
 @include('modules.front.parts.top-banner')
-@if($agent->isDesktop())
     @include('modules.front.parts.navigation')
-@elseif($agent->isMobile())
     @include('modules.front.parts.mobile.mobileNav')
-@endif
 <main class="d-flex flex-column u-hero u-hero--end mnh-100vh">
         @yield('content')
 </main>

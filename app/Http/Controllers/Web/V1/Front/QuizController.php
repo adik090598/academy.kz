@@ -8,7 +8,7 @@ use App\Http\Forms\Web\V1\QuizWebForm;
 use App\Models\Entities\Quiz;
 use Illuminate\Http\Request;
 
-class TestController extends WebBaseController
+class QuizController extends WebBaseController
 {
         public function index(){
             $quizzes = Quiz::orderBy('created_at', 'asc')->paginate(10);

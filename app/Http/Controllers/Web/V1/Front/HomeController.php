@@ -11,12 +11,10 @@ class HomeController extends WebBaseController
 {
     public function index() {
 
-        $agent = new Agent();
-        return $this->frontPagesView('welcome', compact('agent', $agent));
+        return $this->frontPagesView('welcome');
     }
 
     public function home() {
-        $agent = new Agent();
         return $this->frontPagesView('home', compact('agent', $agent));
     }
 

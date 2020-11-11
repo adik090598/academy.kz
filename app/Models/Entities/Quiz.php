@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Quiz extends Model
 {
-    use HasFactory;
     use SoftDeletes;
 
     public const IMAGE_DIRECTORY = "images/quizzes";

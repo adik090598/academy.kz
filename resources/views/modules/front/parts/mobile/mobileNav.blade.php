@@ -28,7 +28,7 @@
             <a class="" href="#">Журнал</a>
         </li>
         <li>
-            <a class="" href="{{route('test.index')}}">Тестар</a>
+            <a class="" href="{{route('quiz.index')}}">Тестар</a>
         </li>
     </ul>
 </nav>
