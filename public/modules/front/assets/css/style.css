@@ -204,5 +204,38 @@ body{
     background: #00B6FF;
 }
 
+.btn-primary {
+    background-color:#00A0A3;
+    border-color:#00A0A3;
+
+}
+.btn-primary:hover {
+    background-color:#00A0A3;
+    cursor: pointer;
+    border-color:#00A0A3;
+
+}
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+     background-color: #00A0A3;
+     border-color: #00A0A3;
+}
+.btn-primary:focus {
+    border-color:#00A0A3;
+    cursor: pointer;
+}
+.btn-outline-primary {
+    border-color:#00A0A3;
+    color:#00A0A3;
+}
+
+.btn-outline-primary:hover {
+    border-color:#00A0A3;
+    color:#00A0A3;
+    background-color: inherit;
+    cursor: pointer;
+
+}
+
 
 
