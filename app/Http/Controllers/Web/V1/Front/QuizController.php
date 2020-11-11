@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class QuizController extends WebBaseController
 {
         public function index(){
-            $quizzes = Quiz::orderBy('created_at', 'asc')->paginate(10);
+            $quizzes = Quiz::orderBy('created_at', 'desc')->paginate(10);
             return $this->frontPagesView('test.index', compact('quizzes'));
         }
 }

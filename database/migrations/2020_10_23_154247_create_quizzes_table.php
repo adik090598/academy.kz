@@ -20,7 +20,8 @@ class CreateQuizzesTable extends Migration
             $table->text('description');
             $table->string('duration');
             $table->float('price');
-            $table->foreignId('subject_id')->nullable($value=false)->constrained('subjects');
+            $table->foreignId('subject_id')->constrained('subjects');
+            $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
             $table->softDeletes();
         });
