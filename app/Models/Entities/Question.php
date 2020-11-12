@@ -11,12 +11,12 @@ class Question extends Model
 
     public function quiz()
     {
-        return $this->belongsTo('App\Models\Entities\Quiz');
+        return $this->belongsTo('App\Models\Entities\Quiz','quiz_id','id');
     }
 
     public function answers()
     {
-        return $this->hasMany('App\Models\Entities\Answer');
+        return $this->hasMany(Answer::class, 'question_id','id');
     }
 }
 

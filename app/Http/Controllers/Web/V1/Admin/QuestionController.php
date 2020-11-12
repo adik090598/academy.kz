@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web\V1\Admin;
 use App\Exceptions\Web\WebServiceExplainedException;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\WebBaseController;
-use App\Http\Forms\Web\V1\QuizWebForm;
+use App\Http\Forms\Web\V1\QuestionWebForm;
 use App\Http\Requests\Web\V1\QuestionWebRequest;
 use App\Models\Entities\Answer;
 use App\Models\Entities\Question;
@@ -34,7 +34,7 @@ class QuestionController extends WebBaseController
     public function create()
     {
         $question_web_form = QuestionWebForm::inputGroups(null);
-        return $this->adminPagesView('quiz.quiz', compact('question_web_form'));
+        return $this->adminPagesView('question.create', compact('question_web_form'));
     }
 
     /**

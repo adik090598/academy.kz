@@ -13,7 +13,7 @@
             <div class="h-100">
                 <header class="m-5">
                     <h2 class="h3 card-header-title"></h2>
-                    <a href="#" class="btn btn-outline-primary mt-3" data-toggle="modal" data-target="#addQuestion">
+                    <a href="{{route('question.create')}}" class="btn btn-outline-primary mt-3" >
                         Добавить вопрос
                         <i class="ti ti-plus"></i>
                     </a>
@@ -23,10 +23,10 @@
                     @if($questions)
                         @foreach($questions->questions as $key => $question)
                         <div class="question-box">
-                            <h3 class="question-text">{!! ($key+1)."-".$question->question_text !!}</h3>
+                            <h3 class="question-text">{!! $question->question_text !!}</h3>
                             @foreach($question->answers as $key => $answer)
-                                <h5>{{($key+1).")".$answer->answer}}
-                                    {!! $answer->is_right ? '<i class=ti-check></i>' : '' !!}
+                                <h5> {!! $answer->is_right ? '<i class=ti-check></i>' : '' !!}
+                                    {{($key+1).")".$answer->answer}}
                                 </h5>
                             @endforeach
                         </div>
@@ -87,38 +87,4 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script type="text/javascript">
-        var max_fields  = 10; //maximum input boxes allowed
-        var wrapper = $('.answer_box'); //Fields wrapper
-        var add_button = $('.add_field_button'); //Add button ID
 
-        var x = 1; //initlal text box count
-        $(add_button).click(function(e){ //on add input button click
-            e.preventDefault();
-            if(x < max_fields){ //max input box allowed
-                 //text box increment
-                $(wrapper).append(`<div class="input-group mb-3 removeMe">
-                                    <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <input type="hidden" name="answers[${x}][check]" value="0">
-                                        <input type="checkbox" name="answers[${x}][check]" value="1" aria-label="Checkbox for following text input">
-                                    </div>
-                                    </div>
-                                    <input type="text" name="answers[${x}][text]" class="form-control" aria-label="answer text">
-                                    <div class="input-group-append">
-                                    <div class="input-group-text">
-                                    <button class="btn btn-danger remove-date" type="button">-</button>
-                                    </div>
-                                    </div>
-                                    </div>`); //add input box
-                x++;
-            }
-        });
-        $(wrapper).on("click",".remove-date", function(e){ //user click on remove text
-            e.preventDefault(); $(this).closest('div.removeMe').remove(); x--;
-        })
-
-        CKEDITOR.replace( 'description' );
-    </script>
-@endsection
