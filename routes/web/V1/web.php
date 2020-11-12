@@ -55,20 +55,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin
     Route::post('/delete', ['uses' => 'QuizController@delete', 'as' => 'quiz.delete']);
 
     //Questions
-    Route::get('/question/{id}', ['uses' => 'QuestionController@index', 'as' => 'question.index']);
+    Route::get('/question/{id}', ['uses' => 'QuestionController@index', 'as' => 'question.index'])->where('id', '[0-9]+');
     Route::get('/question/create', ['uses' => 'QuestionController@create', 'as' => 'question.create']);
     Route::get('/question/edit', ['uses' => 'QuestionController@edit', 'as' => 'question.edit']);
     Route::post('/question/store', ['uses' => 'QuestionController@store', 'as' => 'question.store']);
     Route::post('/question/update', ['uses' => 'QuestionController@update', 'as' => 'question.update']);
     Route::post('/question/delete', ['uses' => 'QuestionController@delete', 'as' => 'question.delete']);
 
-    //Answer
-    Route::get('/answers/{id}', ['uses' => 'AnswerController@index', 'as' => 'answer.index']);
-    Route::get('/answer/create', ['uses' => 'AnswerController@create', 'as' => 'answer.create']);
-    Route::get('/answer/edit', ['uses' => 'AnswerController@edit', 'as' => 'answer.edit']);
-    Route::post('/answer/store', ['uses' => 'AnswerController@store', 'as' => 'answer.store']);
-    Route::post('/answer/update', ['uses' => 'AnswerController@update', 'as' => 'answer.update']);
-    Route::post('/answer/delete', ['uses' => 'AnswerController@delete', 'as' => 'answer.delete']);
 });
 
 Route::group(['namespace' => 'Core', 'middleware' => 'auth', 'prefix' => 'admin'], function () {

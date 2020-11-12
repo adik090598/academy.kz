@@ -12,7 +12,6 @@ use App\Models\Entities\Question;
 use App\Models\Entities\Quiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use function Sodium\add;
 
 class QuestionController extends WebBaseController
 {
