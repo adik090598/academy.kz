@@ -10,7 +10,7 @@
                     <h2 class="logo-text">Academy</h2>
                     <h5>Вход</h5>
                 </div>
-                <form>
+                <form class="mt-2">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Электронная почта</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"

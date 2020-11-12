@@ -8,27 +8,47 @@
             <div class="row justify-content-center p-4 align-items-center mt-lg-5">
                 <div class="col-12 text-center">
                     <h2 class="logo-text">Academy</h2>
-                    <h5>Вход</h5>
+                    <h5>Тіркелу</h5>
                 </div>
-                <form>
+                <form class="col-12 col-lg-6 col-sm-8 col-xl-6 mt-2">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Электронная почта</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                               placeholder="example@example.ru">
-                        <small id="emailHelp" class="form-text text-muted">Мы никогда никому не передадим вашу
-                            электронную
-                            почту.</small>
+                        <input type="text" name="name" class="form-control"
+                               value="{{old('name')}}"
+                               placeholder="Аты">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Пароль</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="**********">
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Запомнить меня</label>
+                        <input type="text" name="surname" class="form-control"
+                               value="{{old('fsurname')}}"
+                               placeholder="Тегі">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary float-right">Войти <i class="fas fa-sign-in-alt"></i></button>
+                        <input type="text" name="father_name" class="form-control"
+                               value="{{old('father_name')}}"
+                               placeholder="Әкесінің аты">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" class="form-control" id="phone"
+                               inputmode="numeric"
+                               value="{{old('phone')}}"
+                               placeholder="Байланыс нөмері">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control"
+                               value="{{old('email')}}"
+                               placeholder="academy@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control"
+                               value="{{old('password')}}"
+                               placeholder="Құпия сөз">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="confirm_password" class="form-control"
+                               value="{{old('confirm_password')}}"
+                               placeholder="Құпия сөзді қайталаңыз">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary float-right">Тіркелу <i class="fas fa-sign-in-alt"></i></button>
                     </div>
                 </form>
             </div>
@@ -40,4 +60,11 @@
                  alt="img">
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script type="text/javascript">
+        $("#phone").mask("+7(799) 999-99-99");
+
+    </script>
 @endsection
