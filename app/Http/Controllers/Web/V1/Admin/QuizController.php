@@ -101,23 +101,9 @@ class QuizController extends WebBaseController
 
     public function getQuizById(Request $request)
     {
-        $questions = Quiz::with('questions.answers')->find($request->id);
-        $question_web_form = QuestionWebForm::inputGroups(null);
-        return $this->adminPagesView('quiz.quiz', compact('questions','question_web_form'));
-    }
-
-    public function getQuestions($id)
-    {
-        $quiztest = Question::select('question_text')->where('test_id',$id)
-            ->with(['answers' => function ($query) {
-                $query->select('answer','points')->inRandomOrder();
-            }])
-            ->inRandomOrder()
-            ->whereHas('answers')
-            ->get();
-
-        return $quiztest;
 
     }
+
+
 
 }

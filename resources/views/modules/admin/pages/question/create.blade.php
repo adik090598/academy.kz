@@ -11,7 +11,7 @@
         <div class="col-md-12 mb-5">
             <div class="card h-100">
                 <header class="card-header">
-                    <a href="{{route('quiz.quiz')}}" class="btn btn-outline-primary mt-1 mb-4"><i class="ti ti-arrow-left"></i> Назад</a>
+                    <a href="{{route('quiz.index')}}" class="btn btn-outline-primary mt-1 mb-4"><i class="ti ti-arrow-left"></i>Назад</a>
                     <h2 class="h4 card-header-title">Тест</h2>
                 </header>
                 <div class="card-body pt-0">

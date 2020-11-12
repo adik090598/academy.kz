@@ -20,9 +20,11 @@ class QuestionController extends WebBaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
+        $questions = Quiz::with('questions.answers')->find($request->id);
+        $question_web_form = QuestionWebForm::inputGroups(null);
+        return $this->adminPagesView('quiz.quiz', compact('questions','question_web_form'));
     }
 
     /**

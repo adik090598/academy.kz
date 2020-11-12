@@ -15,7 +15,7 @@ class HomeController extends WebBaseController
     }
 
     public function home() {
-        return $this->frontPagesView('home', compact('agent', $agent));
+        return $this->frontPagesView('home');
     }
 
     public function login() {
@@ -26,4 +26,7 @@ class HomeController extends WebBaseController
         return $this->frontPagesView('register');
     }
 
+    public function attempt() {
+        return $this->frontPagesView('attempt_quiz');
+    }
 }
