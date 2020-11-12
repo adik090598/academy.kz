@@ -20,6 +20,8 @@ Route::group(['namespace' => 'Front',], function () {
     Route::get('/login', ['as' => 'login', 'uses' => 'HomeController@login']);
     Route::get('/register', ['as' => 'register', 'uses' => 'HomeController@register',]);
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'front.quiz.index']);
+    Route::get('/attempt', ['as' => 'attempt', 'uses' => 'HomeController@attempt',]);
+
 });
 
 Route::group(['namespace' => 'Auth', 'verify' => true, 'prefix' => 'admin'], function () {
@@ -48,7 +50,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin
     //Quizzes
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'quiz.index']);
     Route::get('/quiz/create', ['uses' => 'QuizController@create', 'as' => 'quiz.create']);
-    Route::get('/quiz/get', ['uses' => 'QuizController@getQuizById', 'as' => 'quiz.get']);
+    Route::get('/quiz/get', ['uses' => 'QuestionController@index', 'as' => 'quiz.get']);
     Route::get('/quiz/edit', ['uses' => 'QuizController@edit', 'as' => 'quiz.edit']);
     Route::post('/store', ['uses' => 'QuizController@store', 'as' => 'quiz.store']);
     Route::post('/update', ['uses' => 'QuizController@update', 'as' => 'quiz.update']);
@@ -61,7 +63,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin
     Route::post('/question/store', ['uses' => 'QuestionController@store', 'as' => 'question.store']);
     Route::post('/question/update', ['uses' => 'QuestionController@update', 'as' => 'question.update']);
     Route::post('/question/delete', ['uses' => 'QuestionController@delete', 'as' => 'question.delete']);
-
 });
 
 Route::group(['namespace' => 'Core', 'middleware' => 'auth', 'prefix' => 'admin'], function () {
