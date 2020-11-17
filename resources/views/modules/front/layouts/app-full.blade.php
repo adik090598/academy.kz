@@ -1,28 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-    @include('modules.front.parts.head')
+    <title>Academy.kz</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     @include('modules.front.parts.styles')
-    @yield('styles')
-    <link rel="stylesheet" href="{{asset('modules/front/assets/css/style.css')}}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
-@include('modules.front.parts.top-banner')
 @include('modules.front.parts.navigation')
-@include('modules.front.parts.mobile.mobileNav')
-<div class="container">
-    <main class="d-flex flex-column u-hero u-hero--end mnh-100vh">
-        <div class="row justify-content-between">
-            @include('modules.front.parts.account')
-            <div class="mainPart col-md-8" style="width: 100%">
-                @yield('content')
-            </div>
-        </div>
-    </main>
+<div class="container-fluid">
+    @yield('content')
 </div>
-
 @include('modules.front.parts.scripts')
 @yield('scripts')
 </body>

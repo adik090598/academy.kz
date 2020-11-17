@@ -1,39 +1,43 @@
-<nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container">
-        <a class="navbar-brand absolute" href="{{url('/welcome')}}">academy.kz</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse navbar-light" id="navbarsExample05">
-            <ul class="navbar-nav mx-auto">
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand ml-lg-5" href="{{route('welcome')}}">academy.kz</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-list"></i>
+    </button>
+    <div class="collapse navbar-collapse text-right" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Олипиада <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Тесттар</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Байқаулар</a>
+            </li>
+            @if(!Auth::user())
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">олимпиада</a>
+                    <a class="nav-link" href="{{route('login')}}">Кіру / Тіркелу</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">журнал</a>
+            @else
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        {{Auth::user()->name. ' ' .Auth::user()->surname}}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#"><i class="fa fa-list"></i> Менің тесттарым</a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Менің сертификаттарым</a>
+                        <form action="{{route('logout')}}" method="post" id="signOutForm">
+                            @csrf
+                            <a class="dropdown-item" href="#"
+                               onclick="document.getElementById('signOutForm').submit()">
+                                <i class="fa fa-sign-out-alt"></i> Шығу
+                            </a>
+                        </form>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('quiz.index')}}">Тестар</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav absolute-right">
-                @if (Route::has('login'))
-                    @auth
-                        <li class="nav-item">
-                            <a style="color: #fff;" href="{{ route('homeFront') }}">Басты бет</a>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a style="color: #fff;" href="{{ route('login') }}">Кіру</a> /
-                            @if (Route::has('register'))
-                                <a style="color: #fff;" href="{{ route('register') }}">Тіркелу</a>
-                            @endif
-                        </li>
-                    @endauth
-                @endif
-            </ul>
-        </div>
+            @endif
+        </ul>
     </div>
 </nav>

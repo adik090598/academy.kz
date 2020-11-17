@@ -1,7 +1,4 @@
-@extends('modules.front.layouts.app-partial')
-@section('styles')
-    <link rel="stylesheet" href="{{asset('modules/front/assets/css/welcome.css')}}">
-@endsection
+@extends('modules.front.layouts.app-full')
 @section('content')
     <header>
         <div class="container">
