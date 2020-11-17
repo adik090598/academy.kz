@@ -7,7 +7,6 @@
 <body>
 @include('modules.front.parts.top-banner')
     @include('modules.front.parts.navigation')
-    @include('modules.front.parts.mobile.mobileNav')
 <main class="d-flex flex-column u-hero u-hero--end mnh-100vh">
         @yield('content')
 </main>
