@@ -1,0 +1,81 @@
+@media screen and (max-width: 1000px) {
+    /*Academy section*/
+    .academy-section {
+        background-image: url("../img/welcome/teacher-single-small.png");
+        background-position: bottom right;
+        padding-top: 50px;
+        padding-bottom: 100px;
+    }
+
+    .academy-section h2 {
+        font-size: 36px;
+        line-height: 53px;
+    }
+
+    .academy-section h3 {
+        font-size: 18px;
+        line-height: 26px;
+        margin-top: 40px;
+    }
+
+    .academy-section p {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    /*Pupils section*/
+
+    .pupils-section {
+        background-image: url("../img/welcome/trophy-mobile.png"), url("../img/welcome/student-mobile.png");
+        background-repeat: no-repeat;
+        background-position: right bottom, left bottom;
+        background-color: #06BFC2;
+        position: relative;
+        z-index: -1;
+        padding-top: 20px;
+        padding-bottom: 80px;
+
+    }
+
+    .pupils-section h2 {
+        font-size: 24px;
+        line-height: 35px;
+    }
+
+    .pupils-section p {
+        font-size: 18px;
+        line-height: 26px;
+        margin-top: 25px;
+    }
+
+    .pupils-section .certificates {
+        padding-bottom: 50px;
+
+    }
+
+    .pupils-section .certificates .certificate-img {
+        margin-top: 20px;
+        min-width: 50px;
+        min-height: 50px;
+        max-width: 100px;
+        max-height: 80px;
+    }
+
+}
+
+@media screen and (max-width: 1366px) and (min-width: 1024px) {
+    .academy-section {
+        padding-top: 100px;
+        padding-bottom: 300px;
+    }
+
+    .pupils-section {
+        padding-top: 50px;
+    }
+
+    .pupils-section .certificates .certificate-img {
+        margin-left: 20px;
+    }
+
+
+}

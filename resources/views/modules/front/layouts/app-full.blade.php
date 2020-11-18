@@ -9,9 +9,7 @@
 </head>
 <body>
 @include('modules.front.parts.navigation')
-<div class="container-fluid">
-    @yield('content')
-</div>
+@yield('content')
 @include('modules.front.parts.scripts')
 @yield('scripts')
 </body>

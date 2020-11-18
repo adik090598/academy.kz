@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <link rel="stylesheet" href="{{asset('modules/front/assets/css/auth.css')}}">
 <link rel="stylesheet" href="{{asset('modules/front/assets/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('modules/front/assets/css/responsive.css')}}">
 @yield('styles')
 
 
