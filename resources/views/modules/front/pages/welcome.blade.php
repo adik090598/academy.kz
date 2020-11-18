@@ -37,4 +37,17 @@
             </div>
         </div>
     </section>
+    <section class="teachers-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-11 col-md-7 col-lg-6">
+                    <h2 class="col-12 offset-lg-2">Педагогтар</h2>
+                    <p class="col-12 offset-lg-2 mt-3">  -  Біздің портал арқылы түрлі бағытта тәжірибе алмасып,
+                        байқаулар мен жарыстар, олимпиадаларға қатыса отырып, білімдерін шыңдап,
+                        жеңімпаз атануға зор мүмкіндіктер бар. Әр педагог жеткен жетістігіне сәйкес түрлі мақтау
+                        қағаздары мен төсбелгімен марапатталады.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

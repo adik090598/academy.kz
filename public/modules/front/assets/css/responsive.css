@@ -61,6 +61,22 @@
         max-height: 80px;
     }
 
+    .teachers-section {
+        background-image: url("../img/welcome/teachers-mobile.png");
+        padding-top: 30px;
+        padding-bottom: 150px;
+    }
+
+    .teachers-section h2{
+        font-size: 24px;
+        line-height: 35px;
+    }
+
+    .teachers-section p{
+        font-size: 14px;
+        line-height: 20px;
+    }
+
 }
 
 @media screen and (max-width: 1366px) and (min-width: 1024px) {
@@ -75,6 +91,11 @@
 
     .pupils-section .certificates .certificate-img {
         margin-left: 20px;
+    }
+
+    .teachers-section {
+        padding-top: 50px;
+        padding-bottom: 250px;
     }
 
 
