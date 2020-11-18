@@ -18,6 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->foreignId('quiz_id')->constrained('quizzes');
             $table->text('question_text');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

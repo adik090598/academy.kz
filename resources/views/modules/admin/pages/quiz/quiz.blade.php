@@ -13,7 +13,7 @@
             <div class="h-100">
                 <header class="m-5">
                     <h2 class="h3 card-header-title"></h2>
-                    <a href="{{route('question.create')}}" class="btn btn-outline-primary mt-3" >
+                    <a href="{{route('question.create', ['quiz_id' => $questions->id ]) }}" class="btn btn-outline-primary mt-3" >
                         Добавить вопрос
                         <i class="ti ti-plus"></i>
                     </a>
@@ -29,6 +29,34 @@
                                     {{($key+1).")".$answer->answer}}
                                 </h5>
                             @endforeach
+                            <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
+                                    data-target="#delete{{$question->id}}"><i class="ti ti-trash"></i>
+                            </button>
+                            <div class="modal modal-backdrop" id="delete{{$question->id}}" tabindex="-1"
+                                 role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title w-100" id="myModalLabel">Удаление</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Вы действительно хотите удалить?</p>
+                                            <form method="post" action="{{route('question.delete', ['id' => $question->id])}}">
+                                                {{csrf_field()}}
+                                                <input type="number" value="{{$question->id}}" hidden>
+                                                <button type="submit" class="btn btn-outline-danger mt-3">Удалить безвозвратно<i class="ti ti-trash"></i></button>
+                                            </form>
+                                        </div>
+{{--                                        <div class="modal-footer">--}}
+{{--                                            <button type="button" class="btn btn-danger-soft btn-sm" data-dismiss="modal">--}}
+{{--                                                <i class="ti ti-close"></i> Закрыть</button>--}}
+{{--                                        </div>--}}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         @endforeach
                     @endif

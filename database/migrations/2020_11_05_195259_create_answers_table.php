@@ -19,6 +19,7 @@ class CreateAnswersTable extends Migration
             $table->text('answer');
             $table->tinyInteger('is_right');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

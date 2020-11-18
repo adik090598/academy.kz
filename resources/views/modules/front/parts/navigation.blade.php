@@ -1,9 +1,10 @@
 <header>
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand ml-lg-5" href="{{route('welcome')}}">academy.kz</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        <button class="navbar-toggler"  data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa fa-list"></i>
+{{--            <i class="fa fa-list"></i>--}}
+            <span></span>
         </button>
         <div class="collapse navbar-collapse text-right" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
@@ -43,3 +44,10 @@
         </div>
     </nav>
 </header>
+@section('scripts')
+    <script type="text/javascript">
+        $(".navbar-toggler").on('click', function (e) {
+            $(this).toggleClass("navbar-toggler_active");
+        })
+    </script>s
+@endsection

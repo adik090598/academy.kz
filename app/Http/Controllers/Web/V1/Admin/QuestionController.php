@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\QuestionWebForm;
 use App\Http\Requests\Web\V1\QuestionWebRequest;
+use App\Http\Requests\Web\V1\QuestionDeleteWebRequest;
 use App\Models\Entities\Answer;
 use App\Models\Entities\Question;
 use App\Models\Entities\Quiz;
@@ -32,10 +33,11 @@ class QuestionController extends WebBaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $quiz_id = $request->get('quiz_id');
         $question_web_form = QuestionWebForm::inputGroups(null);
-        return $this->adminPagesView('question.create', compact('question_web_form'));
+        return $this->adminPagesView('question.create', compact('question_web_form', 'quiz_id'));
     }
 
     /**
@@ -46,12 +48,12 @@ class QuestionController extends WebBaseController
      */
     public function store(QuestionWebRequest $request)
     {
-        $quiz_id = $request->get('quiz_id');
+        $id = $request->get('quiz_id');
         try {
             DB::beginTransaction();
             $question = Question::create([
                 'question_text' => $request->name,
-                'quiz_id' => $quiz_id
+                'quiz_id' => $id
             ]);
             $answers = [];
             $now = now();
@@ -67,7 +69,8 @@ class QuestionController extends WebBaseController
             Answer::insert($answers);
             $this->added();
             DB::commit();
-            return redirect()->back();
+            $question_web_form = QuestionWebForm::inputGroups(null);
+            return redirect()->route('question.index', compact("id", "question_web_form"));
         }
         catch (\Exception $e){
             DB::rollBack();
@@ -110,7 +113,18 @@ class QuestionController extends WebBaseController
         //
     }
 
-    /**
+    public function delete(QuestionDeleteWebRequest $request)
+    {
+        $question = Question::find($request->id);
+        $id = $question->quiz->id;
+
+        $question->answers()->delete();
+        $question->delete();
+        $this->deleted();
+        return redirect()->route('question.index', compact('id'));
+    }
+
+    /**s
      * Remove the specified resource from storage.
      *
      * @param  int  $id

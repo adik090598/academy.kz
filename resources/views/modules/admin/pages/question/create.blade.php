@@ -15,7 +15,7 @@
                     <h2 class="h4 card-header-title">Тест</h2>
                 </header>
                 <div class="card-body pt-0">
-                    <form action="{{route('question.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('question.store', ['quiz_id' => $quiz_id ])}}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <x-admin.input-form-group-list
                                 :errors="$errors"

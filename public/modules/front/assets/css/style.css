@@ -17,14 +17,62 @@ body{
     font-size: 18px;
     line-height: 22px;
     color: #FFFFFF;
+    margin-right: 1vw;
 }
 
 .nav-link:hover {
     color: #ebebeb;
 }
-.navbar-toggler {
-    color: #ffffff;
+
+.nav-link::selection{
+    outline: none;
 }
+
+.navbar-toggler {
+    position: relative;
+    color: #ffffff;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+}
+
+/**************** animated btn******************/
+.navbar-toggler span{
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    margin-left: -10px;
+    width: 20px;
+    height: 2px;
+    background-color: #eeeeee;
+}
+.navbar-toggler span::before,
+.navbar-toggler span::after{
+    content: "";
+    display: block;
+    height: 2px;
+    background-color: #eeeeee;
+    transition: 0.3s;
+}
+.navbar-toggler span::before{
+    transform: translateY(-7px);
+}
+.navbar-toggler span::after{
+    transform: translateY(6px);
+}
+.navbar-toggler_active span{
+    height: 0;
+}
+.navbar-toggler_active span::before{
+    transform: rotate(45deg);
+    transform-origin: center bottom;
+}
+.navbar-toggler_active span::after{
+    transform: rotate(-45deg);
+    transform-origin: center top;
+}
+
+/**********************************************/
 
 .navbar-brand {
     color:#ffffff;
@@ -41,10 +89,10 @@ body{
 /*Academy section*/
 
 .academy-section {
-    background-image: url("../img/welcome/teacher.png");
+    background-image: url("../img/welcome/teacher2.png");
     background-repeat: no-repeat;
     background-position: top right;
-    padding-top: 250px;
+    padding-top: 200px;
     padding-bottom: 230px;
 }
 
@@ -77,6 +125,7 @@ body{
     background-repeat: no-repeat;
     background-position: right bottom, left bottom;
     background-color: #06BFC2;
+    background-size: auto;
     padding-top: 100px;
     padding-bottom: 50px;
 }
