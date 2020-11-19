@@ -10,6 +10,7 @@
 <body>
 @include('modules.front.parts.navigation')
 @yield('content')
+@include('modules.front.parts.footer')
 @include('modules.front.parts.scripts')
 @yield('scripts')
 </body>

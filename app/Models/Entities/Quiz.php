@@ -20,4 +20,8 @@ class Quiz extends Model
         return $this->hasMany(Question::class, 'quiz_id', 'id');
     }
 
+    public function subject() {
+        return $this->belongsTo(Subject::class, 'subject_id', 'id');
+    }
+
 }
