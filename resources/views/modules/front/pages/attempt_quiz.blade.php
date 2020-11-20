@@ -945,8 +945,7 @@
         var currentQuest=questions[index];
         renderQuestion(currentQuest);
         renderOptions(currentQuest.answers);
-        console.log("Question");
-        console.log(questions[index]);
+
     }
 
     /** Return correct answer of a question ***/
