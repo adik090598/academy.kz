@@ -17,8 +17,7 @@ class QuestionWebForm implements WithForm
         return array_merge(
             $array,
             FormUtil::textArea('name', 'Вопрос', 'Вопрос',
-                'text', false, $value ? $value->name : ''),
-
+                'text', false, $value ? $value->name : '')
         );
     }
 }

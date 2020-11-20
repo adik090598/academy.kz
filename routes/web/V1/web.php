@@ -20,8 +20,7 @@ Route::group(['namespace' => 'Front',], function () {
     Route::get('/login', ['as' => 'login', 'uses' => 'HomeController@login']);
     Route::get('/register', ['as' => 'register', 'uses' => 'HomeController@register',]);
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'front.quiz.index']);
-    Route::get('/attempt', ['as' => 'attempt', 'uses' => 'HomeController@attempt',]);
-
+    Route::get('/attempt', ['as' => 'attempt', 'uses' => 'QuizController@attempt',]);
 });
 
 Route::group(['namespace' => 'Auth', 'verify' => true, 'prefix' => 'admin'], function () {

@@ -8,6 +8,7 @@
                 <h4 class="text_header">{{$quiz->name}}</h4>
             </div>
             <div class="description">1</div>
+            <a href="{{route('attempt', ['id'=>$quiz->id])}}">Сдать тест</a>
         </div>
     @endforeach
 @endsection

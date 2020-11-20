@@ -27,7 +27,4 @@ class HomeController extends WebBaseController
         return $this->frontPagesView('register');
     }
 
-    public function attempt() {
-        return $this->frontPagesView('attempt_quiz');
-    }
 }

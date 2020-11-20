@@ -6,6 +6,7 @@ use App\Exceptions\Web\WebServiceExplainedException;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\QuestionWebForm;
+use App\Http\Forms\Web\V1\QuizWebForm;
 use App\Http\Requests\Web\V1\QuestionWebRequest;
 use App\Http\Requests\Web\V1\QuestionDeleteWebRequest;
 use App\Models\Entities\Answer;
@@ -96,9 +97,12 @@ class QuestionController extends WebBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $question = Question::find($request->id);
+        $question_web_form = QuestionWebForm::inputGroups($question);
+
+        return $this->adminPagesView('question.edit', compact( 'question_web_form', 'question'));
     }
 
     /**

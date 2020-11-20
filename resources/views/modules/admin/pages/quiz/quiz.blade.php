@@ -29,6 +29,9 @@
                                     {{($key+1).")".$answer->answer}}
                                 </h5>
                             @endforeach
+                            <a href="{{route('question.edit', ['id' => $question->id])}}" class="btn btn-outline-primary btn-sm">
+                                <i class="ti ti-pencil"></i>
+                            </a>
                             <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
                                     data-target="#delete{{$question->id}}"><i class="ti ti-trash"></i>
                             </button>
