@@ -802,6 +802,41 @@
             color: #666666;
         }
 
+        @media only screen and (max-width:1365px){
+            .progress_menu {
+                display: grid;
+                grid-template-columns: repeat(20, 1fr);
+                grid-gap: 0;
+            }
+            .progress_items{
+                border: 1px solid #00A0A3;
+                border-collapse: collapse;
+            }
+
+            .progress_items:first-child{
+                border-bottom-left-radius: 0;
+                border-top-left-radius: 0;
+            }
+            .progress_items:last-child{
+                border-bottom-right-radius: 0;
+                border-top-right-radius: 0;
+
+            }
+        }
+
+        @media (min-width:378px) and (max-width: 1024px) {
+            .progress_menu{
+                grid-template-columns: repeat(10, 1fr);
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .progress_menu{
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+
     </style>
 </head>
 <body>
@@ -945,7 +980,6 @@
         var currentQuest=questions[index];
         renderQuestion(currentQuest);
         renderOptions(currentQuest.answers);
-
     }
 
     /** Return correct answer of a question ***/
