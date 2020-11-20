@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\QuestionWebForm;
 use App\Http\Forms\Web\V1\QuizWebForm;
 use App\Models\Entities\Quiz;
+use App\Models\Entities\Subject;
 use Illuminate\Http\Request;
 use Psy\Util\Json;
 
@@ -14,7 +15,8 @@ class QuizController extends WebBaseController
 {
         public function index(){
             $quizzes = Quiz::orderBy('created_at', 'desc')->paginate(10);
-            return $this->frontPagesView('test.index', compact('quizzes'));
+            $subjects = Subject::all();
+            return $this->frontPagesView('test.index', compact('quizzes', 'subjects'));
         }
 
         public function attempt(Request $request){

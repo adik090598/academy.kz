@@ -433,5 +433,18 @@ footer a:hover {
     text-decoration: none;
 }
 
+.back-button {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    color: #000000;
+}
+
+.back-button:hover {
+    color: #323232;
+    text-decoration: none;
+}
+
 
 
