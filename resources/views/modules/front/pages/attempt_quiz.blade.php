@@ -1,11 +1,5 @@
-<!Doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+@extends('modules.front.layouts.app-quiz')
+    @section('styles')
     <style>
         *{
             outline: none;
@@ -838,8 +832,8 @@
 
 
     </style>
-</head>
-<body>
+    @endsection
+
 <div class="row justify-content-between">
     <div class="mainPart col-md-12" >
         <div class="container">

@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer class="page-footer font-small mdb-color pt-4">
-
+    <hr>
     <!-- Footer Links -->
     <div class="container text-center text-md-left">
 

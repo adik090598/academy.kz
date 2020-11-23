@@ -10,7 +10,9 @@ use App\Models\Entities\Answer;
 use App\Models\Entities\Question;
 use App\Models\Entities\Quiz;
 use App\Models\Entities\Subject;
+use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Psy\Util\Json;
 
@@ -20,6 +22,19 @@ class QuizController extends WebBaseController
             $quizzes = Quiz::orderBy('created_at', 'desc')->paginate(10);
             $subjects = Subject::all();
             return $this->frontPagesView('test.index', compact('quizzes', 'subjects'));
+        }
+
+        public function getQuiz(Request $request)
+        {   $quiz = Quiz::find($request->quiz);
+            return $this->frontPagesView('test.checkout', compact('quiz'));
+        }
+
+    public function sendQuizRequest(Request $request){
+            $order = Order::create([
+                'status'=>1,
+                'quiz_id'=>$request->quiz,
+                'user_id'=>$request->getUser()
+            ]);
         }
 
         public function attempt(Request $request){
