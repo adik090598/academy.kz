@@ -15,8 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->enum(status,
-                [1=>'status1', 2=>'status2', 3=>'status3']);
+            $table->integer('status');
             $table->foreignId('quiz_id')->constrained('quizzes');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('transaction_id')->constrained('transactions');
