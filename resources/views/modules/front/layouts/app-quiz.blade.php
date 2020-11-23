@@ -2,7 +2,6 @@
 <html lang="en" class="no-js">
 <head>
     @include('modules.admin.parts.head')
-    @include('modules.admin.parts.styles')
     @yield('styles')
 </head>
 <body>

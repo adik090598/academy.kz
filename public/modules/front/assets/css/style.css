@@ -504,4 +504,8 @@ footer a:hover {
         width: 60px;
         height: 60px;
     }
+
+    .quiz-description{
+        font-size: 14px;
+    }
 }

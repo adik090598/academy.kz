@@ -845,10 +845,6 @@
                     </ul>
                 </div>
                 <div class="multipleChoiceQues">
-{{--                    <div class="my-progress">--}}
-{{--                        <progress class="my-progress-bar" min="0" max="100" value="0" step="9" aria-labelledby="my-progress-completion"></progress>--}}
-{{--                        <p id="my-progress-completion" class="js-my-progress-completion sr-only" aria-live="polite">0% complete</p>--}}
-{{--                    </div>--}}
                     <div class="quizBox">
                         <input type="hidden" value="" id="questionId">
                         <div class="question">
@@ -906,7 +902,6 @@
                         </div>
                         <button class="backBtn">Back</button>
                     </div>
-
                         <form action="{{route('submit')}}" method="POST" id="submitForm">
                             @csrf
                             <input type="hidden" name="userAnswers" id="submitAnswers">
@@ -1206,11 +1201,10 @@
         if ($progressValue >= 100) {
         } else {
             if($progressValue==99) $progressValue=100;
-
                 $('.progress_items').removeClass('is-active');
                 $('.progress_item_'+index).addClass('is-active');
 
-            $('progress').val($progressValue);
+
         }
         $('.js-my-progress-completion').html($('progress').val() + '% complete');
     }
