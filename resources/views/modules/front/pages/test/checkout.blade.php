@@ -9,7 +9,7 @@
         <div class="row">
             <div class="d-flex col-12">
                 <div class="col-6 text-left">
-                    <a href="#" class="back-button"><i class="fa fa-arrow-circle-left"></i> Тесттар</a>
+                    <a href="{{route('front.quiz.index')}}" class="back-button"><i class="fa fa-arrow-circle-left"></i> Тесттар</a>
                 </div>
             </div>
             <div class="checkout-container mt-3 col-12" >
@@ -32,7 +32,7 @@
                                     <div class="row">
                                         <div class="col-12"><label><i class="ti-timer"></i> {{$quiz->duration}} минут уақыт беріледі</label></div>
                                         <div class="col-12"><h5>Бағасы: {{$quiz->price}}тг.</h5></div>
-                                        <div class="col-12"><button class="checkout-btn">kaspi.kz арқылы төлем</button></div>
+                                        <div class="col-12"><a href="{{route('attempt', ['id' => $quiz->id])}}" target="_blank" class="checkout-btn">kaspi.kz арқылы төлем</a></div>
                                     </div>
                                 </div>
                         </div>

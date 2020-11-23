@@ -75,9 +75,9 @@
                                         <div class="d-block d-lg-flex">
                                             <p class="quiz-detail"><i
                                                     class="fa fa-calendar"></i> {{$quiz->subject->name}}</p>
-                                            <a href="#" class="btn btn-primary ml-auto float-right">Тапсырыс беру</a>
+                                            <a href="" class="btn btn-primary ml-auto float-right">Тапсырыс беру</a>
                                         </div>
-                                        <a href="#" class="stretched-link"></a>
+                                        <a href="{{route('front.quiz.index')}}" class="stretched-link"></a>
                                     </div>
                                 </div>
                             </div>

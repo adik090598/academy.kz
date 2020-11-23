@@ -4,7 +4,7 @@
         <div class="row">
             <div class="d-flex col-12">
                 <div class="col-6 text-left">
-                    <a href="#" class="back-button"><i class="fa fa-arrow-circle-left"></i> Тесттар</a>
+                    <a href="{{route('welcome')}}" class="back-button"><i class="fa fa-arrow-circle-left"></i> Негізгі бет</a>
                 </div>
                 <div class="form-group col-6">
                     <select class="form-control">

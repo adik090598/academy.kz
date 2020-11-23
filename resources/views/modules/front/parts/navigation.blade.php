@@ -12,7 +12,7 @@
                     <a class="nav-link" href="#">Олимпиада <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Тесттар</a>
+                    <a class="nav-link" href="{{route('front.quiz.index')}}">Тесттар</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Байқаулар</a>
@@ -50,5 +50,5 @@
         $(".navbar-toggler").on('click', function (e) {
             $(this).toggleClass("navbar-toggler_active");
         })
-    </script>s
+    </script>
 @endsection

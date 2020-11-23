@@ -15,6 +15,9 @@ class CreateQuizResultAnswersTable extends Migration
     {
         Schema::create('quiz_result_answers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('quiz_result_id')->constrained('quiz_results', 'id');
+            $table->foreignId('answer_id')->constrained('answers', 'id');
+            $table->boolean('is_right');
             $table->timestamps();
         });
     }
