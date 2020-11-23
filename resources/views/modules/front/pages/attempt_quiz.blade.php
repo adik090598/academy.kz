@@ -856,6 +856,7 @@
 {{--                        <p id="my-progress-completion" class="js-my-progress-completion sr-only" aria-live="polite">0% complete</p>--}}
 {{--                    </div>--}}
                     <div class="quizBox">
+                        <input type="hidden" value="" id="questionId">
                         <div class="question">
                         </div>
                         <hr style="width: 50%">
@@ -912,7 +913,10 @@
                         <button class="backBtn">Back</button>
                     </div>
 
-
+                        <form action="{{route('submit')}}" method="POST" id="submitForm">
+                            @csrf
+                            <input type="hidden" name="userAnswers" id="submitAnswers">
+                    </form>
                 </div>
             </div>
         </div>
@@ -926,6 +930,7 @@
 <script type="text/javascript">
     var $progressValue = 0;
     var resultList=[];
+
     var questions = {!! $questions->questions !!};
 
     function shuffle(a) {
@@ -944,7 +949,7 @@
 
         var optionHtml='<li class="myoptions">'+
             '<input value="'+opts.id+'" name="optRdBtn" type="radio" id="rd_'+i+'">'+
-            '<label for="rd_'+i+'">'+opts.answer+'</label>'+
+            '<label for="rd_'+i+'">'+opts.answer+'is-right'+opts.is_right+'</label>'+
             '<div class="bullet">'+
             '<div class="line zero"></div>'+
             '<div class="line one"></div>'+
@@ -973,6 +978,7 @@
     /** Render question **/
     function renderQuestion(question){
         $(".question").html(question.question_text);
+        $("#questionId").val(question.id);
     }
 
     /** Render quiz :: Question and option **/
@@ -1157,7 +1163,6 @@
             var _class=((results[i].iscorrect)?"item-correct":"item-incorrect");
             var _classH=((results[i].iscorrect)?"h-correct":"h-incorrect");
 
-
             var _html='<div class="_resultboard '+_class+'">'+
                 '<div class="_header">'+results[i].question+'</div>'+
                 '<div class="_yourans '+_classH+'">'+results[i].clicked+'</div>';
@@ -1271,12 +1276,15 @@
 
         var presentIndex=0;
         var clicked=0;
+        var userAnswers = [];
 
         renderQuiz(questions, presentIndex);
         getProgressindicator(questions.length);
 
         $(".answerOptions ").on('click','.myoptions>input', function(e){
             clicked=$(this).val();
+            userAnswers.push($(this).val());
+
             if(presentIndex==0){
                 $("#previous").addClass("hidden");
             }
@@ -1312,6 +1320,8 @@
             addClickedAnswerToResult(questions,presentIndex,clicked);
             $('.multipleChoiceQues').hide();
             $(".resultArea").show();
+            $("#submitAnswers").val(userAnswers);
+            $("#submitForm").submit();
             renderResult(resultList);
 
         });

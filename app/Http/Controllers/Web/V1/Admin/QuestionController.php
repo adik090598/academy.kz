@@ -99,7 +99,7 @@ class QuestionController extends WebBaseController
      */
     public function edit(Request $request)
     {
-        $question = Question::find($request->id);
+        $question = Question::find($request->id)-with('answers');
         $question_web_form = QuestionWebForm::inputGroups($question);
 
         return $this->adminPagesView('question.edit', compact( 'question_web_form', 'question'));
@@ -112,9 +112,36 @@ class QuestionController extends WebBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->get('quiz_id');
+        try {
+            DB::beginTransaction();
+            $question = Question::create([
+                'question_text' => $request->name,
+                'quiz_id' => $id
+            ]);
+            $answers = [];
+            $now = now();
+            foreach ($request->answers as $answer){
+                $answers[] = [
+                    'question_id' => $question->id,
+                    'answer' => $answer['text'],
+                    'is_right' => $answer['check'],
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ];
+            }
+            Answer::insert($answers);
+            $this->added();
+            DB::commit();
+            $question_web_form = QuestionWebForm::inputGroups(null);
+            return redirect()->route('question.index', compact("id", "question_web_form"));
+        }
+        catch (\Exception $e){
+            DB::rollBack();
+            throw new WebServiceExplainedException($e->getMessage());
+        }
     }
 
     public function delete(QuestionDeleteWebRequest $request)

@@ -21,6 +21,9 @@ Route::group(['namespace' => 'Front',], function () {
     Route::get('/register', ['as' => 'register', 'uses' => 'HomeController@register',]);
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'front.quiz.index']);
     Route::get('/attempt', ['as' => 'attempt', 'uses' => 'QuizController@attempt',]);
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/submit', ['as' => 'submit', 'uses' => 'QuizController@submit',]);
+    });
 });
 
 Route::group(['namespace' => 'Auth', 'verify' => true, 'prefix' => 'admin'], function () {
