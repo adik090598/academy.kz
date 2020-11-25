@@ -13,12 +13,16 @@ Route::get('/secure/config/cache-clear', ['uses' => 'ConfigController@cacheClear
 Route::get('/secure/config/key-generate', ['uses' => 'ConfigController@keyGenerate']);
 Route::get('/secure/config/optimize', ['uses' => 'ConfigController@optimize']);
 
-Route::group(['namespace' => 'Front',], function () {
+Route::group(['namespace' => 'Front'], function () {
+    Route::group(['namespace' => 'Auth',], function () {
+        Route::get('/registration', ['as' => 'register.form', 'uses' => 'RegisterController@showRegistrationForm']);
+        Route::post('/register/', ['as' => 'register', 'uses' => 'RegisterController@register']);
+        Route::get('/login', ['as' => 'login.form', 'uses' => 'LoginController@showLoginForm']);
+        Route::post('/login', ['as' => 'login', 'uses' => 'LoginController@login']);
+    });
     Route::get('/', ['uses' => 'HomeController@index']);
     Route::get('/welcome', ['as' => 'welcome', 'uses' => 'HomeController@index']);
     Route::get('/homeClient', ['as' => 'homeFront', 'uses' => 'HomeController@home']);
-    Route::get('/login', ['as' => 'login', 'uses' => 'HomeController@login']);
-    Route::get('/register', ['as' => 'register', 'uses' => 'HomeController@register',]);
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'front.quiz.index']);
     Route::get('/attempt', ['as' => 'attempt', 'uses' => 'QuizController@attempt',]);
 

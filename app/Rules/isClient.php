@@ -28,11 +28,14 @@ class IsClient implements Rule
     public function passes($attribute, $value)
     {
         $user = User::where('email',$value)->first();
-        if($user->role_id == Role::CLIENT_ID){
-            return true;
-        }else{
-            return false;
+        if($user) {
+            if ($user->role_id != Role::ADMIN_ID) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
     }
 
     /**
@@ -42,6 +45,6 @@ class IsClient implements Rule
      */
     public function message()
     {
-        return 'Вы не Бекертуғаном';
+        return 'Вы не являетесь пользователем';
     }
 }

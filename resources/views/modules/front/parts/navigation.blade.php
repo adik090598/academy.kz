@@ -19,7 +19,7 @@
                 </li>
                 @if(!Auth::user())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('login')}}">Кіру / Тіркелу</a>
+                        <a class="nav-link" href="{{route('login.form')}}">Кіру / Тіркелу</a>
                     </li>
                 @else
                     <li class="nav-item dropdown">

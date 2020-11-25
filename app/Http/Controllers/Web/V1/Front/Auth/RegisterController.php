@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\V1\Auth;
+namespace App\Http\Controllers\Web\V1\Front\Auth;
 
 use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\Auth\RegisterWebForm;
@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\YearRule;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends WebBaseController
 {
@@ -31,7 +32,7 @@ class RegisterController extends WebBaseController
     |
     */
 
-    use RedirectsUsers;
+    protected $redirectTo = RouteServiceProvider::WELCOME;
 
 
     public function __construct()
@@ -41,8 +42,8 @@ class RegisterController extends WebBaseController
 
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
 
+        $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
 
@@ -51,35 +52,44 @@ class RegisterController extends WebBaseController
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
-
+        $this->added();
         return $request->wantsJson()
             ? new JsonResponse([], 201)
-            : redirect()->route('user.profile');
+            : redirect()->route('welcome');
     }
 
 
     public function showRegistrationForm()
     {
-        $register_web_form = RegisterWebForm::inputGroups();
-        return $this->adminView('core.auth.register',compact('register_web_form'));
+        return $this->frontPagesView('register');
     }
 
     protected function validator(array $data)
     {
+        $data['phone'] = preg_replace("/[^0-9]/", "", $data['phone']);
         return Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', '', 'max:11', 'min:11'],
+            'surname' => ['required', 'string'],
+            'name' => ['required', 'string'],
+            'father_name' => ['required', 'string'],
+            'role_id' => ['required', Rule::in([Role::LEARNER_ID, Role::TEACHER_ID])],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
     protected function create(array $data)
     {
+        $data['phone'] = preg_replace("/[^0-9]/", "", $data['phone']);
         return User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'role_id' => Role::CLIENT_ID,
-            'avatar_file_id' => AppFile::DEFAULT_IMAGE_ID,
-            'avatar_path' => 'images/avatar.png'
+            'role_id' => $data['role_id'],
+            'name' => $data['name'],
+            'surname' => $data['surname'],
+            'father_name' => $data['father_name'],
+            'phone' => $data['phone'],
+            'avatar_path' => null
         ]);
     }
 
