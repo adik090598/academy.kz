@@ -10,7 +10,11 @@ class UserEditWebRequest extends WebBaseRequest
     public function injectedRules()
     {
         return [
-            'id' => ['numeric', 'exists:users,id', 'required']
+            //'id' => ['numeric', 'exists:users,id', 'required']
+            'phone' => ['required', 'string', '', 'max:17', 'min:17'],
+            'surname' => ['required', 'string'],
+            'name' => ['required', 'string'],
+            'father_name' => ['string'],
         ];
     }
 }

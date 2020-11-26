@@ -6,6 +6,7 @@ use App\Exceptions\Web\WebServiceExplainedException;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\UserWebForm;
+use App\Http\Requests\Web\V1\UserEditWebRequest;
 use App\Models\Entities\Core\User;
 use App\Services\Common\V1\Support\FileService;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class UserController extends WebBaseController
         return $this->frontPagesView('profile', compact('user','user_web_form'));
     }
 
-    public function update(Request $request){
+    public function update(UserEditWebRequest $request){
         $user = Auth::user();
 
         $old_path = $user->avatar_path;

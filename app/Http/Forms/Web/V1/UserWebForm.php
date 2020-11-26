@@ -26,6 +26,5 @@ class UserWebForm implements WithForm
             FormUtil::input('patronymic', 'Отчество', 'Отчество',
                 'text', false, $value ? $value->father_name : '')
         );
-
     }
 }

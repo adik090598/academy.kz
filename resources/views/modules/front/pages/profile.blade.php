@@ -51,12 +51,12 @@
                                            value="{{$user->email}}">
                                 </div>
                                 <div class="row justify-content-between">
-                                    <div class="col-md-5 col-12">
+                                    <div class="col-md-5 col-12 m-1">
                                         <button type="button" class="btn btn-block btn-wide btn-primary text-uppercase">
                                             Изменить пароль <i class="ti ti-unlock"></i>
                                         </button>
                                     </div>
-                                    <div class="col-md-4 col-12">
+                                    <div class="col-md-4 col-12 m-1">
                                         <button type="submit" class=" btn btn-block btn-wide btn-success text-uppercase">
                                             Сохранить <i class="ti ti-save"></i>
                                         </button>
