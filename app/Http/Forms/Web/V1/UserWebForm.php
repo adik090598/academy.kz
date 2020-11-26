@@ -19,9 +19,21 @@ class UserWebForm implements WithForm
         }
         return array_merge(
             $array,
-            FormUtil::input('name', 'Имя', 'Название',
+            FormUtil::input('avatar_path', '', null,
+                'file', !$value ? true : false),
+            FormUtil::input('surename', 'Фамилия', 'Фамилия',
+                'text', false, $value ? $value->surname : ''),
+            FormUtil::input('name', 'Имя', 'Имя',
                 'text', false, $value ? $value->name : ''),
-        FormUtil::input('image', '', 'Фото',
-            'file', !$value ? true : false));
+            FormUtil::input('patronymic', 'Отчество', 'Отчество',
+                'text', false, $value ? $value->father_name : ''),
+            FormUtil::input('email', 'Электронная почта', 'Электронная почта',
+                'text', false, $value ? $value->email : ''),
+            FormUtil::input('password', null, 'Пароль',
+                'password', false, null),
+            FormUtil::input('confirm_password', '', 'Повторите пароль',
+                'password', false, '')
+        );
+
     }
 }

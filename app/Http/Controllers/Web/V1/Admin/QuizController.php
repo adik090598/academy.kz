@@ -99,11 +99,4 @@ class QuizController extends WebBaseController
         return redirect()->route('quiz.index');
     }
 
-    public function getQuizById(Request $request)
-    {
-
-    }
-
-
-
 }
