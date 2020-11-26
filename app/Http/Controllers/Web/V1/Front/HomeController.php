@@ -40,36 +40,5 @@ class HomeController extends WebBaseController
         return $this->frontPagesView('register');
     }
 
-    public function profile(){
-        $user = Auth::user();
-        $user_web_form = UserWebForm::inputGroups($user);
-        return $this->frontPagesView('profile', compact('user','user_web_form'));
-    }
-
-    public function update(Request $request){
-        $user = User::find($request->id);
-
-        $old_path = $user->avatar_path;
-
-        $path = null;
-        if($request->avatar_path) {
-            $path = $this->fileService->updateWithRemoveOrStore($request->avatar_path, User::IMAGE_DIRECTORY, $old_path);
-        }
-        try {
-            $user->update([
-                'name' => $request->name,
-                'surname' => $request->surname,
-                'patronymic' => $request->patronymic,
-                'avatar_path' => $path ? $path : $old_path,
-                'father_name' => $request->patronymic,
-            ]);
-            $this->edited();
-            return redirect()->route('user.profile');
-        } catch (\Exception $exception) {
-            if($path) $this->fileService->remove($path);
-            throw new WebServiceExplainedException($exception->getMessage());
-        }
-
-    }
 
 }

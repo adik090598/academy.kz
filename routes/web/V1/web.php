@@ -19,7 +19,6 @@ Route::group(['namespace' => 'Front'], function () {
         Route::post('/register/', ['as' => 'register', 'uses' => 'RegisterController@register']);
         Route::get('/login', ['as' => 'login.form', 'uses' => 'LoginController@showLoginForm']);
         Route::post('/login', ['as' => 'login', 'uses' => 'LoginController@login']);
-
     });
     Route::get('/', ['uses' => 'HomeController@index']);
     Route::get('/welcome', ['as' => 'welcome', 'uses' => 'HomeController@index']);
@@ -28,8 +27,8 @@ Route::group(['namespace' => 'Front'], function () {
     Route::get('/attempt', ['as' => 'attempt', 'uses' => 'QuizController@attempt',]);
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('/profile', ['as' => 'user.profile', 'uses' => 'HomeController@profile']);
-        Route::post('/update', ['as' => 'user.update', 'uses' => 'HomeController@update']);
+        Route::get('/profile', ['as' => 'user.profile', 'uses' => 'UserController@index']);
+        Route::post('/update', ['as' => 'user.update', 'uses' => 'UserController@update']);
         Route::get('/quiz', ['as' => 'quiz', 'uses' => 'QuizController@getQuiz',]);
         Route::post('/sendQuizRequest', ['as' => 'sendQuizRequest', 'uses' => 'QuizController@attemp',]);
         Route::post('/submit', ['as' => 'submit', 'uses' => 'QuizController@submit',]);

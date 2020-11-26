@@ -492,9 +492,6 @@ footer a:hover {
 }
 
 
-
-
-
 .avatar_user{
     position: relative;
     border: 1px solid #dddddd;
@@ -502,6 +499,7 @@ footer a:hover {
 }
 
 .avatar_user img{
+    padding: 2px;
     width: 100%;
     border-radius: 16px;
 }
@@ -553,12 +551,11 @@ footer a:hover {
 
 
 .user_edit input[type="file"] {
+    display: none;
     width: 2px;
     height: 2px;
     overflow: hidden;
-    opacity: 0;
 }
-
 
 
 .user_edit{

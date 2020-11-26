@@ -44,9 +44,10 @@
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Запомнить меня</label>
+                        <a class="ml-3" href="{{route('register.form')}}">Первый раз? Зарегайся чел</a>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary float-right">Войти <i class="fas fa-sign-in-alt"></i></button>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-primary float-right">Войти<i class="fas fa-sign-in-alt"></i></button>
                     </div>
                 </form>
             </div>

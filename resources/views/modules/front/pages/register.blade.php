@@ -6,7 +6,7 @@
                 <a href="{{route('welcome')}}" class="btn btn-outline-primary"><i class="fa fa-arrow-left"></i>
                     Назад</a>
             </div>
-            <div class="row justify-content-center p-4 align-items-center mt-lg-5">
+            <div class="row justify-content-center p-4 align-items-center">
                 <div class="col-12 text-center">
                     <h2 class="logo-text">Academy</h2>
                     <h5>Тіркелу</h5>
@@ -112,6 +112,7 @@
                         @endif
                     </div>
                     <div class="form-group">
+                        <a class="ml-3" href="{{route('login.form')}}">Уже есть аккаунт? Хуле тогда тут делаешь еблан</a>
                         <button type="submit" class="btn btn-primary float-right">Тіркелу <i
                                 class="fas fa-sign-in-alt"></i></button>
                     </div>
@@ -130,6 +131,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script type="text/javascript">
         $("#phone").mask("+7(799) 999-99-99");
-
     </script>
 @endsection
