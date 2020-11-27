@@ -837,7 +837,6 @@
 <div class="row justify-content-between">
     <div class="mainPart col-md-12" >
         <div class="container">
-
             <div class="quizArea">
                 <h1 id="time-display" class="timer-display">00:00</h1>
                 <div class="pagination p12">
@@ -915,7 +914,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
 <script src="https://raw.githubusercontent.com/emn178/Chart.PieceLabel.js/master/src/Chart.PieceLabel.js"></script>
-
 <script type="text/javascript">
     var $progressValue = 0;
     var resultList=[];
@@ -1348,9 +1346,6 @@
 
     });
 </script>
-
-
-
 </body>
 </html>
 
