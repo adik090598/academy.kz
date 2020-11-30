@@ -1041,6 +1041,9 @@
             e.preventDefault();
             addClickedAnswerToResult(questions,presentIndex,clicked);
             presentIndex++;
+            if(questions.length==(presentIndex+1)){
+                $("#submit").removeClass('hidden');
+            }
             $("#previous").removeClass("hidden");
             renderQuiz(questions, presentIndex);
             changeProgressValue(presentIndex);
