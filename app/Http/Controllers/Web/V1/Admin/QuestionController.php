@@ -99,7 +99,7 @@ class QuestionController extends WebBaseController
      */
     public function edit(Request $request)
     {
-        $question = Question::find($request->id)-with('answers');
+        $question = Question::where('id', $request->id)-with('answers')->first();
         $question_web_form = QuestionWebForm::inputGroups($question);
 
         return $this->adminPagesView('question.edit', compact( 'question_web_form', 'question'));
