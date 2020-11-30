@@ -871,7 +871,6 @@
 <script type="text/javascript">
     var $progressValue = 0;
     var resultList=[];
-
     var questions = {!! $questions->questions !!};
 
     /*** Return shuffled question ***/
@@ -960,8 +959,6 @@
             if($progressValue==99) $progressValue=100;
                 $('.progress_items').removeClass('is-active');
                 $('.progress_item_'+index).addClass('is-active');
-
-
         }
         $('.js-my-progress-completion').html($('progress').val() + '% complete');
     }
@@ -1014,17 +1011,18 @@
     };
 
     $(document).ready(function() {
-
+        const map1 = new Map();
         var presentIndex=0;
         var clicked=0;
-        var userAnswers = [];
+        var userAnswers = {};
 
         renderQuiz(questions, presentIndex);
         getProgressindicator(questions.length);
 
         $(".answerOptions ").on('click','.myoptions>input', function(e){
             clicked=$(this).val();
-            userAnswers.push($(this).val());
+            //userAnswers.push($(this).val());
+            userAnswers[presentIndex-1] = $(this).val();
 
             if(presentIndex==0){
                 $("#previous").addClass("hidden");
@@ -1064,7 +1062,7 @@
             addClickedAnswerToResult(questions,presentIndex,clicked);
             $('.multipleChoiceQues').hide();
             $(".resultArea").show();
-            $("#submitAnswers").val(userAnswers);
+            $("#submitAnswers").val(Object.values(userAnswers));
             $("#submitForm").submit();
         });
 
@@ -1082,7 +1080,6 @@
                 $("#previous").removeClass("hidden");
                 $("#next").removeClass("hidden");
             }
-
             renderQuiz(questions, presentIndex);
             changeProgressValue( presentIndex);
         }

@@ -4,15 +4,21 @@
     <div class="container pt-5" style="min-height: 766px;">
         <div class="accordion" id="accordionExample">
                 <div class="text-center">
-                    <h5 class="mb-0">
-                       Вы набрали  {{$result}}/{{$count}}
-                    </h5>
-                    <h4> Ваш результат {{$resString}}</h4>
-                    <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-right" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Посмотреть мои ответы
-                        </button>
-                    </h2>
+                    @if($count)
+                        <h5 class="mb-0">
+                            Вы набрали  {{$result}}/{{$count}}
+                        </h5>
+                        <h4> Ваш результат {{$resString}}</h4>
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-right" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Посмотреть мои ответы
+                            </button>
+                        </h2>
+                        @else
+                        <h5 class="mb-0">
+                            Ваш результат {{$resString}}
+                        </h5>
+                        @endif
                 </div>
 
                 <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">

@@ -19,29 +19,33 @@ use Psy\Util\Json;
 
 class QuizController extends WebBaseController
 {
-        public function index(){
-            $quizzes = Quiz::orderBy('created_at', 'desc')->paginate(10);
-            $subjects = Subject::all();
-            return $this->frontPagesView('test.index', compact('quizzes', 'subjects'));
-        }
+    public function index()
+    {
+        $quizzes = Quiz::orderBy('created_at', 'desc')->paginate(10);
+        $subjects = Subject::all();
+        return $this->frontPagesView('test.index', compact('quizzes', 'subjects'));
+    }
 
-        public function getQuiz(Request $request)
-        {   $quiz = Quiz::find($request->quiz);
-            return $this->frontPagesView('test.checkout', compact('quiz'));
-        }
+    public function getQuiz(Request $request)
+    {
+        $quiz = Quiz::find($request->quiz);
+        return $this->frontPagesView('test.checkout', compact('quiz'));
+    }
 
-    public function sendQuizRequest(Request $request){
-            $order = Order::create([
-                'status'=>1,
-                'quiz_id'=>$request->quiz,
-                'user_id'=>$request->getUser()
-            ]);
-        }
+    public function sendQuizRequest(Request $request)
+    {
+        $order = Order::create([
+            'status' => 1,
+            'quiz_id' => $request->quiz,
+            'user_id' => $request->getUser()
+        ]);
+    }
 
-        public function attempt(Request $request){
-            $questions = Quiz::with('questions.answers')->find($request->id);
-            //$questions->toJson(JSON_PRETTY_PRINT);
-            $questions->toArray();
+    public function attempt(Request $request)
+    {
+        $questions = Quiz::with('questions.answers')->find($request->id);
+        //$questions->toJson(JSON_PRETTY_PRINT);
+        $questions->toArray();
 //
 //            Order::create([
 //                'status'  => 1,
@@ -49,27 +53,31 @@ class QuizController extends WebBaseController
 //                'user_id' => Auth::id(),
 //                'transaction_id' => 1
 //            ]);
-            return $this->frontPagesView('attempt_quiz', compact('questions'));
-        }
+        return $this->frontPagesView('attempt_quiz', compact('questions'));
+    }
 
-        public function submit(Request $request){
-            $arr = explode(',', $request->get("userAnswers"));
-            $result = 0;
-            $userAnswers = [];
+    public function submit(Request $request)
+    {
+        $arr = explode(',', $request->get("userAnswers"));
+        $result = 0;
+        $userAnswers = [];
 
-            foreach ($arr as $a) {
-                $answer = Answer::find($a);
-                $qustion = Question::find($answer->question_id);
-                $qustion->answer = $answer;
-                $userAnswers[] = $qustion;
-                if($answer->is_right){
-                    $result++;
-                }
-                $quiz = Quiz::with('questions')->find($qustion->quiz_id);
+        foreach ($arr as $a) {
+            $answer = Answer::find($a);
+            if ($answer){
+            $qustion = Question::find($answer->question_id);
+            $qustion->answer = $answer;
+            $userAnswers[] = $qustion;
+            if ($answer->is_right) {
+                $result++;
             }
-            $count = $quiz->questions->count();
-            $resString = $result/$count*100 .'%';
-            return $this->frontPagesView('result', compact('userAnswers', 'result','resString','count'));
-
+            $quiz = Quiz::with('questions')->find($qustion->quiz_id);
+                $count = $quiz->questions->count();
+                $resString = $result / $count * 100 . '%';
+            }
+            $count = 0;
+            $resString = '0%';
         }
+        return $this->frontPagesView('result', compact('userAnswers', 'result', 'resString', 'count'));
+    }
 }
