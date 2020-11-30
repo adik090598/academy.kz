@@ -857,55 +857,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="resultArea">
-                    <div class="resultPage1">
-                        <div class="resultBox">
-                            <h1>Result Summary</h1>
-                        </div>
-                        <div class="briefchart">
-                            <svg height="300" width="300" id="_cir_progress">
-                                <g>
-                                    <rect x="0" y="1" width="30" height="15"  fill="#ab4e6b" />
-                                    <text x="32" y="14" font-size="14"  class="_text_incor">Incorrect : 12 </text>
-                                </g>
-                                <g>
-                                    <rect x="160" y="1" width="30" height="15"  fill="#968089" />
-                                    <text x="192" y="14" font-size="14" class="_text_cor">Correct : 12</text>
-                                </g>
-                                <circle class="_cir_P_x" cx="150" cy="150" r="120" stroke="#ab4e6b" stroke-width="20" fill="none" onmouseover="evt.target.setAttribute('stroke', 'rgba(171, 78, 107,0.7)');" onmouseout="evt.target.setAttribute('stroke','#ab4e6b');"></circle>
 
-                                <circle class="_cir_P_y" cx="150" cy="150" r="120" stroke="#968089" stroke-width="20"  stroke-dasharray="0,1000" fill="none"  onmouseover="evt.target.setAttribute('stroke', 'rgba(150, 128, 137,0.7)');" onmouseout="evt.target.setAttribute('stroke','#968089');"></circle>
-                                <text x="50%" y="50%" text-anchor="middle" stroke="none" stroke-width="1px" dy=".3em" class="_cir_Per">0%</text>
-                            </svg>
-                        </div>
-
-                        <div class="resultBtns">
-                            <button class="viewanswer">View Answers</button>
-                            <button class="viewchart">View Chart</button>
-                            <button class="replay"><i class="fa fa-repeat" style="font-size:1em;"></i> <br/>Replay</button>
-                        </div>
-                    </div>
-
-                    <div class="resultPage2">
-                        <h1>Your Result</h1>
-                        <div class="chartBox">
-                            <canvas id="myChart" width="400" height="400"></canvas>
-                        </div>
-                        <button class="backBtn">Back</button>
-                    </div>
-
-                    <div class="resultPage3">
-                        <h1>Your Answers</h1>
-                        <div class="allAnswerBox">
-
-                        </div>
-                        <button class="backBtn">Back</button>
-                    </div>
-                        <form action="{{route('submit')}}" method="POST" id="submitForm">
-                            @csrf
-                            <input type="hidden" name="userAnswers" id="submitAnswers">
-                    </form>
-                </div>
+                <form action="{{route('submit')}}" method="POST" id="submitForm">
+                    @csrf
+                    <input type="hidden" name="userAnswers" id="submitAnswers">
+                </form>
             </div>
         </div>
     </div>
@@ -919,15 +875,6 @@
     var resultList=[];
 
     var questions = {!! $questions->questions !!};
-
-    function shuffle(a) {
-        for (var i = a.length; i; i--) {
-            var j = Math.floor(Math.random() * i);
-            var _ref = [a[j], a[i - 1]];
-            a[i - 1] = _ref[0];
-            a[j] = _ref[1];
-        }
-    }
 
     /*** Return shuffled question ***/
 
@@ -997,192 +944,6 @@
         return arrayForChart
     }
 
-    /** percentage Calculation **/
-    function percentCalculation(array, total){
-        var percent = array.map(function (d, i) {
-            return (100 * d / total).toFixed(2);
-        });
-        return percent;
-    }
-
-    /*** Get percentage for chart **/
-    function getPercentage(resultByCat, wrong){
-        var totalNumber=resultList.length;
-        var wrongAnwer=wrong;
-        //var arrayForChart=genResultArray(resultByCat, wrong);
-        //return percentCalculation(arrayForChart, totalNumber);
-    }
-
-    /** count right and wrong answer number **/
-    function countAnswers(results){
-
-        var countCorrect=0, countWrong=0;
-
-        for(var i=0;i<results.length;i++){
-            if(results[i].iscorrect==true)
-                countCorrect++;
-            else countWrong++;
-        }
-
-        return [countCorrect, countWrong];
-    }
-
-    /**** Categorize result *****/
-    function resultByCategory(results){
-
-        var categoryCount = [];
-        var ctArray=results.reduce(function (res, value) {
-            if (!res[value.category]) {
-                res[value.category] = {
-                    category: value.category,
-                    correctanswer: 0
-                };
-                categoryCount.push(res[value.category])
-            }
-            var val=(value.iscorrect==true)?1:0;
-            res[value.category].correctanswer += val;
-            return res;
-        }, {});
-
-        categoryCount.sort(function(a,b) {
-            return a.category - b.category;
-        });
-
-        return categoryCount;
-    }
-
-
-    /** Total score pie chart**/
-    function totalPieChart(_upto, _cir_progress_id, _correct, _incorrect) {
-
-        $("#"+_cir_progress_id).find("._text_incor").html("Incorrect : "+_incorrect);
-        $("#"+_cir_progress_id).find("._text_cor").html("Correct : "+_correct);
-
-        var unchnagedPer=_upto;
-
-        _upto = (_upto > 100) ? 100 : ((_upto < 0) ? 0 : _upto);
-
-        var _progress = 0;
-
-        var _cir_progress = $("#"+_cir_progress_id).find("._cir_P_y");
-        var _text_percentage = $("#"+_cir_progress_id).find("._cir_Per");
-
-        var _input_percentage;
-        var _percentage;
-
-        var _sleep = setInterval(_animateCircle, 25);
-
-        function _animateCircle() {
-            //2*pi*r == 753.6 +xxx=764
-            _input_percentage = (_upto / 100) * 764;
-            _percentage = (_progress / 100) * 764;
-
-            _text_percentage.html(_progress + '%');
-
-            if (_percentage >= _input_percentage) {
-                _text_percentage.html('<tspan x="50%" dy="0em">'+unchnagedPer + '% </tspan><tspan  x="50%" dy="1.9em">Your Score</tspan>');
-                clearInterval(_sleep);
-            } else {
-
-                _progress++;
-
-                _cir_progress.attr("stroke-dasharray",_percentage + ',764');
-            }
-        }
-    }
-
-    function renderBriefChart(correct, total, incorrect){
-        var percent=(100 * correct / total);
-        if(Math.round(percent) !== percent) {
-            percent = percent.toFixed(2);
-        }
-
-        totalPieChart(percent, '_cir_progress', correct, incorrect)
-
-    }
-    /*** render chart for result **/
-    function renderChart(data){
-        var ctx = document.getElementById("myChart");
-        var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: [ "Verbal communication",
-                    "Non-verbal communication",
-                    "Written communication",
-                    "Incorrect"
-                ],
-                datasets: [
-                    {
-
-                        data: data,
-                        backgroundColor: [  '#e6ded4',
-                            '#968089',
-                            '#e3c3d4',
-                            '#ab4e6b'
-                        ],
-                        borderColor: [  'rgba(239, 239, 81, 1)',
-                            '#8e3407',
-                            'rgba((239, 239, 81, 1)',
-                            '#000000'
-                        ],
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                pieceLabel: {
-                    render: 'percentage',
-                    fontColor: 'black',
-                    precision: 2
-                }
-            }
-
-        });
-    }
-
-    /** List question and your answer and correct answer
-
-     *****/
-    function getAllAnswer(results){
-        var innerhtml="";
-        for(var i=0;i<results.length;i++){
-
-            var _class=((results[i].iscorrect)?"item-correct":"item-incorrect");
-            var _classH=((results[i].iscorrect)?"h-correct":"h-incorrect");
-
-            var _html='<div class="_resultboard '+_class+'">'+
-                '<div class="_header">'+results[i].question+'</div>'+
-                '<div class="_yourans '+_classH+'">'+results[i].clicked+'</div>';
-
-            var html="";
-            if(!results[i].iscorrect)
-                html='<div class="_correct">'+results[i].answer+'</div>';
-            _html=(_html+html)+'</div>';
-            innerhtml+=_html;
-        }
-
-        $(".allAnswerBox").html('').append(innerhtml);
-    }
-    /** render  Brief Result **/
-    function renderResult(resultList){
-
-        var results=resultList;
-        console.log(results);
-        var countCorrect=countAnswers(results)[0],
-            countWrong=countAnswers(results)[1];
-
-
-        renderBriefChart(countCorrect, resultList.length, countWrong);
-    }
-
-    function renderChartResult(){
-        var results=resultList;
-        var countCorrect=countAnswers(results)[0],
-            countWrong=countAnswers(results)[1];
-        var dataForChart=genResultArray(resultList, countWrong);
-        renderChart(dataForChart);
-    }
-
     /** Insert progress bar in html **/
     function getProgressindicator(length){
         var progressbarhtml=" ";
@@ -1219,8 +980,6 @@
         }
         resultList.push(result);
 
-        console.log("result");
-        console.log(result);
 
     }
 
@@ -1312,30 +1071,6 @@
 
         });
 
-        $(".resultArea").on('click','.viewchart',function(){
-            $(".resultPage2").show();
-            $(".resultPage1").hide();
-            $(".resultPage3").hide();
-            renderChartResult();
-        });
-
-        $(".resultArea").on('click','.backBtn',function(){
-            $(".resultPage1").show();
-            $(".resultPage2").hide();
-            $(".resultPage3").hide();
-            renderResult(resultList);
-        });
-
-        $(".resultArea").on('click','.viewanswer',function(){
-            $(".resultPage3").show();
-            $(".resultPage2").hide();
-            $(".resultPage1").hide();
-            getAllAnswer(resultList);
-        });
-
-        $(".resultArea").on('click','.replay',function(){
-            window.location.reload(true);
-        });
 
         getQuestionById = function(id){
             addClickedAnswerToResult(questions,presentIndex,clicked);

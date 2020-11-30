@@ -26,10 +26,10 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <input type="hidden" name="answers[0][check]" value="0">
-                                        <input type="checkbox" name="answers[0][check]" value="1" aria-label="Checkbox for following text input">
+                                        <input type="checkbox" name="answers[0][check]"  value="1" aria-label="Checkbox for following text input">
                                     </div>
                                 </div>
-                                <input type="text" name="answers[0][text]" class="form-control" aria-label="answer text">
+                                <input type="text" name="answers[0][text]" required class="form-control" aria-label="answer text">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <button class="btn btn-primary add_field_button" type="button">+</button>
