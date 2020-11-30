@@ -65,9 +65,10 @@ class QuizController extends WebBaseController
                 if($answer->is_right){
                     $result++;
                 }
+                $quiz = Quiz::with('questions')->find($qustion->quiz_id);
             }
-            $resString = $result/count($arr)*100 .'%';
-            $count = count($arr);
+            $count = $quiz->questions->count();
+            $resString = $result/$count*100 .'%';
             return $this->frontPagesView('result', compact('userAnswers', 'result','resString','count'));
 
         }
