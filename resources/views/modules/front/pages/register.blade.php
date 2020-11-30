@@ -112,7 +112,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <a class="ml-3" href="{{route('login.form')}}">Уже есть аккаунт? Хуле тогда тут делаешь еблан</a>
+                        <a class="ml-3" href="{{route('login.form')}}">Уже есть аккаунт?</a>
                         <button type="submit" class="btn btn-primary float-right">Тіркелу <i
                                 class="fas fa-sign-in-alt"></i></button>
                     </div>
