@@ -868,8 +868,6 @@
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
-<script src="https://raw.githubusercontent.com/emn178/Chart.PieceLabel.js/master/src/Chart.PieceLabel.js"></script>
 <script type="text/javascript">
     var $progressValue = 0;
     var resultList=[];
@@ -1065,13 +1063,23 @@
             $(".resultArea").show();
             $("#submitAnswers").val(userAnswers);
             $("#submitForm").submit();
-            renderResult(resultList);
-
         });
 
         getQuestionById = function(id){
             addClickedAnswerToResult(questions,presentIndex,clicked);
             presentIndex = id;
+            if(id==0){
+                $("#previous").addClass("hidden");
+            }
+            else if(questions.length==(presentIndex+1)){
+                $("#submit").removeClass('hidden');
+            }
+            else{
+                $("#submit").addClass('hidden');
+                $("#previous").removeClass("hidden");
+                $("#next").removeClass("hidden");
+            }
+
             renderQuiz(questions, presentIndex);
             changeProgressValue( presentIndex);
         }

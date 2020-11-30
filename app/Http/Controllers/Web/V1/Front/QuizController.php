@@ -49,7 +49,6 @@ class QuizController extends WebBaseController
 //                'user_id' => Auth::id(),
 //                'transaction_id' => 1
 //            ]);
-
             return $this->frontPagesView('attempt_quiz', compact('questions'));
         }
 
@@ -57,8 +56,7 @@ class QuizController extends WebBaseController
             $arr = explode(',', $request->get("userAnswers"));
             $result = 0;
             $userAnswers = [];
-            $resString = '';
-           // dd($arr);
+
             foreach ($arr as $a) {
                 $answer = Answer::find($a);
                 $qustion = Question::find($answer->question_id);
@@ -67,12 +65,10 @@ class QuizController extends WebBaseController
                 if($answer->is_right){
                     $result++;
                 }
-               // $result++;
             }
-
             $resString = $result/count($arr)*100 .'%';
             $count = count($arr);
             return $this->frontPagesView('result', compact('userAnswers', 'result','resString','count'));
-           // dd($result);
+
         }
 }
