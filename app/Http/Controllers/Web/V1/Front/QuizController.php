@@ -61,9 +61,10 @@ class QuizController extends WebBaseController
            // dd($arr);
             foreach ($arr as $a) {
                 $answer = Answer::find($a);
+                $qustion = Question::find($answer->question_id);
+                $qustion->answer = $answer;
+                $userAnswers[] = $qustion;
                 if($answer->is_right){
-                    $qustion = Question::with('answers')->find($answer->question_id);
-                    $userAnswers[] = $qustion;
                     $result++;
                 }
                // $result++;

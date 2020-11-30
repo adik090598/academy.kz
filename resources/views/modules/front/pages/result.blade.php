@@ -19,15 +19,15 @@
                         @if($userAnswers)
                             <ul>
                                 @foreach($userAnswers as $question)
-                                    @if($question->answers->get(1)->is_right)
+                                    @if($question->answer->is_right)
                                         <div class="alert alert-success" role="alert">
                                             <h4 class="alert-heading">{!! $question->question_text  !!} </h4>
-                                            <p>{{ $question->answers->first()->answer  }}</p>
+                                            <p>{{ $question->answer->answer  }}</p>
                                         </div>
                                     @else
                                         <div class="alert alert-danger" role="alert">
                                             <h4 class="alert-heading">{!! $question->question_text  !!}</h4>
-                                            <p class="mb-0"></p>
+                                            <p class="mb-0">{{ $question->answer->answer  }}</p>
                                         </div>
                                     @endif
                                 @endforeach

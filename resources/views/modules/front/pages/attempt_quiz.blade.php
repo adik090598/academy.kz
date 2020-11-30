@@ -979,8 +979,6 @@
             category:questions[presentIndex].category
         }
         resultList.push(result);
-
-
     }
 
     function tick() {
@@ -1070,7 +1068,6 @@
             renderResult(resultList);
 
         });
-
 
         getQuestionById = function(id){
             addClickedAnswerToResult(questions,presentIndex,clicked);
