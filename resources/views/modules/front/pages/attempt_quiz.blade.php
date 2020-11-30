@@ -883,7 +883,7 @@
 
         var optionHtml='<li class="myoptions">'+
             '<input value="'+opts.id+'" name="optRdBtn" type="radio" id="rd_'+i+'">'+
-            '<label for="rd_'+i+'">'+opts.answer+'is-right'+opts.is_right+'</label>'+
+            '<label for="rd_'+i+'">'+opts.answer+'</label>'+
             '<div class="bullet">'+
             '<div class="line zero"></div>'+
             '<div class="line one"></div>'+

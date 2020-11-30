@@ -63,8 +63,6 @@ class QuizController extends WebBaseController
                 $answer = Answer::find($a);
                 if($answer->is_right){
                     $qustion = Question::with('answers')->find($answer->question_id);
-
-
                     $userAnswers[] = $qustion;
                     $result++;
                 }
