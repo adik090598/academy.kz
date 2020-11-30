@@ -871,15 +871,21 @@
 <script type="text/javascript">
     var $progressValue = 0;
     var resultList=[];
+    var userAnswers = [];
     var questions = {!! $questions->questions !!};
 
     /*** Return shuffled question ***/
 
     /*** Return list of options ***/
     function returnOptionList(opts, i){
+        let key = userAnswers.find(element => element == opts.id);
+        let radio = '';
+        if(key){
+            radio = 'checked';
+        }
 
         var optionHtml='<li class="myoptions">'+
-            '<input value="'+opts.id+'" name="optRdBtn" type="radio" id="rd_'+i+'">'+
+            '<input value="'+opts.id+'" '+radio+' name="optRdBtn" type="radio" id="rd_'+i+'">'+
             '<label for="rd_'+i+'">'+opts.answer+'</label>'+
             '<div class="bullet">'+
             '<div class="line zero"></div>'+
@@ -892,7 +898,6 @@
             '<div class="line seven"></div>'+
             '</div>'+
             '</li>';
-
         return optionHtml;
     }
 
@@ -1011,10 +1016,9 @@
     };
 
     $(document).ready(function() {
-        const map1 = new Map();
+
         var presentIndex=0;
         var clicked=0;
-        var userAnswers = {};
 
         renderQuiz(questions, presentIndex);
         getProgressindicator(questions.length);
@@ -1022,7 +1026,8 @@
         $(".answerOptions ").on('click','.myoptions>input', function(e){
             clicked=$(this).val();
             //userAnswers.push($(this).val());
-            userAnswers[presentIndex-1] = $(this).val();
+
+            userAnswers[presentIndex] = $(this).val();
 
             if(presentIndex==0){
                 $("#previous").addClass("hidden");

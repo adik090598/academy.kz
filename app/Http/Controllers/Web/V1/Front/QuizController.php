@@ -74,9 +74,11 @@ class QuizController extends WebBaseController
             $quiz = Quiz::with('questions')->find($qustion->quiz_id);
                 $count = $quiz->questions->count();
                 $resString = $result / $count * 100 . '%';
+            } else{
+                $count = 0;
+                $resString = '0%';
             }
-            $count = 0;
-            $resString = '0%';
+
         }
         return $this->frontPagesView('result', compact('userAnswers', 'result', 'resString', 'count'));
     }
