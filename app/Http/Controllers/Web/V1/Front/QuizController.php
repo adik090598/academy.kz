@@ -9,8 +9,10 @@ use App\Http\Forms\Web\V1\QuizWebForm;
 use App\Models\Entities\Answer;
 use App\Models\Entities\Question;
 use App\Models\Entities\Quiz;
+use App\Models\Entities\QuizResultAnswer;
 use App\Models\Entities\Subject;
 use App\Models\Entities\Order;
+use App\Models\Entities\QuizResult;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,8 +80,26 @@ class QuizController extends WebBaseController
                 $count = 0;
                 $resString = '0%';
             }
-
         }
+
+        $quiz_result = QuizResult::create([
+            'user_id'   => Auth::id(),
+            'quiz_id'   => $quiz->id,
+            'order_id'  => 1,
+            'result'    => $result/$count
+        ]);
+
+        foreach ($arr as $a) {
+            $answer = Answer::find($a);
+            if ($answer) {
+                QuizResultAnswer::create([
+                   'quiz_result_id'  => $quiz_result->id,
+                    'answer_id'      => $answer->id,
+                    'is_right'       =>  $answer->is_right
+                ]);
+            }
+        }
+
         return $this->frontPagesView('result', compact('userAnswers', 'result', 'resString', 'count'));
     }
 }

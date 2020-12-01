@@ -19,6 +19,7 @@ class CreateQuizResultAnswersTable extends Migration
             $table->foreignId('answer_id')->constrained('answers', 'id');
             $table->boolean('is_right');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

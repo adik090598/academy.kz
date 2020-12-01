@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\UserWebForm;
 use App\Http\Requests\Web\V1\UserEditWebRequest;
 use App\Models\Entities\Core\User;
+use App\Models\Entities\QuizResult;
 use App\Services\Common\V1\Support\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,5 +53,12 @@ class UserController extends WebBaseController
             throw new WebServiceExplainedException($exception->getMessage());
         }
 
+    }
+
+    public function myQuizzes(){
+        $user = Auth::user();
+        $quizzes = QuizResult::where('user_id', $user->id)->with('quiz')->get();
+        //dd($quizzes);
+        return $this->frontPagesView('my_quizzes', compact('quizzes'));
     }
 }

@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('transaction_id')->constrained('transactions');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

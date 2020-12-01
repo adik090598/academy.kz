@@ -32,6 +32,7 @@ Route::group(['namespace' => 'Front'], function () {
         Route::get('/quiz', ['as' => 'quiz', 'uses' => 'QuizController@getQuiz',]);
         Route::post('/sendQuizRequest', ['as' => 'sendQuizRequest', 'uses' => 'QuizController@attemp',]);
         Route::post('/submit', ['as' => 'submit', 'uses' => 'QuizController@submit',]);
+        Route::get('/myquizzes', ['as' => 'myquizzes', 'uses' => 'UserController@myQuizzes',]);
     });
 });
 

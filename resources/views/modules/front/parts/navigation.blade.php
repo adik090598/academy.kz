@@ -29,7 +29,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{{route('user.profile')}}"><i class="fa fa-user"></i> Профиль</a>
-                            <a class="dropdown-item" href="#"><i class="fa fa-list"></i> Менің тесттарым</a>
+                            <a class="dropdown-item" href="{{route('myquizzes')}}"><i class="fa fa-list"></i> Менің тесттарым</a>
                             <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Менің сертификаттарым</a>
                             <form action="{{route('logout')}}" method="post" id="signOutForm">
                                 @csrf

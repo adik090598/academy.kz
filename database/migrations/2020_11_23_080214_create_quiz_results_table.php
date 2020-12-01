@@ -20,6 +20,7 @@ class CreateQuizResultsTable extends Migration
             $table->foreignId('order_id')->constrained('orders');
             $table->double('result');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
