@@ -96,7 +96,7 @@ class ProfileController extends WebBaseController
             )
         )->execute();
 
-        $certificate = base_path('\public\modules\front\assets\reports\application.pdf');
+        $certificate = base_path('\public\modules\front\assets\reports\\'.$template.'.pdf');
 
         return response()->file($certificate)->deleteFileAfterSend(true);
     }
