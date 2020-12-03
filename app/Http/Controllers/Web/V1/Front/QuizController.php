@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Requests\Web\V1\SubmitQuizWebRequest;
 use App\Models\Entities\Answer;
 use App\Models\Entities\Category;
+use App\Models\Entities\Core\Role;
 use App\Models\Entities\Question;
 use App\Models\Entities\Quiz;
 use App\Models\Entities\QuizResultAnswer;
