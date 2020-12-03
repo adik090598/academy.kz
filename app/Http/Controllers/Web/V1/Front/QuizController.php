@@ -106,14 +106,14 @@ class QuizController extends WebBaseController
                 'name' => $user->name,
                 'surname' => $user->surname,
                 'father_name' => $user->father_name,
-                'city' => $user->school->area->city->name,
-                'area' => $user->school->area->name,
-                'region' => $user->school->area->city->region->name,
-                'school' => $user->father_name,
-                'class_letter' => $user->class_letter,
-                'class_number' => $user->class_number,
-                'class_teacher' => $user->class_teacher,
-                'certificate_type' => QuizResult::DEFAULT,
+                //'city' => $user->school->area->city->name,
+                //'area' => $user->school->area->name,
+                //'region' => $user->school->area->city->region->name,
+               // 'school' => $user->father_name,
+               // 'class_letter' => $user->class_letter,
+               // 'class_number' => $user->class_number,
+               // 'class_teacher' => $user->class_teacher,
+               // 'certificate_type' => QuizResult::DEFAULT,
                 'result' => 0
             ]);
 
@@ -132,16 +132,16 @@ class QuizController extends WebBaseController
             QuizResultAnswer::insert($selected_answers);
             $quiz_result->result = $result;
             $quiz = QuizResult::find($request->quiz_id);
-            $certificate_type = QuizResult::DEFAULT;
-            if($result >= $quiz->third_place && $result < $quiz->second_place) {
-                $certificate_type = QuizResult::THIRD_PLACE;
-            } else if($result >= $quiz->second_place && $result < $quiz->first_place) {
-                $certificate_type = QuizResult::SECOND_PLACE;
-            }
-            else if($result >= $quiz->first_place) {
-                $certificate_type = QuizResult::FIRST_PLACE;
-            }
-            $quiz_result->certificate_type = $certificate_type;
+           // $certificate_type = QuizResult::DEFAULT;
+//            if($result >= $quiz->third_place && $result < $quiz->second_place) {
+//                $certificate_type = QuizResult::THIRD_PLACE;
+//            } else if($result >= $quiz->second_place && $result < $quiz->first_place) {
+//                $certificate_type = QuizResult::SECOND_PLACE;
+//            }
+//            else if($result >= $quiz->first_place) {
+//                $certificate_type = QuizResult::FIRST_PLACE;
+//            }
+           // $quiz_result->certificate_type = $certificate_type;
             $quiz_result->save();
 
             DB::commit();
