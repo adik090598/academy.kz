@@ -26,12 +26,6 @@ class QuizWebForm implements WithForm
                 'selected' => $value ? $value->subject_id == $subject->id ? 'selected' : '' : ''];
         }
 
-        $categories = Category::all();
-        $category_selects = [];
-        foreach ($categories as $category) {
-            $category_selects[] = ['value' => $category->id, 'title' => $category->name,
-                'selected' => $value ? $value->category_id == $category->id ? 'selected' : '' : ''];
-        }
         $role_selectes = [];
         $role_selectes[] = ['value' => 2, 'title' => 'Ученик',
                 'selected' => $value ? $value->role_id == 2 ? 'selected' : '' : ''];
@@ -44,21 +38,25 @@ class QuizWebForm implements WithForm
             FormUtil::input('image', '', 'Фото',
                 'file', !$value ? true : false),
             FormUtil::input('description', 'Описание для теста', 'Описание',
-                'text', false, $value ? $value->description : ''),
+                'text', true, $value ? $value->description : ''),
             FormUtil::input('duration', 'Время в минутах', 'Продолжительность теста',
                 'number', false, $value ? $value->duration : ''),
             FormUtil::select('subject_id', '', 'Предмет',
                 true, $subject_selects),
             FormUtil::select('role_id', '', 'Роль',
                 true, $role_selectes),
-            FormUtil::select('category_id', '', 'Категория',
-                true, $category_selects),
             FormUtil::input('price', '1800', 'Стоимость',
                 'number', false, $value ? $value->price : ''),
             FormUtil::input('start_date', '', 'Дата начало',
                 'date', false, $value ? $value->start_date : ''),
             FormUtil::input('end_date', '', 'Дата окончания',
-                'date', false, $value ? $value->end_date : '')
+                'date', false, $value ? $value->end_date : ''),
+            FormUtil::input('first_place', '', 'Балл за первое место ( 15 > )',
+                'number', false, $value ? $value->first_place : ''),
+            FormUtil::input('second_place', '', 'Балл за второе место ( 10 > )' ,
+                'number', false, $value ? $value->second_place : ''),
+            FormUtil::input('third_place', '', 'Балл за третье место ( 5 > )',
+                'number', false, $value ? $value->third_place : '')
         );
     }
 }

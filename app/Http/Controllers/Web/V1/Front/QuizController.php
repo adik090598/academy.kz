@@ -20,7 +20,13 @@ class QuizController extends WebBaseController
 {
     public function index()
     {
-        $quizzes = Quiz::orderBy('created_at', 'desc')->has('questions')->paginate(10);
+        $now = now();
+        $quizzes = Quiz::orderBy('created_at', 'desc')
+            ->where('role_id', Auth::user()->role_id)
+            ->where('start_date', '>=', $now)
+            ->where('end_date', '<=', $now)
+            ->has('questions')
+            ->paginate(10);
         $subjects = Subject::all();
         return $this->frontPagesView('quiz.index', compact('quizzes', 'subjects'));
     }
@@ -36,8 +42,7 @@ class QuizController extends WebBaseController
     public function pass(Request $request)
     {
         $quiz = $this->checkQuiz($request->id, true);
-        //$questions->toJson(JSON_PRETTY_PRINT);
-//
+
         Order::create([
             'status' => 1,
             'quiz_id' => $quiz->id,

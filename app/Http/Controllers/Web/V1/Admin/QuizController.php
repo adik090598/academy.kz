@@ -9,6 +9,7 @@ use App\Http\Forms\Web\V1\QuizWebForm;
 use App\Http\Forms\Web\V1\QuestionWebForm;
 use App\Http\Requests\Web\V1\QuizEditWebRequest;
 use App\Http\Requests\Web\V1\QuizWebRequest;
+use App\Models\Entities\Category;
 use App\Models\Entities\Quiz;
 use App\Models\Entities\Question;
 use App\Models\Entities\Answer;
@@ -49,7 +50,13 @@ class QuizController extends WebBaseController
                 'price' => $request->price,
                 'duration' =>$request->duration,
                 'subject_id' => $request->subject_id,
-                'category_id' => $request->category_id
+                'category_id' => Category::TESTS,
+                'role_id' => $request->role_id,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'first_place' => $request->first_place,
+                'second_place' => $request->second_place,
+                'third_place' => $request->third_place,
             ]);
         } catch (\Exception $exception) {
             if($path) $this->fileService->remove($path);
@@ -81,7 +88,12 @@ class QuizController extends WebBaseController
                 'price' => $request->price,
                 'duration' =>$request->duration,
                 'subject_id' => $request->subject_id,
-                'category_id' => $request->category_id
+                'start_date' => $request->start_date,
+                'role_id' => $request->role_id,
+                'end_date' => $request->end_date,
+                'first_place' => $request->first_place,
+                'second_place' => $request->second_place,
+                'third_place' => $request->third_place,
 
             ]);
             $this->edited();

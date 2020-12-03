@@ -12,10 +12,15 @@ class QuizWebRequest extends WebBaseRequest
         return [
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
+            'start_date' => ['date', 'nullable'],
+            'end_date' => ['date', 'nullable'],
+            'first_place' => ['numeric', 'nullable'],
+            'second_place' => ['numeric', 'nullable'],
+            'third_place' => ['numeric', 'nullable'],
             'duration' => ['required', 'numeric', 'min:0'],
             'price' => ['required', 'numeric', 'min:0'],
             'subject_id' => ['required', 'exists:subjects,id'],
-            'category_id' => ['required', 'exists:categories,id'],
+            'role_id' => ['required', 'exists:roles,id'],
             'image' => [!$this->isEditOrUpdate() ? 'required' : '', 'image'],
             'id' => ['numeric', 'exists:quizzes,id', !$this->isStore() ? 'required' : '']
         ];
