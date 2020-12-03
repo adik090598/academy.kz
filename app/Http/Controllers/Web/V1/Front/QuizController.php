@@ -6,6 +6,7 @@ use App\Exceptions\Web\WebServiceExplainedException;
 use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Requests\Web\V1\SubmitQuizWebRequest;
 use App\Models\Entities\Answer;
+use App\Models\Entities\Category;
 use App\Models\Entities\Question;
 use App\Models\Entities\Quiz;
 use App\Models\Entities\QuizResultAnswer;
@@ -23,11 +24,13 @@ class QuizController extends WebBaseController
         $now = now();
         $quizzes = Quiz::orderBy('created_at', 'desc')
             ->where('role_id', Auth::user()->role_id)
+            ->where('category_id', Category::TESTS)
             ->where('start_date', null)
             ->where('end_date', null)
             ->has('questions')
             ->get();
         $quizzes_with_dates = Quiz::where('start_date', '<=', $now)
+            ->where('category_id', Category::TESTS)
             ->where('end_date', '>=', $now)
             ->has('questions')
             ->get();
