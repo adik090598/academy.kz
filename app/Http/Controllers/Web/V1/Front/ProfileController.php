@@ -71,35 +71,12 @@ class ProfileController extends WebBaseController
         return $this->frontPagesView('profile.certificates', compact('results'));
     }
 
-    public function getCertificate(Request $request){
-        $result = QuizResult::find($request->get('result'));
-
-        $jasper = new JasperPHP;
-
-        $template = "application";
-
-        $jasper->compile(base_path('public\modules\front\assets\reports\\'.$template.'.jrxml'))->execute();
-
-        $fullname = $result->surname.' '.$result->name.' '.$result->father_name;
-        $address = $result->region.','.$result->city.','.$result->area;
-        $class = $result->class_number.'"'.$result->class_letter.'"';
-        $school = $result->school;
-
-        $jasper->process(
-            base_path('public\modules\front\assets\reports\\'.$template.'.jasper'),
-            false,
-            array("pdf"),
-            array(
-                "address" => $address,
-                "school"  => $school,
-                "class"   => $class,
-                "fullname"=> $fullname
-            )
-        )->execute();
-
-        $certificate = base_path('\public\modules\front\assets\reports\\'.$template.'.pdf');
-
-        return response()->file($certificate)->deleteFileAfterSend(true);
+    public function getCertificate($id){
+        $result = QuizResult::where('user_id', Auth::id())->where('id', $id)->first();
+        if(!$result) {
+            throw new WebServiceExplainedException('Сертификат не найден!');
+        }
+        return $this->frontPagesView('certificates.certificate', compact('result'));
     }
 
 }

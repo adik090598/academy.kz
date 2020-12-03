@@ -18,7 +18,7 @@
                     </div>
                     <ul class="profile-box-nav">
                         <li><a href="{{route('profile.quizzes')}}"><i class="fa fa-list"></i> Мои тесты</a></li>
-                        <li><a href="#"><i class="fa fa-file"></i> Мои сертифкаты</a></li>
+                        <li><a href="{{route('profile.certificates')}}"><i class="fa fa-file"></i> Мои сертифкаты</a></li>
                     </ul>
                 </div>
             </div>

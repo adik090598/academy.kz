@@ -34,7 +34,7 @@ Route::group(['namespace' => 'Front'], function () {
             Route::post('/update', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
             Route::get('/quizzes', ['as' => 'profile.quizzes', 'uses' => 'ProfileController@quizzes',]);
             Route::get('/certificates', ['as' => 'profile.certificates', 'uses' => 'ProfileController@certificates',]);
-            Route::get('/certificate', ['as' => 'profile.certificate', 'uses' => 'ProfileController@getCertificate',]);
+            Route::get('/certificate/{id}', ['as' => 'profile.certificate', 'uses' => 'ProfileController@getCertificate',])->where('id', '[0-9]+');
         });
 
         Route::group(['prefix' => 'quiz'], function () {
