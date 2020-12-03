@@ -13,7 +13,7 @@ class Area extends Model
     }
 
     public function schools() {
-        return $this->hasMany(School::class, 'school_id', 'id');
+        return $this->hasMany(School::class, 'id', 'school_id');
     }
 
 }

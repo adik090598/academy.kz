@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Web\V1\Front\Auth;
 
 use App\Http\Controllers\Web\WebBaseController;
-use App\Http\Forms\Web\V1\Auth\RegisterWebForm;
-use App\Http\Forms\Web\V1\Auth\UserRegisterWebForm;
+use App\Models\Entities\Area;
+use App\Models\Entities\City;
 use App\Models\Entities\Core\Role;
 use App\Models\Entities\Core\User;
 use App\Models\Entities\Region;
-use App\Models\Entities\Support\AppFile;
+use App\Models\Entities\School;
+use App\Models\Entities\Subject;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RedirectsUsers;
@@ -17,7 +18,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Rules\YearRule;
 use Illuminate\Validation\Rule;
 
 class RegisterController extends WebBaseController
@@ -62,8 +62,12 @@ class RegisterController extends WebBaseController
 
     public function showRegistrationForm()
     {
-        $regions = Region::with('cities.areas.schools')->get();
-        return $this->frontPagesView('auth.register', compact('regions'));
+        $regions = Region::all();
+        $cities = City::all();
+        $areas = Area::all();
+        $schools = School::all();
+        $subjects = Subject::all();
+        return $this->frontPagesView('auth.register', compact('regions', 'cities', 'areas', 'schools', 'subjects'));
     }
 
     protected function validator(array $data)
@@ -75,6 +79,11 @@ class RegisterController extends WebBaseController
             'surname' => ['required', 'string'],
             'name' => ['required', 'string'],
             'father_name' => ['required', 'string'],
+            'сlass_teacher' => ['string'],
+            'сlass_number' => ['numeric'],
+            'сlass_letter' => ['string'],
+            'subject_id' => ['numeric', 'exists:subjects,id'],
+            'school_id' => ['numeric', 'exists:schools,id'],
             'role_id' => ['required', Rule::in([Role::LEARNER_ID, Role::TEACHER_ID])],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -83,6 +92,7 @@ class RegisterController extends WebBaseController
     protected function create(array $data)
     {
         $data['phone'] = preg_replace("/[^0-9]/", "", $data['phone']);
+        $subject_id = $data['role_id'] == Role::TEACHER_ID ? $data['subject_id'] : null;
         return User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -91,7 +101,12 @@ class RegisterController extends WebBaseController
             'surname' => $data['surname'],
             'father_name' => $data['father_name'],
             'phone' => $data['phone'],
-            'avatar_path' => null
+            'avatar_path' => null,
+            'class_number' => $data['class_number'],
+            'class_letter' => $data['class_letter'],
+            'class_teacher' => $data['class_teacher'],
+            'subject_id' => $subject_id,
+            'school_id' => $data['school_id'],
         ]);
     }
 

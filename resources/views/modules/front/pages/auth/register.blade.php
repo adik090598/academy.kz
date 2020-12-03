@@ -31,7 +31,7 @@
                                value="{{old('surname')}}"
                                placeholder="Тегі"
                                required>
-                    @if (isset($errors) && $errors->has('surname'))
+                        @if (isset($errors) && $errors->has('surname'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('surname') }}</strong>
                             </span>
@@ -43,9 +43,132 @@
                                value="{{old('father_name')}}"
                                placeholder="Әкесінің аты"
                                required>
-                    @if (isset($errors) && $errors->has('father_name'))
+                        @if (isset($errors) && $errors->has('father_name'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('father_name') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control{{ isset($errors) && $errors->has('role_id') ? ' is-invalid' : '' }}"
+                                name="role_id"
+                                id="role_id"
+                                onchange="chooseRole()"
+                                required>
+                            <option>Рөль</option>
+                            <option value="2">Оқушы</option>
+                            <option value="3">Мұғалім</option>
+                        </select>
+                        @if (isset($errors) && $errors->has('role_id'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('role_id') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <select type="text" name="region_id"
+                                id="region_id"
+                                class="form-control{{ isset($errors) && $errors->has('region_id') ? ' is-invalid' : '' }}"
+                                onchange="chooseRegion()"
+                                required>
+                            <option value="0">Облыс</option>
+                            @foreach($regions as $region)
+                                <option value="{{$region->id}}">{{$region->name}}</option>
+                            @endforeach
+                        </select>
+                        @if (isset($errors) && $errors->has('region_id'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('region_id') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <select type="text" name="city_id"
+                                id="city_id"
+                                class="form-control{{ isset($errors) && $errors->has('city_id') ? ' is-invalid' : '' }}"
+                                onchange="chooseCity()"
+                                hidden
+                                required>
+                            <option value="0">Қала</option>
+                        </select>
+                        @if (isset($errors) && $errors->has('city_id'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('city_id') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <select type="text" name="area_id"
+                                id="area_id"
+                                class="form-control{{ isset($errors) && $errors->has('area_id') ? ' is-invalid' : '' }}"
+                                onchange="chooseArea()"
+                                hidden
+                                required>
+                            <option value="0">Аудан</option>
+
+                        </select>
+                        @if (isset($errors) && $errors->has('area_id'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('area_id') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <select type="text" name="school_id"
+                                id="school_id"
+                                class="form-control{{ isset($errors) && $errors->has('school_id') ? ' is-invalid' : '' }}"
+                                hidden
+                                required>
+                        </select>
+                        @if (isset($errors) && $errors->has('area_id'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('school_id') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="class_teacher"
+                               id="class_teacher"
+                               class="form-control{{ isset($errors) && $errors->has('class_teacher') ? ' is-invalid' : '' }}"
+                               value="{{old('class_teacher')}}"
+                               placeholder="Мұғалімнің аты жөні"
+                               hidden>
+                        @if (isset($errors) && $errors->has('class_teacher'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('class_teacher') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group col-12 row" id="class-number-letter" hidden>
+                        <select type="text" name="class_number"
+                                id="class_number"
+                                class="form-control{{ isset($errors) && $errors->has('class_number') ? ' is-invalid' : '' }} col-5">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                        </select>
+                        @if (isset($errors) && $errors->has('class_number'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('class_number') }}</strong>
+                            </span>
+                        @endif
+                        <input type="text" name="class_letter"
+                               id="class_letter"
+                               maxlength="1"
+                               placeholder="A"
+                               class="form-control{{ isset($errors) && $errors->has('class_letter') ? ' is-invalid' : '' }} col-5 ml-3"
+                               style="text-transform:uppercase"/>
+                        @if (isset($errors) && $errors->has('class_letter'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('class_letter') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -56,21 +179,23 @@
                                value="{{old('phone')}}"
                                placeholder="Байланыс нөмері"
                                required>
-                    @if (isset($errors) && $errors->has('phone'))
+                        @if (isset($errors) && $errors->has('phone'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('phone') }}</strong>
                             </span>
                         @endif
                     </div>
+
                     <div class="form-group">
-                        <select class="form-control{{ isset($errors) && $errors->has('role_id') ? ' is-invalid' : '' }}"
-                                name="role_id">
-                                <option value="2">Оқушы</option>
-                                <option value="3">Мұғалім</option>
+                        <select class="form-control{{ isset($errors) && $errors->has('subject_id') ? ' is-invalid' : '' }}"
+                                name="subject_id" id="subject_id" hidden>
+                            @foreach($subjects as $subject)
+                                <option value="{{$subject->id}}">{{$subject->name}}</option>
+                            @endforeach
                         </select>
-                        @if (isset($errors) && $errors->has('role_id'))
+                        @if (isset($errors) && $errors->has('subject_id'))
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('role_id') }}</strong>
+                                <strong>{{ $errors->first('subject_id') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -131,5 +256,93 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script type="text/javascript">
         $("#phone").mask("+7(799) 999-99-99");
+        var regions = {!! $regions !!};
+        var cities = {!! $cities !!};
+        var areas = {!! $areas !!};
+        var schools = {!! $schools !!};
+
+        function chooseRegion() {
+            var region_id = document.getElementById('region_id').value;
+            var city_id = document.getElementById('city_id');
+            var area_id = document.getElementById('area_id');
+            var school_id = document.getElementById('school_id');
+            var chosen_cities = cities.filter(o => o.region_id == region_id);
+            emptySelect(area_id);
+            emptySelect(school_id);
+            emptySelect(city_id);
+            chosen_cities.forEach(function (e) {
+                var opt = document.createElement('option');
+                opt.value = e.id;
+                opt.innerHTML = e.name;
+                city_id.appendChild(opt);
+            });
+            city_id.hidden = false;
+            area_id.hidden = true;
+            school_id.hidden = true;
+        }
+
+        function chooseCity() {
+            var city_id = document.getElementById('city_id').value;
+            var area_id = document.getElementById('area_id');
+            var school_id = document.getElementById('school_id');
+            var chosen_areas = areas.filter(o => o.city_id == city_id);
+            emptySelect(area_id);
+            emptySelect(school_id);
+
+            chosen_areas.forEach(function (e) {
+                var opt = document.createElement('option');
+                opt.value = e.id;
+                opt.innerHTML = e.name;
+                console.log(e);
+                area_id.appendChild(opt);
+            });
+
+            area_id.hidden = false;
+            school_id.hidden = true;
+        }
+
+        function chooseArea() {
+            var area_id = document.getElementById('area_id').value;
+            var school_id = document.getElementById('school_id');
+            var chosen_schools = schools.filter(o => o.area_id == area_id);
+            emptySelect(school_id);
+            chosen_schools.forEach(function (e) {
+                var opt = document.createElement('option');
+                opt.value = e.id;
+                opt.innerHTML = e.name;
+                school_id.appendChild(opt);
+            });
+            school_id.hidden = false;
+        }
+
+        function chooseRole() {
+            var role_id = document.getElementById('role_id');
+            var class_number = document.getElementById('class-number-letter');
+            var class_teacher =  document.getElementById('class_teacher');
+            var subject_id =  document.getElementById('subject_id');
+            console.log(class_number);
+            if(role_id.value == 2) {
+                class_number.hidden = false;
+                class_teacher.hidden = false;
+                subject_id.hidden = true;
+            } else if(role_id.value == 3) {
+                subject_id.hidden = false;
+                class_number.hidden = true;
+                class_teacher.hidden = true;
+
+            } else {
+                class_number.hidden = true;
+                class_teacher.hidden = true;
+                subject_id.hidden = true;
+            }
+
+        }
+
+        function emptySelect(element) {
+            for (var i = 0; i < element.length; i++) {
+                if (element[i].value != 0)
+                    element.remove(i);
+            }
+        }
     </script>
 @endsection
