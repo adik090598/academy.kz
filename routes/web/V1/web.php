@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Entities\Core\Role;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,6 +28,7 @@ Route::group(['namespace' => 'Front'], function () {
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'front.quiz.index']);
 
     Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'ROLE_OR:' . Role::TEACHER_ID .','. Role::LEARNER_ID], function () {
         Route::group(['prefix' => 'profile'], function () {
             Route::get('/profile', ['as' => 'profile.profile', 'uses' => 'ProfileController@index']);
             Route::post('/update', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
@@ -38,7 +40,7 @@ Route::group(['namespace' => 'Front'], function () {
             Route::get('/pass/{id}', ['as' => 'quiz.pass', 'uses' => 'QuizController@pass',])->where('id', '[0-9]+');
             Route::post('/submit', ['as' => 'submit', 'uses' => 'QuizController@submit',]);
         });
-
+    });
     });
 });
 

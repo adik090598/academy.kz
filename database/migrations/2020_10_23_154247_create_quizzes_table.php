@@ -26,7 +26,7 @@ class CreateQuizzesTable extends Migration
             $table->integer('second_place')->nullable();
             $table->integer('third_place')->nullable();
             $table->foreignId('subject_id')->nullable()->constrained('subjects');
-            $table->foreignId('role_id')->constrained('roles');
+            $table->foreignId('role_id')->nullable()->constrained('roles');
             $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
             $table->softDeletes();

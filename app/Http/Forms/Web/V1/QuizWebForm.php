@@ -32,6 +32,11 @@ class QuizWebForm implements WithForm
             $category_selects[] = ['value' => $category->id, 'title' => $category->name,
                 'selected' => $value ? $value->category_id == $category->id ? 'selected' : '' : ''];
         }
+        $role_selectes = [];
+        $role_selectes[] = ['value' => 2, 'title' => 'Ученик',
+                'selected' => $value ? $value->role_id == 2 ? 'selected' : '' : ''];
+        $role_selectes[] = ['value' => 3, 'title' => 'Преподователь',
+            'selected' => $value ? $value->role_id == 3 ? 'selected' : '' : ''];
         return array_merge(
             $array,
             FormUtil::input('name', 'Тест по физике', 'Название',
@@ -44,10 +49,16 @@ class QuizWebForm implements WithForm
                 'number', false, $value ? $value->duration : ''),
             FormUtil::select('subject_id', '', 'Предмет',
                 true, $subject_selects),
+            FormUtil::select('role_id', '', 'Роль',
+                true, $role_selectes),
             FormUtil::select('category_id', '', 'Категория',
                 true, $category_selects),
             FormUtil::input('price', '1800', 'Стоимость',
-                'number', false, $value ? $value->price : '')
+                'number', false, $value ? $value->price : ''),
+            FormUtil::input('start_date', '', 'Дата начало',
+                'date', false, $value ? $value->start_date : ''),
+            FormUtil::input('end_date', '', 'Дата окончания',
+                'date', false, $value ? $value->end_date : '')
         );
     }
 }
