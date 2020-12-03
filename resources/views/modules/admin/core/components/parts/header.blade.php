@@ -53,12 +53,12 @@
                                         </li>
                                     @endif
                                 @endforeach
-                                <li>
-                                    @csrf
-                                    <a href="{{route('user.edit', ['id' => $user->id])}}" class="link-dark">
-                                        Профиль
-                                    </a>
-                                </li>
+{{--                                <li>--}}
+{{--                                    @csrf--}}
+{{--                                    <a href="{{route('user.edit', ['id' => $user->id])}}" class="link-dark">--}}
+{{--                                        Профиль--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                                 <li>
                                     <form action="{{route('logout')}}" method="post" id="signOutForm">
                                         @csrf
