@@ -52,6 +52,7 @@ class QuizController extends WebBaseController
 
     public function submit(SubmitQuizWebRequest $request)
     {
+        dd('asd');
         $arr = explode(',', $request->get("userAnswers"));
         $result = 0;
         $userAnswers = [];
