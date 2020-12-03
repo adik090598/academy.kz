@@ -2,49 +2,73 @@
 
 @section('content')
     <div class="container pt-5" style="min-height: 766px;">
-        <div class="accordion" id="accordionExample">
-            <div class="text-center">
-                @if($count)
-                    <h5 class="mb-0">
-                        Вы набрали {{$result}}/{{$count}}
-                    </h5>
-                    <h4> Ваш результат {{$resString}}</h4>
-                    <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-right" type="button" data-toggle="collapse"
-                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Посмотреть мои ответы
-                        </button>
-                    </h2>
-                @else
-                    <h5 class="mb-0">
-                        Ваш результат {{$resString}}
-                    </h5>
-                @endif
-            </div>
 
-            <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
-                <div class="card-body">
-                    @if($userAnswers)
-                        <ul>
-                            @foreach($userAnswers as $question)
-                                @if($question->answer->is_right)
-                                    <div class="alert alert-success" role="alert">
-                                        <h4 class="alert-heading">{!! $question->question_text  !!} </h4>
-                                        <p>{{ $question->answer->answer  }}</p>
-                                    </div>
+        <div class="card-body">
+            <div class="card col-12 p-0 mb-4">
+                <div class="card-body p-0">
+                    <div class="d-flex">
+                        <div class="col-5 col-lg-4 p-0">
+                            <img src="{{asset($result->quiz->image_path)}}" alt="" class="quiz-img">
+                        </div>
+                        <div class="col-7 col-lg-8 p-1 pr-3 d-block mt-1">
+                            <p class="quiz-detail quiz-detail-title">{{$result->quiz->name}}</p>
+                            <p class="quiz-detail mt-lg-4"><i
+                                    class="fa fa-check"></i> {{$result->answers->count()}}
+                                сұрақ</p>
+                            <div class="d-block d-lg-flex">
+                                <p class="quiz-detail"><i
+                                        class="fa fa-calendar"></i> {{$result->quiz->subject->name}}</p>
+                            </div>
+                            <p class="quiz-detail"><i
+                                    class="fa fa-money-bill-wave-alt"></i>
+                                @if($result->order->price)
+                                    {{$result->order->price}}
                                 @else
-                                    <div class="alert alert-danger" role="alert">
-                                        <h4 class="alert-heading">{!! $question->question_text  !!}</h4>
-                                        <p class="mb-0">{{ $question->answer->answer  }}</p>
-                                    </div>
+                                    {{$result->quiz->price}}
                                 @endif
+                                тг
+                            </p>
+                            <p class="quiz-detail">
+                                <b>
+                                    <i class="fa fa-check"></i>
+                                    Нәтиже: {{$result->result .' / '.$result->answers->count()}}
+                                </b>
+                            </p>
+                            <button class="btn btn-link btn-block text-right stretched-link" type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapse{{$result->id}}" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                Посмотреть мои ответы
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="collapse{{$result->id}}" class="collapse hide" aria-labelledby="headingOne"
+                 data-parent="#accordionExample">
+                <div class="card-body">
+                    @if($result->answers)
+                        <ul>
+                            @foreach($result->answers as $answer)
+                                <div class="alert alert-{{$answer->is_right ? 'success' : 'danger'}}" role="alert">
+                                    <h4 class="alert-heading">{!! $answer->answer->question->question_text  !!} </h4>
+                                    <p>{{ $answer->answer->answer  }}</p>
+                                    <ul>
+                                        @foreach($answer->answer->question->answers as $option)
+                                            <li>{{$option->answer}}
+                                                @if($option->is_right)
+                                                    <i class="fa fa-check"></i>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             @endforeach
                         </ul>
                     @endif
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
 

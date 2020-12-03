@@ -10,6 +10,7 @@ class SubmitQuizWebRequest extends WebBaseRequest
     public function injectedRules()
     {
         return [
+            'quiz_id' => ['required', 'exists:quizzes,id'],
             'answers' => ['required', 'string'],
         ];
     }

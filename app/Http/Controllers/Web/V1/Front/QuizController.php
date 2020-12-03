@@ -14,6 +14,7 @@ use App\Models\Entities\Order;
 use App\Models\Entities\QuizResult;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class QuizController extends WebBaseController
 {
@@ -37,12 +38,13 @@ class QuizController extends WebBaseController
         $quiz = $this->checkQuiz($request->id, true);
         //$questions->toJson(JSON_PRETTY_PRINT);
 //
-            Order::create([
-                'status'  => 1,
-                'quiz_id' => $request->id,
-                'user_id' => Auth::id(),
+        Order::create([
+            'status' => 1,
+            'quiz_id' => $request->id,
+            'user_id' => Auth::id(),
 //                'transaction_id' => 1
-            ]);
+        ]);
+
         foreach ($quiz->questions as $question) {
             $question->answers = $question->hiddenAnswers;
         }
@@ -52,57 +54,86 @@ class QuizController extends WebBaseController
 
     public function submit(SubmitQuizWebRequest $request)
     {
-        dd('asd');
-        $arr = explode(',', $request->get("userAnswers"));
+        $user_id = Auth::id();
+        $answer_ids = [];
         $result = 0;
-        $userAnswers = [];
 
-        foreach ($arr as $a) {
-            $answer = Answer::find($a);
-            if ($answer){
-            $qustion = Question::find($answer->question_id);
-            $qustion->answer = $answer;
-            $userAnswers[] = $qustion;
-            if ($answer->is_right) {
-                $result++;
-            }
-            $quiz = Quiz::with('questions')->find($qustion->quiz_id);
-                $count = $quiz->questions->count();
-                $resString = $result / $count * 100 . '%';
-            } else{
-                $count = 0;
-                $resString = '0%';
-            }
+        $order = Order::where('user_id', $user_id)
+            ->where('quiz_id', $request->quiz_id)
+            ->where('status', Order::ACCEPTED)
+            ->orderBy('updated_at', 'desc')
+            ->first();
+        if (!$order) {
+            throw new WebServiceExplainedException('У вас нету оплаты по данному запросу');
+
+        }
+        $quiz_result = QuizResult::where('order_id', $order->id)->first();
+        if ($quiz_result) {
+            throw new WebServiceExplainedException('У вас не осталось попыток!');
         }
 
-        $quiz_result = QuizResult::create([
-            'user_id'   => Auth::id(),
-            'quiz_id'   => $quiz->id,
-            'order_id'  => 1,
-            'result'    => $result/$count
-        ]);
-
-        foreach ($arr as $a) {
-            $answer = Answer::find($a);
-            if ($answer) {
-                QuizResultAnswer::create([
-                   'quiz_result_id'  => $quiz_result->id,
-                    'answer_id'      => $answer->id,
-                    'is_right'       =>  $answer->is_right
-                ]);
+        if ($request->answers) {
+            $answer_ids = explode(',', $request->get("answers"));
+        }
+        if (empty($answer_ids)) {
+            throw new WebServiceExplainedException('Системная ошибка!');
+        }
+        $quiz_questions_ids = Question::where('quiz_id', $request->quiz_id)->withTrashed()->get()->pluck('id');
+        $quiz_answers_ids = Answer::whereIn('question_id', $quiz_questions_ids)->withTrashed()->get()->pluck('id');
+        $quiz_answers_ids = $quiz_answers_ids->toArray();
+        foreach ($answer_ids as $answer_id) {
+            if (!in_array($answer_id, $quiz_answers_ids)) {
+                throw new WebServiceExplainedException('Ответы не относятся к этому тесту!');
             }
         }
+        $answers = Answer::whereIn('id', $answer_ids)->with('question.quiz')->get();
 
-        return $this->frontPagesView('quiz.result', compact('userAnswers', 'result', 'resString', 'count'));
+        $selected_answers = [];
+        try {
+            DB::beginTransaction();
+            $now = now();
+            $quiz_result = QuizResult::create([
+                'user_id' => $user_id,
+                'quiz_id' => $request->quiz_id,
+                'order_id' => $order->id,
+                'result' => 0
+            ]);
+
+            foreach ($answers as $answer) {
+                $selected_answers[] = [
+                    'answer_id' => $answer->id,
+                    'quiz_result_id' => $quiz_result->id,
+                    'is_right' => $answer->is_right,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
+                if($answer->is_right) {
+                    $result++;
+                }
+            }
+            QuizResultAnswer::insert($selected_answers);
+            $quiz_result->result = $result;
+            $quiz_result->save();
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            throw new WebServiceExplainedException('Системная ошибка! '. $exception->getMessage());
+        }
+
+        $result = QuizResult::where('id', $quiz_result->id)
+            ->with('quiz', 'answers.answer.question', 'order')->first();
+
+        return $this->frontPagesView('quiz.result', compact('result'));
     }
 
-    private function checkQuiz($id, $hidden = false) {
-        if($hidden) {
+    private function checkQuiz($id, $hidden = false)
+    {
+        if ($hidden) {
             $quiz = Quiz::where('id', $id)->with('questions.hiddenAnswers')->first();
         } else {
             $quiz = Quiz::where('id', $id)->with('questions.answers')->first();
         }
-        if(!$quiz) throw new WebServiceExplainedException('Тест не найден!');
+        if (!$quiz) throw new WebServiceExplainedException('Тест не найден!');
         return $quiz;
     }
 }
