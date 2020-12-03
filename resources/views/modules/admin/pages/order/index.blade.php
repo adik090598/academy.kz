@@ -28,16 +28,16 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{$order->id}}</td>
-                                    <td><a href="{{route('order.get', ['id' => $order->id])}}">{{$order->name}}</a></td>
+                                    <td><a href="{{route('order.get', ['id' => $order->id])}}">{{$order->user->name}}</a></td>
                                     <td>{{$order->created_at}}</td>
                                     <td class="d-inline-block">
-                                        <a href="{{route('quiz.edit', ['id' => $order->id])}}" class="btn btn-outline-primary btn-sm">
+                                        <a href="#" class="btn btn-outline-primary btn-sm">
                                             <i class="ti ti-pencil"></i>
                                         </a>
                                         <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
                                                 data-target="#delete{{$order->id}}"><i class="ti ti-trash"></i>
                                         </button>
-                                        <div class="modal modal-backdrop" id="delete{{$quiz->id}}" tabindex="-1"
+                                        <div class="modal modal-backdrop" id="delete{{$order->id}}" tabindex="-1"
                                              role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -49,7 +49,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <p>Вы действительно хотите удалить?</p>
-                                                        <form method="post" action="{{route('quiz.delete', ['id' => $quiz->id])}}">
+                                                        <form method="post" action="{{route('quiz.delete', ['id' => $order->id])}}">
                                                             {{csrf_field()}}
                                                             <input type="number" value="{{$order->id}}" hidden>
                                                             <button type="submit" class="btn btn-outline-danger mt-3">Удалить безвозвратно<i class="ti ti-trash"></i></button>
@@ -96,7 +96,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{$order->links()}}
+
                     @else <h6>У вас пока нет заявок!</h6>
                     @endif
                 </div>

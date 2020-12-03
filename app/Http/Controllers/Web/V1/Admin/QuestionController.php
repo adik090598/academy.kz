@@ -101,7 +101,6 @@ class QuestionController extends WebBaseController
     {
         $question = Question::where('id', $request->id)->with('answers')->first();
         $question_web_form = QuestionWebForm::inputGroups($question);
-
         return $this->adminPagesView('question.edit', compact( 'question_web_form', 'question'));
     }
 
@@ -114,13 +113,11 @@ class QuestionController extends WebBaseController
      */
     public function update(Request $request)
     {
-        $id = $request->get('quiz_id');
+        $question = Quiz::find($request->get('quiz_id'));
         try {
             DB::beginTransaction();
-            $question = Question::create([
-                'question_text' => $request->name,
-                'quiz_id' => $id
-            ]);
+            $question->update([
+                'question_text' => $request->name,]);
             $answers = [];
             $now = now();
             foreach ($request->answers as $answer){

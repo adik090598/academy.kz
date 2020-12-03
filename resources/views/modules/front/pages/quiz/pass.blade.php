@@ -1073,10 +1073,13 @@
             presentIndex--;
             if(presentIndex==0){
                 $(this).addClass("hidden");
+                $("#next").removeClass("hidden");
             }
             else if(questions.length!=(presentIndex+1)){
                 $("#submit").addClass('hidden');
+                $("#next").removeClass("hidden");
             }
+
             renderQuiz(questions, presentIndex);
             changeProgressValue( presentIndex);
         });
@@ -1094,7 +1097,9 @@
             addClickedAnswerToResult(questions,presentIndex,clicked);
             presentIndex = id;
             if(id==0){
+                $("#next").removeClass("hidden");
                 $("#previous").addClass("hidden");
+                $("#submit").addClass("hidden");
             }
             else if(questions.length==(presentIndex+1)){
                 $("#submit").removeClass('hidden');

@@ -14,13 +14,14 @@ class QuestionWebForm implements WithForm
     {
         $array = [];
         if($value) {
-            $array = FormUtil::textArea('name', 'Вопрос', 'Вопрос',
-                true,  $value->question_text ? $value : '');
+            $array = FormUtil::input('quiz_id', 1, null,
+                'numeric', true,
+                $value->id, null, null, true);
         }
         return array_merge(
             $array,
             FormUtil::textArea('name', 'Вопрос', 'Вопрос',
-                true,  $value ? $value->name : '')
+                true,  $value ? $value->question_text : '')
         );
     }
 }
