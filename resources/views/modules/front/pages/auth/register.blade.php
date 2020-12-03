@@ -8,7 +8,7 @@
             </div>
             <div class="row justify-content-center p-4 align-items-center">
                 <div class="col-12 text-center">
-                    <h2 class="logo-text">Academy</h2>
+                    <h2 class="logo-text">Akadem</h2>
                     <h5>Тіркелу</h5>
                 </div>
                 <form class="col-12 col-lg-6 col-sm-8 col-xl-6 mt-2" method="POST" action="{{route('register')}}">
@@ -204,7 +204,7 @@
                                class="form-control{{ isset($errors) && $errors->has('email') ? ' is-invalid' : '' }}"
                                name="email"
                                value="{{old('email')}}"
-                               placeholder="academy@gmail.com"
+                               placeholder="Akadem@gmail.com"
                                required>
                         @if (isset($errors) && $errors->has('email'))
                             <span class="invalid-feedback" role="alert">

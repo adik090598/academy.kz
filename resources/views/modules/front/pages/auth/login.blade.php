@@ -7,7 +7,7 @@
             </div>
             <div class="row justify-content-center p-4 align-items-center mt-lg-5">
                 <div class="col-12 text-center">
-                    <h2 class="logo-text">Academy</h2>
+                    <h2 class="logo-text">Akadem</h2>
                     <h5>Вход</h5>
                 </div>
                 <form class="mt-2" method="post" action="{{route('login')}}">

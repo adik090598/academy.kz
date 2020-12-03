@@ -90,9 +90,9 @@ body{
     color: #ebebeb;
 }
 
-/*Academy section*/
+/*Akadem section*/
 
-.academy-section {
+.Akadem-section {
     background-image: url("../img/welcome/teacher2.png");
     background-repeat: no-repeat;
     background-position: top right;
@@ -100,7 +100,7 @@ body{
     padding-bottom: 230px;
 }
 
-.academy-section h2 {
+.Akadem-section h2 {
     font-style: normal;
     font-weight: normal;
     font-size: 48px;
@@ -108,7 +108,7 @@ body{
     color: #00768F;
 }
 
-.academy-section h3 {
+.Akadem-section h3 {
     font-style: normal;
     font-weight: 600;
     font-size: 36px;
@@ -116,7 +116,7 @@ body{
     color: #192C33;
 }
 
-.academy-section p {
+.Akadem-section p {
     font-style: normal;
     font-weight: normal;
     font-size: 18px;

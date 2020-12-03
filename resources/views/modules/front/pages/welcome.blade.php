@@ -1,10 +1,10 @@
 @extends('modules.front.layouts.app-full')
 @section('content')
-    <section class="academy-section">
+    <section class="Akadem-section">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-xl-9 text-xl-center">
-                    <h2 class="text-center text-xl-center col-12 col-lg-7 col-xl-12 text-lg-left">AcademyKZ</h2>
+                    <h2 class="text-center text-xl-center col-12 col-lg-7 col-xl-12 text-lg-left">AkademKZ</h2>
                     <h3 class="col-9 col-xl-12 col-lg-6">Білім әлеміне қош келдіңіздер!</h3>
                     <p class="col-7 col-xl-6 offset-xl-3 col-lg-5">Сіз мұнда ашық сабақтар, сабақ жоспарлары, тәрбие
                         сағаттарды,

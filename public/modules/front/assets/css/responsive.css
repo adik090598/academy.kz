@@ -1,24 +1,24 @@
 @media screen and (max-width: 1000px) {
-    /*Academy section*/
-    .academy-section {
+    /*Akadem section*/
+    .Akadem-section {
         background-image: url("../img/welcome/teacher-single-small.png");
         background-position: bottom right;
         padding-top: 50px;
         padding-bottom: 100px;
     }
 
-    .academy-section h2 {
+    .Akadem-section h2 {
         font-size: 36px;
         line-height: 53px;
     }
 
-    .academy-section h3 {
+    .Akadem-section h3 {
         font-size: 18px;
         line-height: 26px;
         margin-top: 40px;
     }
 
-    .academy-section p {
+    .Akadem-section p {
         font-size: 12px;
         line-height: 18px;
     }
@@ -61,7 +61,8 @@
     }
 
     .teachers-section {
-        background-image: url("../img/welcome/teachers-mobile.png");
+        background-image: url("../img/welcome/teachers.png");
+        background-size: 70% auto;
         padding-top: 30px;
         padding-bottom: 150px;
     }
@@ -117,7 +118,7 @@
 }
 
 @media screen and (max-width: 1366px) and (min-width: 1024px) {
-    .academy-section {
+    .Akadem-section {
         padding-top: 100px;
         padding-bottom: 300px;
     }

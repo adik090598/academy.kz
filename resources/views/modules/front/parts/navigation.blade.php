@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand ml-lg-5" href="{{route('welcome')}}">academy.kz</a>
+        <a class="navbar-brand ml-lg-5" href="{{route('welcome')}}">Akadem.kz</a>
         <button class="navbar-toggler"  data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 {{--            <i class="fa fa-list"></i>--}}
