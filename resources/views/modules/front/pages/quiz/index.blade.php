@@ -7,20 +7,17 @@
                     <a href="{{route('welcome')}}" class="back-button"><i class="fa fa-arrow-circle-left"></i> Негізгі бет</a>
                 </div>
                 <div class="form-group col-6">
+                    <input type="text" class="form-control" placeholder="Поиск">
+                </div>
+            </div>
+                <div class="d-flex mt-4">
+                <div class="col-4 d-none d-lg-block">
+                   <h5>Фильтр</h5>
                     <select class="form-control">
                         @foreach($subjects as $subject)
                             <option value="{{$subject->id}}">{{$subject->name}}</option>
                         @endforeach
                     </select>
-                </div>
-            </div>
-            <div class="d-flex mt-4">
-                <div class="col-4 d-none d-lg-block">
-                    <div class="card">
-                        <div class="card-body">
-                            Профиль либо что то еще
-                        </div>
-                    </div>
                 </div>
                 <div class="col-xl-8 col-12 quizzes">
                     @foreach($quizzes as $quiz)
