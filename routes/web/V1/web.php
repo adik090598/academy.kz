@@ -28,21 +28,21 @@ Route::group(['namespace' => 'Front'], function () {
     Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'front.quiz.index']);
 
     Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'ROLE_OR:' . Role::TEACHER_ID .','. Role::LEARNER_ID], function () {
-        Route::group(['prefix' => 'profile'], function () {
-            Route::get('/profile', ['as' => 'profile.profile', 'uses' => 'ProfileController@index']);
-            Route::post('/update', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-            Route::get('/quizzes', ['as' => 'profile.quizzes', 'uses' => 'ProfileController@quizzes',]);
-            Route::get('/certificates', ['as' => 'profile.certificates', 'uses' => 'ProfileController@certificates',]);
-            Route::get('/certificate/{id}', ['as' => 'profile.certificate', 'uses' => 'ProfileController@getCertificate',])->where('id', '[0-9]+');
-        });
+        Route::group(['middleware' => 'ROLE_OR:' . Role::TEACHER_ID . ',' . Role::LEARNER_ID], function () {
+            Route::group(['prefix' => 'profile'], function () {
+                Route::get('/profile', ['as' => 'profile.profile', 'uses' => 'ProfileController@index']);
+                Route::post('/update', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+                Route::get('/quizzes', ['as' => 'profile.quizzes', 'uses' => 'ProfileController@quizzes',]);
+                Route::get('/certificates', ['as' => 'profile.certificates', 'uses' => 'ProfileController@certificates',]);
+                Route::get('/certificate/{id}', ['as' => 'profile.certificate', 'uses' => 'ProfileController@getCertificate',])->where('id', '[0-9]+');
+            });
 
-        Route::group(['prefix' => 'quiz'], function () {
-            Route::get('/{id}', ['as' => 'quiz.single', 'uses' => 'QuizController@quiz'])->where('id', '[0-9]+');
-            Route::get('/pass/{id}', ['as' => 'quiz.pass', 'uses' => 'QuizController@pass',])->where('id', '[0-9]+');
-            Route::post('/submit', ['as' => 'submit', 'uses' => 'QuizController@submit',]);
+            Route::group(['prefix' => 'quiz'], function () {
+                Route::get('/{id}', ['as' => 'quiz.single', 'uses' => 'QuizController@quiz'])->where('id', '[0-9]+');
+                Route::get('/pass/{id}', ['as' => 'quiz.pass', 'uses' => 'QuizController@pass',])->where('id', '[0-9]+');
+                Route::post('/submit', ['as' => 'submit', 'uses' => 'QuizController@submit',]);
+            });
         });
-    });
     });
 });
 
@@ -59,7 +59,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
         Route::post('logout', ['as' => 'logout', 'uses' => 'LoginController@logout'])->middleware('auth');
 
     });
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth', 'ROLE_OR:' . Role::ADMIN_ID],], function () {
         Route::get('/home', ['as' => 'admin.index', 'uses' => 'PageController@home']);
         Route::get('/', ['uses' => 'PageController@home']);
         //Users

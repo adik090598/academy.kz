@@ -178,8 +178,6 @@ return [
         App\Providers\SystemServiceProvider::class,
 
 
-        //insert jasper service provider here
-        JasperPHP\JasperPHPServiceProvider::class
     ],
 
     /*

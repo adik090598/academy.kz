@@ -1,19 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\web\v1\Front;
+namespace App\Http\Controllers\Web\V1\Front;
 
 use App\Exceptions\Web\WebServiceExplainedException;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\UserWebForm;
 use App\Http\Requests\Web\V1\UserEditWebRequest;
 use App\Models\Entities\Core\User;
 use App\Models\Entities\QuizResult;
 use App\Services\Common\V1\Support\FileService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use JasperPHP\JasperPHP;
-
 
 class ProfileController extends WebBaseController
 {
