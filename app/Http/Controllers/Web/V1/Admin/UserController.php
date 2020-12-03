@@ -36,7 +36,7 @@ class UserController extends WebBaseController
         $old_path = $user->profile_photo_path;
         $path = null;
         if($request->image) {
-            $path = $this->fileService->updateWithRemoveOrStore($request->image, User::IMAGE_DIRECTORY, $old_path);
+            $path = $this->fileService->updateWithRemoveOrStore($request->image, User::AVATAR_DIRECTORY, $old_path);
         }
         try {
             $user->update([

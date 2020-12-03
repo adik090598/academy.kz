@@ -17,7 +17,7 @@ class User extends Authenticatable
     use Notifiable;
 
 
-    public const IMAGE_DIRECTORY = "images/users";
+    public const AVATAR_DIRECTORY = "images/avatars";
 
     /**
      * The attributes that are mass assignable.

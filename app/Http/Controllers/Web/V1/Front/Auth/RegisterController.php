@@ -61,7 +61,7 @@ class RegisterController extends WebBaseController
 
     public function showRegistrationForm()
     {
-        return $this->frontPagesView('register');
+        return $this->frontPagesView('auth.register');
     }
 
     protected function validator(array $data)

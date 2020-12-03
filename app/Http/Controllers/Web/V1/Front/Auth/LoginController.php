@@ -26,7 +26,7 @@ class LoginController extends WebBaseController
 
     public function showLoginForm()
     {
-        return $this->frontPagesView('login');
+        return $this->frontPagesView('auth.login');
     }
 
     public function login(Request $request)

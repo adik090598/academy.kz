@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class UserController extends WebBaseController
+class ProfileController extends WebBaseController
 {
     protected $fileService;
 
@@ -26,7 +26,7 @@ class UserController extends WebBaseController
     public function index(){
         $user = Auth::user();
         $user_web_form = UserWebForm::inputGroups($user);
-        return $this->frontPagesView('profile', compact('user','user_web_form'));
+        return $this->frontPagesView('profile.profile', compact('user','user_web_form'));
     }
 
     public function update(UserEditWebRequest $request){
@@ -36,7 +36,7 @@ class UserController extends WebBaseController
 
         $path = null;
         if($request->avatar_path) {
-            $path = $this->fileService->updateWithRemoveOrStore($request->avatar_path, User::IMAGE_DIRECTORY, $old_path);
+            $path = $this->fileService->updateWithRemoveOrStore($request->avatar_path, User::AVATAR_DIRECTORY, $old_path);
         }
         try {
             $user->update([
@@ -47,7 +47,7 @@ class UserController extends WebBaseController
                 'father_name'  => $request->patronymic,
             ]);
             $this->edited();
-            return redirect()->route('user.profile');
+            return redirect()->route('profile.profile');
         } catch (\Exception $exception) {
             if($path) $this->fileService->remove($path);
             throw new WebServiceExplainedException($exception->getMessage());
@@ -55,10 +55,11 @@ class UserController extends WebBaseController
 
     }
 
-    public function myQuizzes(){
-        $user = Auth::user();
-        $quizzes = QuizResult::where('user_id', $user->id)->with('quiz')->get();
-        //dd($quizzes);
-        return $this->frontPagesView('my_quizzes', compact('quizzes'));
+    public function quizzes(){
+        $results = QuizResult::where('user_id', Auth::id())
+            ->with('quiz', 'answers.answer.question', 'order')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return $this->frontPagesView('profile.quizzes', compact('results'));
     }
 }

@@ -54,7 +54,7 @@ class RegisterController extends WebBaseController
 
         return $request->wantsJson()
             ? new JsonResponse([], 201)
-            : redirect()->route('user.profile');
+            : redirect()->route('profile.profile');
     }
 
 

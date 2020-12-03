@@ -27,18 +27,4 @@ class HomeController extends WebBaseController
         $quizzes = Quiz::orderBy('created_at', 'desc')->withCount('questions')->with('subject')->get()->take(3);
         return $this->frontPagesView('welcome', compact('quizzes'));
     }
-
-    public function home() {
-        return $this->frontPagesView('home');
-    }
-
-    public function login() {
-        return $this->frontPagesView('login');
-    }
-
-    public function register() {
-        return $this->frontPagesView('register');
-    }
-
-
 }

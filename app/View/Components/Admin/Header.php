@@ -27,7 +27,7 @@ class Header extends BaseComponent
     public function navList()
     {
         return [
-//            $this->navItem(route('user.profile'), 'Профиль')
+//            $this->navItem(route('profile.profile'), 'Профиль')
         ];
     }
 

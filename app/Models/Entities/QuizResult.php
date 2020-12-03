@@ -13,6 +13,14 @@ class QuizResult extends Model
 
     public function quiz()
     {
-        return $this->belongsTo('App\Models\Entities\Quiz','quiz_id','id');
+        return $this->belongsTo(Quiz::class,'quiz_id','id');
+    }
+
+    public function answers() {
+        return $this->hasMany(QuizResultAnswer::class, 'quiz_result_id', 'id')->withTrashed();
+    }
+
+    public function order() {
+        return $this->belongsTo(Order::class, 'order_id', 'id');
     }
 }

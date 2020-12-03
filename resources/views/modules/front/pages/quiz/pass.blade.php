@@ -5,8 +5,7 @@
             outline: none;
         }
         body{
-            background-color: #eeeeee;
-            font-family: "Be Vietnam", "Open Sans";
+            font-family: "Be Vietnam", "Open Sans", serif;
             font-style: normal;
             font-weight: normal;
             font-size: 18px;
@@ -1091,8 +1090,6 @@
 
     });
 </script>
-</body>
-</html>
 
 
 
