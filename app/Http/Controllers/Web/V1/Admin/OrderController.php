@@ -7,7 +7,7 @@ use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\OrderWebForm;
 use App\Http\Forms\Web\V1\QuizWebForm;
 use App\Models\Entities\Quiz;
-use App\Order;
+use App\Models\Entities\Order;
 use App\Services\Common\V1\Support\FileService;
 use Illuminate\Http\Request;
 

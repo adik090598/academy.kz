@@ -44,13 +44,18 @@
             font-weight: bold;
         }
         .p12 .is-active{
-            background-color: #00A0A3;
+            background-color: #FFB63E !important;
+            color: #323232;
+            font-weight: bold;
+        }
+
+        .p12 .is-checked{
+            background: #0e9f6e;
             color: #fff;
             font-weight: bold;
         }
 
         .quizArea{
-
             margin:  auto;
             padding: 10px;
             position: relative;
@@ -117,6 +122,14 @@
             font-size: 16px;
             line-height: 16px;
             transition: all 0.2s cubic-bezier(.4,0,.2,1);
+        }
+
+        #previous{
+            background: #5a6268;
+        }
+
+        #submit{
+            background: #328be0;
         }
 
         #next:hover,
@@ -956,14 +969,14 @@
     }
 
     /*** change progress bar when next button is clicked ***/
-    function changeProgressValue(index){
+    function changeProgressValue(index,checked){
             index++;
-        $progressValue+= 9;
+        $progressValue+=0;
         if ($progressValue >= 100) {
         } else {
             if($progressValue==99) $progressValue=100;
-                $('.progress_items').removeClass('is-active');
-                $('.progress_item_'+index).addClass('is-active');
+            $('.progress_items').removeClass('is-active');
+            $('.progress_item_'+index).addClass('is-active');
         }
         $('.js-my-progress-completion').html($('progress').val() + '% complete');
     }
@@ -1028,6 +1041,7 @@
             //userAnswers.push($(this).val());
 
             userAnswers[presentIndex] = $(this).val();
+            $('.progress_item_'+(presentIndex+1)).addClass('is-checked');
 
             if(presentIndex==0){
                 $("#previous").addClass("hidden");
@@ -1046,6 +1060,7 @@
             presentIndex++;
             if(questions.length==(presentIndex+1)){
                 $("#submit").removeClass('hidden');
+                $("#next").addClass("hidden");
             }
             $("#previous").removeClass("hidden");
             renderQuiz(questions, presentIndex);
@@ -1058,6 +1073,9 @@
             presentIndex--;
             if(presentIndex==0){
                 $(this).addClass("hidden");
+            }
+            else if(questions.length!=(presentIndex+1)){
+                $("#submit").addClass('hidden');
             }
             renderQuiz(questions, presentIndex);
             changeProgressValue( presentIndex);
@@ -1072,6 +1090,7 @@
         });
 
         getQuestionById = function(id){
+            var checked = 0;
             addClickedAnswerToResult(questions,presentIndex,clicked);
             presentIndex = id;
             if(id==0){
@@ -1079,14 +1098,22 @@
             }
             else if(questions.length==(presentIndex+1)){
                 $("#submit").removeClass('hidden');
+                $("#next").addClass("hidden");
+                $("#previous").removeClass("hidden");
             }
             else{
                 $("#submit").addClass('hidden');
                 $("#previous").removeClass("hidden");
                 $("#next").removeClass("hidden");
             }
+
+            if(userAnswers[presentIndex]!=null){
+                checked = 1;
+            }
+
             renderQuiz(questions, presentIndex);
-            changeProgressValue( presentIndex);
+            console.log(presentIndex);
+            changeProgressValue(presentIndex, checked);
         }
 
     });

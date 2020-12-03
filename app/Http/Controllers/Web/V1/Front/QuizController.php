@@ -40,8 +40,9 @@ class QuizController extends WebBaseController
 //
         Order::create([
             'status' => 1,
-            'quiz_id' => $request->id,
+            'quiz_id' => $quiz->id,
             'user_id' => Auth::id(),
+            'price' => $quiz->price,
 //                'transaction_id' => 1
         ]);
 
