@@ -35,7 +35,7 @@
                                         Нәтиже: {{$result->result .' / '.$result->answers->count()}}
                                     </b>
                                 </p>
-                                <a href="#" class="btn btn-link btn-block text-right stretched-link">
+                                <a href="{{route('profile.certificate',['result'=>$result->id])}}" class="btn btn-link btn-block text-right stretched-link">
                                     Скачать сертификат
                                 </a>
                             </div>
