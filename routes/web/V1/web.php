@@ -20,6 +20,7 @@ Route::group(['namespace' => 'Front'], function () {
         Route::post('/register/', ['as' => 'register', 'uses' => 'RegisterController@register']);
         Route::get('/login', ['as' => 'login.form', 'uses' => 'LoginController@showLoginForm']);
         Route::post('/login', ['as' => 'login', 'uses' => 'LoginController@login']);
+        Route::post('logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
     });
 
     Route::get('/', ['uses' => 'HomeController@index']);
