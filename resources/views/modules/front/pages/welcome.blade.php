@@ -29,11 +29,11 @@
             <div class="row">
                 <div class="certificates offset-xl-5 offset-6">
                     <img class="certificate-img d-none d-xl-inline"
-                         src="{{asset('modules/front/assets/img/welcome/certificate.png')}}"
+                         src="{{asset('modules/front/assets/img/welcome/certificate2.jpg')}}"
                          alt="">
-                    <img class="certificate-img" src="{{asset('modules/front/assets/img/welcome/certificate2.png')}}"
+                    <img class="certificate-img" src="{{asset('modules/front/assets/img/welcome/certificate.jpg')}}"
                          alt="">
-                    <img class="certificate-img" src="{{asset('modules/front/assets/img/welcome/certificate3.png')}}"
+                    <img class="certificate-img" src="{{asset('modules/front/assets/img/welcome/certificate3.jpg')}}"
                          alt="">
                 </div>
             </div>

@@ -19,6 +19,18 @@ class CreateQuizResultsTable extends Migration
             $table->foreignId('quiz_id')->constrained('quizzes');
             $table->foreignId('order_id')->constrained('orders');
             $table->double('result');
+            $table->integer('all_score');
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('father_name')->nullable();
+            $table->string('city')->nullable();
+            $table->string('region')->nullable();
+            $table->string('area')->nullable();
+            $table->string('school')->nullable();
+            $table->string('class_letter')->nullable();
+            $table->integer('class_number')->nullable();
+            $table->integer('class_teacher')->nullable();
+            $table->integer('certificate_type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

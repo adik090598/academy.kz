@@ -42,7 +42,7 @@ class QuizController extends WebBaseController
             'status' => 1,
             'quiz_id' => $quiz->id,
             'user_id' => Auth::id(),
-            'price' => $quiz->price,
+//            'price' => $quiz->price,
 //                'transaction_id' => 1
         ]);
 

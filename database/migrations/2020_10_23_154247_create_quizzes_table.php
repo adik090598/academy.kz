@@ -18,9 +18,15 @@ class CreateQuizzesTable extends Migration
             $table->string('name');
             $table->text('image_path');
             $table->text('description');
-            $table->string('duration');
+            $table->integer('duration');
             $table->float('price');
-            $table->foreignId('subject_id')->constrained('subjects');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->integer('first_place')->nullable();
+            $table->integer('second_place')->nullable();
+            $table->integer('third_place')->nullable();
+            $table->foreignId('subject_id')->nullable()->constrained('subjects');
+            $table->foreignId('role_id')->constrained('roles');
             $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
             $table->softDeletes();
