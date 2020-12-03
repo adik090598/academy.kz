@@ -68,6 +68,30 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
         Route::post('/subject/update', ['uses' => 'SubjectController@update', 'as' => 'subject.update']);
         Route::post('/subject/delete', ['uses' => 'SubjectController@delete', 'as' => 'subject.delete']);
 
+        //Regions
+        Route::get('/region/', ['uses' => 'RegionController@index', 'as' => 'region.index']);
+        Route::get('/region/edit', ['uses' => 'RegionController@edit', 'as' => 'region.edit']);
+        Route::post('/region/store', ['uses' => 'RegionController@store', 'as' => 'region.store']);
+        Route::post('/region/update', ['uses' => 'RegionController@update', 'as' => 'region.update']);
+
+        //Cities
+        Route::get('/city/', ['uses' => 'CityController@index', 'as' => 'city.index']);
+        Route::get('/city/edit', ['uses' => 'CityController@edit', 'as' => 'city.edit']);
+        Route::post('/city/store', ['uses' => 'CityController@store', 'as' => 'city.store']);
+        Route::post('/city/update', ['uses' => 'CityController@update', 'as' => 'city.update']);
+
+        //Areas
+        Route::get('/area/', ['uses' => 'AreaController@index', 'as' => 'area.index']);
+        Route::get('/area/edit', ['uses' => 'AreaController@edit', 'as' => 'area.edit']);
+        Route::post('/area/store', ['uses' => 'AreaController@store', 'as' => 'area.store']);
+        Route::post('/area/update', ['uses' => 'AreaController@update', 'as' => 'area.update']);
+
+        //School
+        Route::get('/school/', ['uses' => 'SchoolController@index', 'as' => 'school.index']);
+        Route::get('/school/edit', ['uses' => 'SchoolController@edit', 'as' => 'school.edit']);
+        Route::post('/school/store', ['uses' => 'SchoolController@store', 'as' => 'school.store']);
+        Route::post('/school/update', ['uses' => 'SchoolController@update', 'as' => 'school.update']);
+
         //Quizzes
         Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'quiz.index']);
         Route::get('/quiz/create', ['uses' => 'QuizController@create', 'as' => 'quiz.create']);

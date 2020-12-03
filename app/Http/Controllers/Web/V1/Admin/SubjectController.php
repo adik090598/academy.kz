@@ -20,7 +20,7 @@ class SubjectController extends WebBaseController
 
     public function create() {
         $subject_web_form = SubjectWebForm::inputGroups(null);
-        return $this->adminPagesView('subject.create', compact( 'quiz_web_form'));
+        return $this->adminPagesView('subject.create', compact( 'subject_web_form'));
     }
 
     public function store(SubjectWebRequest $request)

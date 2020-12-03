@@ -7,6 +7,7 @@ use App\Http\Forms\Web\V1\Auth\RegisterWebForm;
 use App\Http\Forms\Web\V1\Auth\UserRegisterWebForm;
 use App\Models\Entities\Core\Role;
 use App\Models\Entities\Core\User;
+use App\Models\Entities\Region;
 use App\Models\Entities\Support\AppFile;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -61,7 +62,8 @@ class RegisterController extends WebBaseController
 
     public function showRegistrationForm()
     {
-        return $this->frontPagesView('auth.register');
+        $regions = Region::with('cities.areas.schools')->get();
+        return $this->frontPagesView('auth.register', compact('regions'));
     }
 
     protected function validator(array $data)

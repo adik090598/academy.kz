@@ -9,6 +9,11 @@ class QuizResult extends Model
 {
     use SoftDeletes;
 
+    public const FIRST_PLACE = 1;
+    public const SECOND_PLACE = 2;
+    public const THIRD_PLACE = 3;
+    public const DEFAULT = 4;
+
     protected $fillable = ['user_id', 'quiz_id', 'order_id', 'result'];
 
     public function quiz()
