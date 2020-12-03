@@ -45,15 +45,19 @@ Route::group(['namespace' => 'Front'], function () {
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
-    Route::get('/login', ['as' => 'admin.login', 'uses' => 'LoginController@showLoginForm']);
-    Route::post('/login', ['as' => 'admin.login.post', 'uses' => 'LoginController@login']);
-    Route::get('/register', ['as' => 'admin.register', 'uses' => 'RegisterController@showRegistrationForm']);
-    Route::post('/register', ['as' => 'admin.register.post', 'uses' => 'RegisterController@create']);
+    Route::group(['namespace' => 'Auth',], function () {
 
+        Route::get('/login', ['as' => 'admin.login', 'uses' => 'LoginController@showLoginForm']);
+        Route::post('/login', ['as' => 'admin.login.post', 'uses' => 'LoginController@login']);
+        Route::get('/register', ['as' => 'admin.register', 'uses' => 'RegisterController@showRegistrationForm']);
+        Route::post('/register', ['as' => 'admin.register.post', 'uses' => 'RegisterController@create']);
+
+        Route::post('logout', ['as' => 'logout', 'uses' => 'LoginController@logout'])->middleware('auth');
+
+    });
     Route::group(['middleware' => 'auth'], function () {
-        Route::post('logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
         Route::get('/home', ['as' => 'admin.index', 'uses' => 'PageController@home']);
-        Route::get('/admin', ['uses' => 'PageController@home']);
+        Route::get('/', ['uses' => 'PageController@home']);
         //Users
         Route::get('/user/edit', ['uses' => 'UserController@edit', 'as' => 'user.edit']);
 

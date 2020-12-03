@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers\Web\V1\Auth;
+namespace App\Http\Controllers\Web\V1\Admin\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
