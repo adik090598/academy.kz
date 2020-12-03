@@ -25,9 +25,11 @@ Route::group(['namespace' => 'Front'], function () {
 
     Route::get('/', ['uses' => 'HomeController@index']);
     Route::get('/welcome', ['as' => 'welcome', 'uses' => 'HomeController@index']);
-    Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'front.quiz.index']);
+    Route::get('/competitions', ['uses' => 'QuizController@competitions', 'as' => 'front.quiz.competition']);
 
     Route::group(['middleware' => 'auth'], function () {
+        Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'front.quiz.index']);
+        Route::get('/olympics', ['uses' => 'QuizController@olympics', 'as' => 'front.quiz.olympics']);
         Route::group(['middleware' => 'ROLE_OR:' . Role::TEACHER_ID . ',' . Role::LEARNER_ID], function () {
             Route::group(['prefix' => 'profile'], function () {
                 Route::get('/profile', ['as' => 'profile.profile', 'uses' => 'ProfileController@index']);

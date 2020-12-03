@@ -10,9 +10,9 @@
 {{--                    <input type="text" class="form-control" placeholder="Поиск">--}}
                 </div>
             </div>
-                <div class="d-flex mt-4">
+            <div class="d-flex mt-4">
                 <div class="col-4 d-none d-lg-block">
-{{--                   <h5>Фильтр</h5>--}}
+{{--                    <h5>Фильтр</h5>--}}
 {{--                    <select class="form-control">--}}
 {{--                        @foreach($subjects as $subject)--}}
 {{--                            <option value="{{$subject->id}}">{{$subject->name}}</option>--}}

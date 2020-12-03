@@ -1,5 +1,4 @@
 @extends('modules.front.layouts.app-full')
-
 @section('content')
     <div class="container pt-5" style="min-height: 766px;">
 
@@ -36,7 +35,7 @@
                                     </b>
                                 </p>
                                 <a href="{{route('profile.certificate',['id'=> $result->id])}}" target="_blank" class="btn btn-link btn-block text-right stretched-link">
-                                    Скачать сертификат
+                                    Сертификатты басып алу
                                 </a>
                             </div>
                         </div>

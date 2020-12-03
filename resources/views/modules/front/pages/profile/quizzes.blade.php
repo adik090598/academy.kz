@@ -40,7 +40,7 @@
                                         data-toggle="collapse"
                                         data-target="#collapse{{$result->id}}" aria-expanded="true"
                                         aria-controls="collapseOne">
-                                    Посмотреть мои ответы
+                                    Жауаптарды көру
                                 </button>
                             </div>
                         </div>

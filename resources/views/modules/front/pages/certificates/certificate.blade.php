@@ -105,7 +105,7 @@
 
         .fullname {
             font-size: 24px;
-            padding-top: 0;
+            padding-top: 0 ;
             color: red;
 
         }

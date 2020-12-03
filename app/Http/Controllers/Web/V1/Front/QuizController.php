@@ -22,7 +22,6 @@ class QuizController extends WebBaseController
 {
     public function index()
     {
-        $now = now();
         $quizzes = Quiz::orderBy('created_at', 'desc')
             ->where('role_id', Auth::user()->role_id)
             ->where('category_id', Category::TESTS)
@@ -30,15 +29,29 @@ class QuizController extends WebBaseController
             ->where('end_date', null)
             ->has('questions')
             ->get();
-        $quizzes_with_dates = Quiz::where('start_date', '<=', $now)
-            ->where('category_id', Category::TESTS)
+
+        $subjects = Subject::all();
+
+        return $this->frontPagesView('quiz.index', compact('quizzes', 'subjects'));
+    }
+
+    public function olympics() {
+        $now = now();
+        $quizzes = Quiz::where('start_date', '<=', $now)
+            ->where('role_id', Auth::user()->role_id)
+            ->where('category_id', Category::OLYMPICS)
             ->where('end_date', '>=', $now)
             ->has('questions')
             ->get();
+        return $this->frontPagesView('quiz.olympics', compact('quizzes'));
+    }
 
-        $quizzes = $quizzes->merge($quizzes_with_dates);
-        $subjects = Subject::all();
-        return $this->frontPagesView('quiz.index', compact('quizzes', 'subjects'));
+    public function competitions() {
+        $now = now();
+        $quizzes = Quiz::where('category_id', Category::COMPETITION)
+            ->with('documents')
+            ->get();
+        return $this->frontPagesView('quiz.competition', compact('quizzes'));
     }
 
     public function quiz(Request $request)

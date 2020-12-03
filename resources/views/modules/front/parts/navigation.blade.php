@@ -9,13 +9,13 @@
         <div class="collapse navbar-collapse text-right" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Олимпиада <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{route('front.quiz.olympics')}}">Олимпиада <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('front.quiz.index')}}">Тесттар</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Байқаулар</a>
+                    <a class="nav-link" href="{{route('front.quiz.competition')}}">Байқаулар</a>
                 </li>
                 @if(!Auth::user())
                     <li class="nav-item">
