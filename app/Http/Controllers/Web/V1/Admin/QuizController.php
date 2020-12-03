@@ -28,7 +28,7 @@ class QuizController extends WebBaseController
 
     public function index()
     {
-        $quizzes = Quiz::orderBy('created_at', 'desc')->paginate(10);
+        $quizzes = Quiz::orderBy('created_at', 'desc')->where('category_id', '!=', Category::COMPETITION)->paginate(10);
         $quiz_web_form = QuizWebForm::inputGroups(null);
         return $this->adminPagesView('quiz.index', compact('quizzes', 'quiz_web_form'));
     }
@@ -42,7 +42,10 @@ class QuizController extends WebBaseController
     {
         try {
             $path = $this->fileService->store($request->image, Quiz::IMAGE_DIRECTORY);
-
+            $category = Category::TESTS;
+            if($request->start_date && $request->end_date) {
+                $category = Category::OLYMPICS;
+            }
             Quiz::create([
                 'name' => $request->name,
                 'image_path' => $path,
@@ -50,7 +53,7 @@ class QuizController extends WebBaseController
                 'price' => $request->price,
                 'duration' =>$request->duration,
                 'subject_id' => $request->subject_id,
-                'category_id' => Category::TESTS,
+                'category_id' => $category,
                 'role_id' => $request->role_id,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
@@ -81,11 +84,16 @@ class QuizController extends WebBaseController
             $path = $this->fileService->updateWithRemoveOrStore($request->image, Quiz::IMAGE_DIRECTORY, $old_path);
         }
         try {
+            $category = Category::TESTS;
+            if($request->start_date && $request->end_date) {
+                $category = Category::OLYMPICS;
+            }
             $quiz->update([
                 'name' => $request->name,
                 'image_path' => $path ? $path : $old_path,
                 'description' => $request->description,
                 'price' => $request->price,
+                'category_id' => $category,
                 'duration' =>$request->duration,
                 'subject_id' => $request->subject_id,
                 'start_date' => $request->start_date,

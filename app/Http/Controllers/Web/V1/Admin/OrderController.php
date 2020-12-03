@@ -21,7 +21,6 @@ class OrderController extends WebBaseController
     public function index()
     {
         $orders = Order::orderBy('created_at', 'desc')->paginate(10);
-        $order_web_form = OrderWebForm::inputGroups(null);
-        return $this->adminPagesView('order.index', compact('orders', 'order_web_form'));
+        return $this->adminPagesView('order.index', compact('orders'));
     }
 }

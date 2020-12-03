@@ -101,9 +101,17 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
         Route::get('/quiz/create', ['uses' => 'QuizController@create', 'as' => 'quiz.create']);
         Route::get('/quiz/get', ['uses' => 'QuestionController@index', 'as' => 'quiz.get']);
         Route::get('/quiz/edit', ['uses' => 'QuizController@edit', 'as' => 'quiz.edit']);
-        Route::post('/store', ['uses' => 'QuizController@store', 'as' => 'quiz.store']);
-        Route::post('/update', ['uses' => 'QuizController@update', 'as' => 'quiz.update']);
-        Route::post('/delete', ['uses' => 'QuizController@delete', 'as' => 'quiz.delete']);
+        Route::post('/quiz/store', ['uses' => 'QuizController@store', 'as' => 'quiz.store']);
+        Route::post('/quiz/update', ['uses' => 'QuizController@update', 'as' => 'quiz.update']);
+        Route::post('/quiz/delete', ['uses' => 'QuizController@delete', 'as' => 'quiz.delete']);
+
+        //Competitions
+        Route::get('/competitions', ['uses' => 'QuizCompetitionController@index', 'as' => 'competition.index']);
+        Route::get('/competition/create', ['uses' => 'QuizCompetitionController@create', 'as' => 'competition.create']);
+        Route::get('/competition/edit', ['uses' => 'QuizCompetitionController@edit', 'as' => 'competition.edit']);
+        Route::post('/competition/store', ['uses' => 'QuizCompetitionController@store', 'as' => 'competition.store']);
+        Route::post('/competition/update', ['uses' => 'QuizCompetitionController@update', 'as' => 'competition.update']);
+        Route::post('/competition/delete', ['uses' => 'QuizCompetitionController@delete', 'as' => 'competition.delete']);
 
         //Orders
         Route::get('/orders', ['uses' => 'OrderController@index', 'as' => 'order.index']);

@@ -24,8 +24,9 @@ class Sidebar extends BaseComponent
         if ($this->user->isAdmin()) {
             return [
                 $this->navItem(route('admin.index'), 'ti-home', 'Главная'),
-                $this->navItem(route('order.index'), 'ti-email', 'Заявки'),
+//                $this->navItem(route('order.index'), 'ti-email', 'Заявки'),
                 $this->navItem(route('quiz.index'), 'ti-check-box', 'Тесты'),
+                $this->navItem(route('competition.index'), 'ti-check-box', 'Байкау'),
                 $this->navItem(route('subject.index'), 'ti-view-list-alt', 'Предметы'),
                 $this->navItem(route('region.index'), 'ti-view-list-alt', 'Регионы'),
                 $this->navItem(route('city.index'), 'ti-view-list-alt', 'Города'),

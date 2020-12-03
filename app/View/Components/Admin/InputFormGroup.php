@@ -22,9 +22,10 @@ class InputFormGroup extends BaseComponent
     public $multiple;
     public $max;
     public $hidden;
+    public $image;
 
     public function __construct($name, $type, $placeholder, $label, $errors = [], $required = true, $value = null,
-                                $multiple = false,$max = null, $hidden = false)
+                                $multiple = false,$max = null, $hidden = false, $image = true)
     {
         $this->name = $name;
         $this->type = $type;
@@ -36,6 +37,7 @@ class InputFormGroup extends BaseComponent
         $this->multiple = $multiple;
         $this->max = $max;
         $this->hidden = $hidden;
+        $this->image = $image;
     }
 
     public function render()

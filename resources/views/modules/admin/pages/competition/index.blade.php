@@ -12,7 +12,7 @@
             <div class="card h-100">
                 <header class="card-header">
                     <h2 class="h4 card-header-title">Тесты</h2>
-                    <a href="{{route('quiz.create')}}" class="btn btn-outline-primary mt-3">
+                    <a href="{{route('competition.create')}}" class="btn btn-outline-primary mt-3">
                         Добавить
                         <i class="ti ti-plus"></i>
                     </a>
@@ -32,15 +32,15 @@
                             @foreach($quizzes as $quiz)
                                 <tr>
                                     <td>{{$quiz->id}}</td>
-                                    <td><a href="{{route('quiz.get', ['id' => $quiz->id])}}">{{$quiz->name}}</a></td>
+                                    <td>{{$quiz->name}}</td>
                                     <td>{{$quiz->created_at}}</td>
                                     <td class="d-inline-block">
-                                        <a href="{{route('quiz.edit', ['id' => $quiz->id])}}" class="btn btn-outline-primary btn-sm">
+                                        <a href="{{route('competition.edit', ['id' => $quiz->id])}}" class="btn btn-outline-primary btn-sm">
                                             <i class="ti ti-pencil"></i>
                                         </a>
-{{--                                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal"--}}
-{{--                                                data-target="#delete{{$quiz->id}}"><i class="ti ti-trash"></i>--}}
-{{--                                        </button>--}}
+                                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
+                                                data-target="#delete{{$quiz->id}}"><i class="ti ti-trash"></i>
+                                        </button>
                                         <div class="modal modal-backdrop" id="delete{{$quiz->id}}" tabindex="-1"
                                              role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
                                             <div class="modal-dialog" role="document">
@@ -53,7 +53,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <p>Вы действительно хотите удалить?</p>
-                                                        <form method="post" action="{{route('quiz.delete', ['id' => $quiz->id])}}">
+                                                        <form method="post" action="{{route('competition.delete', ['id' => $quiz->id])}}">
                                                             {{csrf_field()}}
                                                             <input type="number" value="{{$quiz->id}}" hidden>
                                                             <button type="submit" class="btn btn-outline-danger mt-3">Удалить безвозвратно<i class="ti ti-trash"></i></button>
@@ -68,7 +68,6 @@
                                         </div>
                                     </td>
                                 </tr>
-
                             @endforeach
                             </tbody>
                         </table>

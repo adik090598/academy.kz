@@ -11,6 +11,7 @@ class Quiz extends Model
     use SoftDeletes;
 
     public const IMAGE_DIRECTORY = "images/quizzes";
+    public const DOCUMENT_DIRECTORY = "documents/quizzes";
 
     protected $fillable = ['name', 'description', 'duration', 'price',
         'subject_id', 'image_path', 'category_id', 'start_date', 'end_date',
@@ -23,6 +24,10 @@ class Quiz extends Model
 
     public function subject() {
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
+    }
+
+    public function documents() {
+        return $this->hasMany(QuizDocument::class, 'quiz_id', 'id');
     }
 
 }

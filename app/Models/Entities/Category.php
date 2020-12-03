@@ -10,6 +10,6 @@ class Category extends Model
 {
     use SoftDeletes;
     public const TESTS = 1;
-    public const OLYMPIADA = 2;
-    public const BAIKAU = 3;
+    public const OLYMPICS = 2;
+    public const COMPETITION = 3;
 }

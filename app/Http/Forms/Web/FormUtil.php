@@ -12,9 +12,9 @@ namespace App\Http\Forms\Web;
 class FormUtil
 {
     public static function input($name, $placeholder, $label, $type, $required,
-                                 $value = null, $multiple = false , $max = null, $hidden = false): array
+                                 $value = null, $multiple = false , $max = null, $hidden = false, $image = true): array
     {
-        return [$name => compact('placeholder', 'label', 'type', 'required', 'value', 'multiple', 'max', 'hidden')];
+        return [$name => compact('placeholder', 'label', 'type', 'required', 'value', 'multiple', 'max', 'hidden', 'image')];
     }
 
     public static function select($name, $placeholder, $label, $required = true, $options = []): array

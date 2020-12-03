@@ -18,8 +18,8 @@ class CreateQuizzesTable extends Migration
             $table->string('name');
             $table->text('image_path');
             $table->text('description');
-            $table->integer('duration');
-            $table->float('price');
+            $table->integer('duration')->nullable();
+            $table->float('price')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('first_place')->nullable();

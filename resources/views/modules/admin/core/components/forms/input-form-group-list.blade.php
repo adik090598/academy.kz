@@ -33,6 +33,7 @@
                             :multiple="array_key_exists('multiple', $element) && $element['multiple']"
                             :type="$element['type']"
                             :hidden="$element['hidden']"
+                            :image="$element['image']"
                             />
     @endif
 @endforeach

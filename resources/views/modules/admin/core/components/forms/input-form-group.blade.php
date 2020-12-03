@@ -10,7 +10,7 @@
            placeholder="{{$placeholder}}"
            {{$hidden ? 'hidden' : ''}}
            {{--           @if($type == 'date') max='2050-01-01' @endif--}}
-           @if($type == 'file') accept="image/*" {{$multiple ? ' multiple' : ''}} @endif>
+           @if($type == 'file' && $image) accept="image/*" @else accept="application/*" {{$multiple ? ' multiple' : ''}} @endif>
     @if (isset($errors) && $errors->has($name))
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->first($name) }}</strong>
