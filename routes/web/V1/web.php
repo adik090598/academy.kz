@@ -33,6 +33,8 @@ Route::group(['namespace' => 'Front'], function () {
             Route::get('/profile', ['as' => 'profile.profile', 'uses' => 'ProfileController@index']);
             Route::post('/update', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
             Route::get('/quizzes', ['as' => 'profile.quizzes', 'uses' => 'ProfileController@quizzes',]);
+            Route::get('/certificates', ['as' => 'profile.certificates', 'uses' => 'ProfileController@certificates',]);
+
         });
 
         Route::group(['prefix' => 'quiz'], function () {

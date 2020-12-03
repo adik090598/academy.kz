@@ -62,4 +62,14 @@ class ProfileController extends WebBaseController
             ->get();
         return $this->frontPagesView('profile.quizzes', compact('results'));
     }
+
+    public function certificates(){
+        $results = QuizResult::where('user_id', Auth::id())
+            ->with('quiz', 'answers.answer.question', 'order')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return $this->frontPagesView('profile.certificates', compact('results'));
+    }
+
+
 }
