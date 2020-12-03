@@ -6,6 +6,7 @@ use App\Exceptions\Web\WebServiceExplainedException;
 use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Requests\Web\V1\SubmitQuizWebRequest;
 use App\Models\Entities\Answer;
+use App\Models\Entities\Core\Role;
 use App\Models\Entities\Question;
 use App\Models\Entities\Quiz;
 use App\Models\Entities\QuizResultAnswer;
@@ -23,10 +24,16 @@ class QuizController extends WebBaseController
         $now = now();
         $quizzes = Quiz::orderBy('created_at', 'desc')
             ->where('role_id', Auth::user()->role_id)
-            ->where('start_date', '>=', $now)
-            ->where('end_date', '<=', $now)
+            ->where('start_date', null)
+            ->where('end_date', null)
             ->has('questions')
-            ->paginate(10);
+            ->get();
+        $quizzes_with_dates = Quiz::where('start_date', '<=', $now)
+            ->where('end_date', '>=', $now)
+            ->has('questions')
+            ->get();
+
+        $quizzes = $quizzes->merge($quizzes_with_dates);
         $subjects = Subject::all();
         return $this->frontPagesView('quiz.index', compact('quizzes', 'subjects'));
     }
@@ -109,12 +116,14 @@ class QuizController extends WebBaseController
                 'city' => $user->school->area->city->name,
                 'area' => $user->school->area->name,
                 'region' => $user->school->area->city->region->name,
-                'school' => $user->father_name,
+                'school' => $user->school->name,
                 'class_letter' => $user->class_letter,
                 'class_number' => $user->class_number,
                 'class_teacher' => $user->class_teacher,
                 'certificate_type' => QuizResult::DEFAULT,
-                'result' => 0
+                'result' => 0,
+                'all_score' => 0,
+
             ]);
 
             foreach ($answers as $answer) {
@@ -131,17 +140,22 @@ class QuizController extends WebBaseController
             }
             QuizResultAnswer::insert($selected_answers);
             $quiz_result->result = $result;
-            $quiz = QuizResult::find($request->quiz_id);
+            $quiz = Quiz::where('id', $request->quiz_id)->with('questions')->first();
             $certificate_type = QuizResult::DEFAULT;
-            if($result >= $quiz->third_place && $result < $quiz->second_place) {
-                $certificate_type = QuizResult::THIRD_PLACE;
-            } else if($result >= $quiz->second_place && $result < $quiz->first_place) {
-                $certificate_type = QuizResult::SECOND_PLACE;
-            }
-            else if($result >= $quiz->first_place) {
-                $certificate_type = QuizResult::FIRST_PLACE;
+            if($user->role_id == Role::LEARNER_ID) {
+                if ($result >= $quiz->third_place && $result < $quiz->second_place) {
+                    $certificate_type = QuizResult::THIRD_PLACE;
+                } else if ($result >= $quiz->second_place && $result < $quiz->first_place) {
+                    $certificate_type = QuizResult::SECOND_PLACE;
+                } else if ($result >= $quiz->first_place) {
+                    $certificate_type = QuizResult::FIRST_PLACE;
+                }
+            } else {
+                $certificate_type = QuizResult::DEFAULT_TEACHER;
             }
             $quiz_result->certificate_type = $certificate_type;
+            $quiz_result->all_score = $quiz->questions->count();
+
             $quiz_result->save();
 
             DB::commit();

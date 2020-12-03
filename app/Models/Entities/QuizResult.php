@@ -13,8 +13,11 @@ class QuizResult extends Model
     public const SECOND_PLACE = 2;
     public const THIRD_PLACE = 3;
     public const DEFAULT = 4;
+    public const DEFAULT_TEACHER = 5;
 
-    protected $fillable = ['user_id', 'quiz_id', 'order_id', 'result'];
+    protected $fillable = ['user_id', 'quiz_id', 'order_id',
+        'result', 'all_score', 'name', 'surname', 'city', 'area', 'father_name',
+        'region', 'city', 'school', 'class_teacher', 'class_number', 'class_letter', 'certificate_type'];
 
     public function quiz()
     {
