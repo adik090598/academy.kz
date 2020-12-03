@@ -12,7 +12,7 @@ use App\Models\Entities\QuizResult;
 use App\Services\Common\V1\Support\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use JasperPHP\JasperPHP as JasperPHP;
+use JasperPHP\JasperPHP;
 
 
 class ProfileController extends WebBaseController
@@ -75,8 +75,9 @@ class ProfileController extends WebBaseController
         $result = QuizResult::find($request->get('result'));
 
         $jasper = new JasperPHP;
-        $template = "application".$result->certificate_type;
-        //dd(base_path('public\modules\front\assets\reports\\'.$template.'.jrxml'));
+
+        $template = "application";
+
         $jasper->compile(base_path('public\modules\front\assets\reports\\'.$template.'.jrxml'))->execute();
 
         $fullname = $result->surname.' '.$result->name.' '.$result->father_name;

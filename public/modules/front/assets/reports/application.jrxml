@@ -2,10 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="application_3" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="44b399d0-7c67-4bdf-95d6-4aee57480fc3">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<parameter name="fullname" class="java.lang.String">
-		<parameterDescription><![CDATA[$P{fullname}]]></parameterDescription>
-		<defaultValueExpression><![CDATA["Фамилия Имя Отчество"]]></defaultValueExpression>
-	</parameter>
+	<parameter name="fullname" class="java.lang.String"/>
 	<parameter name="address" class="java.lang.String"/>
 	<parameter name="school" class="java.lang.String"/>
 	<parameter name="class" class="java.lang.String"/>

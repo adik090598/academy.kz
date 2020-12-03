@@ -60,11 +60,9 @@ class FileServiceImpl extends BaseService implements FileService
 
     public function remove(string $path)
     {
-
             if (file_exists($path) && !is_dir($path)) {
                 return unlink($path);
         }
-
         return false;
     }
 
