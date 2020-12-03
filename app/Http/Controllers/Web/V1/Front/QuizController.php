@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\V1\Front;
 
 use App\Exceptions\Web\WebServiceExplainedException;
 use App\Http\Controllers\Web\WebBaseController;
+use App\Http\Requests\Web\V1\SubmitQuizWebRequest;
 use App\Models\Entities\Answer;
 use App\Models\Entities\Question;
 use App\Models\Entities\Quiz;
@@ -33,9 +34,8 @@ class QuizController extends WebBaseController
 
     public function pass(Request $request)
     {
-        $questions = $this->checkQuiz($request->id);
+        $quiz = $this->checkQuiz($request->id, true);
         //$questions->toJson(JSON_PRETTY_PRINT);
-        $questions->toArray();
 //
             Order::create([
                 'status'  => 1,
@@ -43,10 +43,14 @@ class QuizController extends WebBaseController
                 'user_id' => Auth::id(),
 //                'transaction_id' => 1
             ]);
-        return $this->frontPagesView('quiz.pass', compact('questions'));
+        foreach ($quiz->questions as $question) {
+            $question->answers = $question->hiddenAnswers;
+        }
+
+        return $this->frontPagesView('quiz.pass', compact('quiz'));
     }
 
-    public function submit(Request $request)
+    public function submit(SubmitQuizWebRequest $request)
     {
         $arr = explode(',', $request->get("userAnswers"));
         $result = 0;
@@ -91,8 +95,12 @@ class QuizController extends WebBaseController
         return $this->frontPagesView('quiz.result', compact('userAnswers', 'result', 'resString', 'count'));
     }
 
-    private function checkQuiz($id) {
-        $quiz = Quiz::where('id', $id)->with('questions.answers')->first();
+    private function checkQuiz($id, $hidden = false) {
+        if($hidden) {
+            $quiz = Quiz::where('id', $id)->with('questions.hiddenAnswers')->first();
+        } else {
+            $quiz = Quiz::where('id', $id)->with('questions.answers')->first();
+        }
         if(!$quiz) throw new WebServiceExplainedException('Тест не найден!');
         return $quiz;
     }

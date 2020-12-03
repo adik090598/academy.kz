@@ -852,14 +852,14 @@
                         <div class="buttonArea">
                             <button id="previous" class="hidden float-left">Алдыңғы сұрақ</button>
                             <button id="next" class="float-right">Келесі сұрақ</button>
-                            <button id="submit"  class="hidden">Submit</button>
+                            <button id="submit"  class="hidden">Аяқтау</button>
                         </div>
                     </div>
                 </div>
 
                 <form action="{{route('submit')}}" method="POST" id="submitForm">
                     @csrf
-                    <input type="hidden" name="userAnswers" id="submitAnswers">
+                    <input type="hidden" name="answers" id="submitAnswers">
                 </form>
             </div>
         </div>
@@ -871,7 +871,7 @@
     var $progressValue = 0;
     var resultList=[];
     var userAnswers = [];
-    var questions = {!! $questions->questions !!};
+    var questions = {!! $quiz->questions !!};
 
     /*** Return shuffled question ***/
 
@@ -991,7 +991,7 @@
     }
 
     function startTimer() {
-        var e = {!! $questions->duration !!};
+        var e = {!! $quiz->duration !!};
         return (secondsRemaining = 60 * e), 0 > secondsRemaining ||
         isNaN(e) ||
         "" === e
