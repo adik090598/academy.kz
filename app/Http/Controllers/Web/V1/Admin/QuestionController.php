@@ -113,9 +113,7 @@ class QuestionController extends WebBaseController
      */
     public function update(Request $request)
     {
-
         $id = $request->get('id');
-
         $question = Question::find($id);
         try {
             DB::beginTransaction();
@@ -136,14 +134,14 @@ class QuestionController extends WebBaseController
             $question->answers()->delete();
             Answer::insert($answers);
             DB::commit();
+            $this->edited();
+            $question_web_form = QuestionWebForm::inputGroups($question);
+            return redirect()->route('question.edit',['id' => $id]);
         }
         catch (\Exception $e){
             DB::rollBack();
             throw new WebServiceExplainedException($e->getMessage());
         }
-        $this->edited();
-        $question_web_form = QuestionWebForm::inputGroups($question);
-        return $this->adminPagesView('question.edit', compact( 'question_web_form', 'question'));
     }
 
     public function delete(QuestionDeleteWebRequest $request)
