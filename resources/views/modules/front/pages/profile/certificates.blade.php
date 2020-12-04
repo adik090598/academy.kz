@@ -1,7 +1,18 @@
 @extends('modules.front.layouts.app-full')
 @section('content')
     <div class="container pt-5" style="min-height: 766px;">
-
+        <div class="certificates">
+            @foreach($results as $result)
+                <a href="#" class="card credentialing">
+                    <div class="overlay"></div>
+                    <div class="circle">
+                        1qu
+                    </div>
+                    <h5>{{$result->quiz->name}}</h5>
+                    <h6>{{$result->quiz->subject->name}}</h6>
+                </a>
+            @endforeach
+        </div>
         <div class="card-body">
             @foreach($results as $result)
                 <div class="card col-12 p-0 mb-4">

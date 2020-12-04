@@ -102,7 +102,6 @@ class QuizController extends WebBaseController
                 'first_place' => $request->first_place,
                 'second_place' => $request->second_place,
                 'third_place' => $request->third_place,
-
             ]);
             $this->edited();
             return redirect()->route('quiz.index');

@@ -20,22 +20,44 @@
                             :errors="$errors"
                             :elements="$question_web_form"/>
                         <div class="answer_box col-md-12">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <input type="hidden" name="answers[0][check]" value="0">
-                                        <input type="checkbox" name="answers[0][check]" value="1" aria-label="Checkbox for following text input">
+                            @if($question->answers)
+                                @foreach($question->answers as $key => $answer)
+                                    <div class="input-group mb-3 {{$key!=0 ? "removeMe" : ""}}">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <input type="hidden" name="answers[{{$key}}][check]" value="0">
+                                                <input type="checkbox" {{$answer->is_right ? "checked" : ""}} name="answers[{{ $key }}][check]" value="1" aria-label="Checkbox for following text input">
+                                            </div>
+                                        </div>
+                                        <input type="text" name="answers[{{$key}}][text]" class="form-control" value="{{$answer->answer}}" aria-label="answer text">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                @if($key==0)
+                                                    <button class="btn btn-primary add_field_button" type="button">+</button>
+                                                @else
+                                                    <button class="btn btn-danger remove-date" type="button">-</button>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="hidden" name="answers[0][check]" value="0">
+                                            <input type="checkbox" name="answers[0][check]" value="1" aria-label="Checkbox for following text input">
+                                        </div>
+                                    </div>
+                                    <input type="text" name="answers[0][text]" class="form-control" aria-label="answer text">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <button class="btn btn-primary add_field_button" type="button">+</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <input type="text" name="answers[0][text]" class="form-control" aria-label="answer text">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <button class="btn btn-primary add_field_button" type="button">+</button>
-                                    </div>
-                                </div>
-                            </div>
+                            @endif
                         </div>
-
                         <button type="submit" class="offset-md-4 col-md-4 btn btn-block btn-wide btn-primary text-uppercase">
                             Сохранить <i class="ti ti-check"></i>
                         </button>
@@ -51,7 +73,7 @@
         var wrapper = $('.answer_box'); //Fields wrapper
         var add_button = $('.add_field_button'); //Add button ID
 
-        var x = 1; //initlal text box count
+        var x = {{ $question->answers->count() }}; //initlal text box count
         $(add_button).click(function(e){ //on add input button click
             e.preventDefault();
             if(x < max_fields){ //max input box allowed

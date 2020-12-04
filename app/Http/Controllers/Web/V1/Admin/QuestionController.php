@@ -113,14 +113,17 @@ class QuestionController extends WebBaseController
      */
     public function update(Request $request)
     {
-        $question = Quiz::find($request->get('quiz_id'));
+
+        $id = $request->get('id');
+
+        $question = Question::find($id);
         try {
             DB::beginTransaction();
-            $question->update([
-                'question_text' => $request->name,]);
+            $question->update(['question_text' => $request->name]);
             $answers = [];
             $now = now();
             foreach ($request->answers as $answer){
+
                 $answers[] = [
                     'question_id' => $question->id,
                     'answer' => $answer['text'],
@@ -128,17 +131,19 @@ class QuestionController extends WebBaseController
                     'created_at' => $now,
                     'updated_at' => $now
                 ];
+
             }
+            $question->answers()->delete();
             Answer::insert($answers);
-            $this->added();
             DB::commit();
-            $question_web_form = QuestionWebForm::inputGroups(null);
-            return redirect()->route('question.index', compact("id", "question_web_form"));
         }
         catch (\Exception $e){
             DB::rollBack();
             throw new WebServiceExplainedException($e->getMessage());
         }
+        $this->edited();
+        $question_web_form = QuestionWebForm::inputGroups($question);
+        return $this->adminPagesView('question.edit', compact( 'question_web_form', 'question'));
     }
 
     public function delete(QuestionDeleteWebRequest $request)
