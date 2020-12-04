@@ -26,12 +26,12 @@ class Sidebar extends BaseComponent
                 $this->navItem(route('admin.index'), 'ti-home', 'Главная'),
 //                $this->navItem(route('order.index'), 'ti-email', 'Заявки'),
                 $this->navItem(route('quiz.index'), 'ti-check-box', 'Тесты'),
-                $this->navItem(route('competition.index'), 'ti-check-box', 'Байкау'),
-                $this->navItem(route('subject.index'), 'ti-view-list-alt', 'Предметы'),
-                $this->navItem(route('region.index'), 'ti-view-list-alt', 'Регионы'),
-                $this->navItem(route('city.index'), 'ti-view-list-alt', 'Города'),
-                $this->navItem(route('area.index'), 'ti-view-list-alt', 'Район'),
-                $this->navItem(route('school.index'), 'ti-view-list-alt', 'Школа'),
+                $this->navItem(route('competition.index'), 'ti-star', 'Байкау'),
+                $this->navItem(route('subject.index'), 'ti-book', 'Предметы'),
+                $this->navItem(route('region.index'), 'ti-map', 'Регионы'),
+                $this->navItem(route('city.index'), 'ti-location-pin', 'Города'),
+                $this->navItem(route('area.index'), 'ti-map-alt', 'Район'),
+                $this->navItem(route('school.index'), 'ti-briefcase', 'Школа'),
             ];
         } else {
             return [
