@@ -17,7 +17,7 @@ class QuizResult extends Model
 
     protected $fillable = ['user_id', 'quiz_id', 'order_id',
         'result', 'all_score', 'name', 'surname', 'city', 'area', 'father_name',
-        'region', 'city', 'school', 'class_teacher', 'class_number', 'class_letter', 'certificate_type'];
+        'region', 'city', 'school', 'class_number', 'class_letter', 'certificate_type'];
 
     public function quiz()
     {

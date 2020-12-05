@@ -20,46 +20,58 @@ class ProfileController extends WebBaseController
         $this->fileService = $fileService;
     }
 
-    public function index(){
+    public function index()
+    {
         $user = Auth::user();
         $user_web_form = UserWebForm::inputGroups($user);
-        return $this->frontPagesView('profile.profile', compact('user','user_web_form'));
+        return $this->frontPagesView('profile.profile', compact('user', 'user_web_form'));
     }
 
-    public function update(UserEditWebRequest $request){
+    public function update(UserEditWebRequest $request)
+    {
         $user = Auth::user();
 
         $old_path = $user->avatar_path;
 
         $path = null;
-        if($request->avatar_path) {
+        if ($request->avatar_path) {
             $path = $this->fileService->updateWithRemoveOrStore($request->avatar_path, User::AVATAR_DIRECTORY, $old_path);
         }
         try {
             $user->update([
-                'name'         => $request->name,
-                'surname'      => $request->surname,
-                'phone'        => $request->phone,
-                'avatar_path'  => $path ? $path : $old_path,
-                'father_name'  => $request->patronymic,
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'phone' => $request->phone,
+                'avatar_path' => $path ? $path : $old_path,
+                'father_name' => $request->patronymic,
             ]);
             $this->edited();
             return redirect()->route('profile.profile');
         } catch (\Exception $exception) {
-            if($path) $this->fileService->remove($path);
+            if ($path) $this->fileService->remove($path);
             throw new WebServiceExplainedException($exception->getMessage());
         }
     }
 
-    public function quizzes(){
+    public function quizzes()
+    {
         $results = QuizResult::where('user_id', Auth::id())
-            ->with('quiz', 'answers.answer.question', 'order')
+            ->with('quiz.questions.answers', 'answers.answer.question', 'order')
             ->orderBy('created_at', 'desc')
             ->get();
-        return $this->frontPagesView('profile.quizzes', compact('results'));
+        $question_ids = [];
+        foreach ($results as $result) {
+            foreach ($result->answers as $answer) {
+                $question_ids[] = $answer->answer->question_id;
+            }
+            $result->not_answered_questions = $result->quiz->questions->whereNotIn('id', $question_ids);
+        }
+
+            return $this->frontPagesView('profile.quizzes', compact('results'));
     }
 
-    public function certificates(){
+    public function certificates()
+    {
         $results = QuizResult::where('user_id', Auth::id())
             ->with('quiz', 'answers.answer.question', 'order')
             ->orderBy('created_at', 'desc')
@@ -67,9 +79,10 @@ class ProfileController extends WebBaseController
         return $this->frontPagesView('profile.certificates', compact('results'));
     }
 
-    public function getCertificate($id){
+    public function getCertificate($id)
+    {
         $result = QuizResult::where('user_id', Auth::id())->where('id', $id)->first();
-        if(!$result) {
+        if (!$result) {
             throw new WebServiceExplainedException('Сертификат не найден!');
         }
         return $this->frontPagesView('certificates.certificate', compact('result'));

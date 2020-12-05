@@ -40,5 +40,8 @@
                 </div>
             </div>
         </div>
+        @if($quizzes->isEmpty())
+            <h4 class="text-center">Байқаулар табылған жоқ!</h4>
+        @endif
     </div>
 @endsection

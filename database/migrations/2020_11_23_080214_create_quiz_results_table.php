@@ -29,7 +29,6 @@ class CreateQuizResultsTable extends Migration
             $table->string('school')->nullable();
             $table->string('class_letter')->nullable();
             $table->integer('class_number')->nullable();
-            $table->string('class_teacher')->nullable();
             $table->integer('certificate_type')->nullable();
             $table->timestamps();
             $table->softDeletes();

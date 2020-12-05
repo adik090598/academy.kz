@@ -53,8 +53,8 @@
                     </div>
                 </div>
             @endforeach
-            @if(!$results)
-                <h4>Сертификаттар табылған жоқ!</h4>
+            @if($results->isEmpty())
+                <h4 class="text-center">Сертификаттар табылған жоқ!</h4>
             @endif
         </div>
     </div>

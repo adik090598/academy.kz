@@ -16,7 +16,6 @@ class AlterUsersTableAddColumns extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->integer('class_number')->nullable();
             $table->string('class_letter')->nullable();
-            $table->string('class_teacher')->nullable();
             $table->foreignId('school_id')->nullable()->constrained('schools');
             $table->foreignId('subject_id')->nullable()->constrained('subjects');
         });

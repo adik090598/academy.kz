@@ -79,7 +79,6 @@ class RegisterController extends WebBaseController
             'surname' => ['required', 'string'],
             'name' => ['required', 'string'],
             'father_name' => ['required', 'string'],
-            'сlass_teacher' => ['string'],
             'сlass_number' => ['numeric'],
             'сlass_letter' => ['string'],
             'subject_id' => ['numeric', 'exists:subjects,id'],
@@ -104,7 +103,6 @@ class RegisterController extends WebBaseController
             'avatar_path' => null,
             'class_number' => $data['class_number'],
             'class_letter' => $data['class_letter'],
-            'class_teacher' => $data['class_teacher'],
             'subject_id' => $subject_id,
             'school_id' => $data['school_id'],
         ]);

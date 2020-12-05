@@ -77,22 +77,22 @@
 
         .inner-container {
             position: relative;
-            padding-top: 685px;
+            padding-top: 682px;
         }
 
         .inner-container-default {
             position: relative;
-            padding-top: 670px;
+            padding-top: 680px;
         }
 
         .place {
             font-size: 24px;
-            margin-left: -80px;
+            margin-left: 26%;
         }
 
         .school {
             font-size: 24px;
-            margin-left: -80px;
+            margin-left: 26%;
             padding-top: 3px;
         }
 
@@ -106,6 +106,7 @@
         .fullname {
             font-size: 24px;
             padding-top: 0 ;
+            margin-left: 26%;
             color: red;
 
         }

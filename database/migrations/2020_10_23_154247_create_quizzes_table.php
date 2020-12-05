@@ -25,6 +25,10 @@ class CreateQuizzesTable extends Migration
             $table->integer('first_place')->nullable();
             $table->integer('second_place')->nullable();
             $table->integer('third_place')->nullable();
+            $table->text('first_place_certificate')->nullable();
+            $table->text('second_place_certificate')->nullable();
+            $table->text('third_place_certificate')->nullable();
+            $table->text('default_certificate')->nullable();
             $table->foreignId('subject_id')->nullable()->constrained('subjects');
             $table->foreignId('role_id')->nullable()->constrained('roles');
             $table->foreignId('category_id')->constrained('categories');

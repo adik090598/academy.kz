@@ -27,6 +27,7 @@ class QuizController extends WebBaseController
             ->where('category_id', Category::TESTS)
             ->where('start_date', null)
             ->where('end_date', null)
+            ->withCount('questions')
             ->has('questions')
             ->get();
 
@@ -41,6 +42,7 @@ class QuizController extends WebBaseController
             ->where('role_id', Auth::user()->role_id)
             ->where('category_id', Category::OLYMPICS)
             ->where('end_date', '>=', $now)
+            ->withCount('questions')
             ->has('questions')
             ->get();
         return $this->frontPagesView('quiz.olympics', compact('quizzes'));
@@ -116,6 +118,7 @@ class QuizController extends WebBaseController
                 throw new WebServiceExplainedException('Ответы не относятся к этому тесту!');
             }
         }
+
         $answers = Answer::whereIn('id', $answer_ids)->with('question.quiz')->get();
 
         $selected_answers = [];
@@ -135,23 +138,25 @@ class QuizController extends WebBaseController
                 'school' => $user->school->name,
                 'class_letter' => $user->class_letter,
                 'class_number' => $user->class_number,
-                'class_teacher' => $user->class_teacher,
                 'certificate_type' => QuizResult::DEFAULT,
                 'result' => 0,
                 'all_score' => 0,
 
             ]);
 
-            foreach ($answers as $answer) {
-                $selected_answers[] = [
-                    'answer_id' => $answer->id,
-                    'quiz_result_id' => $quiz_result->id,
-                    'is_right' => $answer->is_right,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ];
-                if($answer->is_right) {
-                    $result++;
+            foreach ($quiz_answers_ids as $answer_id) {
+                $answer = $answers->where('id', $answer_id)->first();
+                if ($answer) {
+                    $selected_answers[] = [
+                        'answer_id' => $answer->id,
+                        'quiz_result_id' => $quiz_result->id,
+                        'is_right' => $answer->is_right,
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                    if ($answer->is_right) {
+                        $result++;
+                    }
                 }
             }
             QuizResultAnswer::insert($selected_answers);
@@ -183,7 +188,7 @@ class QuizController extends WebBaseController
         $result = QuizResult::where('id', $quiz_result->id)
             ->with('quiz', 'answers.answer.question', 'order')->first();
 
-        return $this->frontPagesView('quiz.result', compact('result'));
+        return redirect()->route('profile.quizzes');
     }
 
     private function checkQuiz($id, $hidden = false)

@@ -55,7 +55,7 @@
                                 id="role_id"
                                 onchange="chooseRole()"
                                 required>
-                            <option>Рөль</option>
+                            <option value="">Рөль</option>
                             <option value="2">Оқушы</option>
                             <option value="3">Мұғалім</option>
                         </select>
@@ -71,7 +71,7 @@
                                 class="form-control{{ isset($errors) && $errors->has('region_id') ? ' is-invalid' : '' }}"
                                 onchange="chooseRegion()"
                                 required>
-                            <option value="0">Облыс</option>
+                            <option value="">Облыс</option>
                             @foreach($regions as $region)
                                 <option value="{{$region->id}}">{{$region->name}}</option>
                             @endforeach
@@ -89,7 +89,7 @@
                                 onchange="chooseCity()"
                                 hidden
                                 required>
-                            <option value="0">Қала</option>
+                            <option value="">Қала</option>
                         </select>
                         @if (isset($errors) && $errors->has('city_id'))
                             <span class="invalid-feedback" role="alert">
@@ -104,8 +104,7 @@
                                 onchange="chooseArea()"
                                 hidden
                                 required>
-                            <option value="0">Аудан</option>
-
+                            <option value="">Аудан</option>
                         </select>
                         @if (isset($errors) && $errors->has('area_id'))
                             <span class="invalid-feedback" role="alert">
@@ -119,6 +118,7 @@
                                 class="form-control{{ isset($errors) && $errors->has('school_id') ? ' is-invalid' : '' }}"
                                 hidden
                                 required>
+                            <option value="">Мектеп</option>
                         </select>
                         @if (isset($errors) && $errors->has('area_id'))
                             <span class="invalid-feedback" role="alert">
@@ -126,23 +126,11 @@
                             </span>
                         @endif
                     </div>
-                    <div class="form-group">
-                        <input type="text" name="class_teacher"
-                               id="class_teacher"
-                               class="form-control{{ isset($errors) && $errors->has('class_teacher') ? ' is-invalid' : '' }}"
-                               value="{{old('class_teacher')}}"
-                               placeholder="Мұғалімнің аты жөні"
-                               hidden>
-                        @if (isset($errors) && $errors->has('class_teacher'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('class_teacher') }}</strong>
-                            </span>
-                        @endif
-                    </div>
                     <div class="form-group col-12 row" id="class-number-letter" hidden>
                         <select type="text" name="class_number"
                                 id="class_number"
                                 class="form-control{{ isset($errors) && $errors->has('class_number') ? ' is-invalid' : '' }} col-5">
+                            <option value="">Сынып</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -163,7 +151,7 @@
                         <input type="text" name="class_letter"
                                id="class_letter"
                                maxlength="1"
-                               placeholder="A"
+                               placeholder="AБВ"
                                class="form-control{{ isset($errors) && $errors->has('class_letter') ? ' is-invalid' : '' }} col-5 ml-3"
                                style="text-transform:uppercase"/>
                         @if (isset($errors) && $errors->has('class_letter'))
@@ -318,21 +306,20 @@
         function chooseRole() {
             var role_id = document.getElementById('role_id');
             var class_number = document.getElementById('class-number-letter');
-            var class_teacher =  document.getElementById('class_teacher');
             var subject_id =  document.getElementById('subject_id');
-            console.log(class_number);
             if(role_id.value == 2) {
+                document.getElementById('class_letter').required = true;
+                document.getElementById('class_number').required = true;
                 class_number.hidden = false;
-                class_teacher.hidden = false;
                 subject_id.hidden = true;
+
             } else if(role_id.value == 3) {
                 subject_id.hidden = false;
+                subject_id.required = true;
                 class_number.hidden = true;
-                class_teacher.hidden = true;
 
             } else {
                 class_number.hidden = true;
-                class_teacher.hidden = true;
                 subject_id.hidden = true;
             }
 
@@ -340,7 +327,7 @@
 
         function emptySelect(element) {
             for (var i = 0; i < element.length; i++) {
-                if (element[i].value != 0)
+                if (element[i].value != "")
                     element.remove(i);
             }
         }

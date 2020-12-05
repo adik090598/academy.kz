@@ -31,8 +31,8 @@
                    aria-haspopup="true" aria-expanded="false"
                    data-toggle="dropdown"
                    data-offset="0">
-                    <img class="u-header-avatar img-fluid rounded-circle mr-md-3" src="{{$user->profile_photo_path}}"
-                         alt="User Profile">
+{{--                    <img class="u-header-avatar img-fluid rounded-circle mr-md-3" src="{{$user->profile_photo_path}}"--}}
+{{--                         alt="User Profile">--}}
                     <span class="text-dark d-none d-md-inline-flex align-items-center">
 								{{$user->name}}
                         <span class="ti-angle-down text-muted ml-4"></span>

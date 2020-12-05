@@ -20,13 +20,13 @@
                 <button type="submit" class="btn btn-block btn-wide btn-primary text-uppercase">
                     Вход
                 </button>
-                <div class="divider-with-text text-center my-4 mx-7">
-                    <span class="divider-with-text__content"></span>
-                </div>
-                <p class="text-center mb-0">
-                    Нет аккаунта?
-                    <a class="font-weight-semi-bold" href="{{route('register')}}">Зарегистрируйтесь</a>
-                </p>
+{{--                <div class="divider-with-text text-center my-4 mx-7">--}}
+{{--                    <span class="divider-with-text__content"></span>--}}
+{{--                </div>--}}
+{{--                <p class="text-center mb-0">--}}
+{{--                    Нет аккаунта?--}}
+{{--                    <a class="font-weight-semi-bold" href="{{route('register')}}">Зарегистрируйтесь</a>--}}
+{{--                </p>--}}
 
             </form>
         </div>
