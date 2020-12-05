@@ -23,18 +23,19 @@
                                     @endif
                                     тг
                                 </p>
+                                <p class="quiz-detail"><i
+                                        class="fa fa-id-card"></i> ID номер: {{$order->id}}</p>
                                 <p class="quiz-detail">
                                     <b>
                                         <i class="fa fa-check"></i>
                                         Статус: {{$order->status}}
                                     </b>
                                 </p>
-                                <button class="btn btn-link btn-block text-right stretched-link" type="button"
-                                        data-toggle="collapse"
-                                        data-target="#collapse{{$order->id}}" aria-expanded="true"
-                                        aria-controls="collapseOne">
-                                    Жауаптарды көру
-                                </button>
+                                @if($order->status == \App\Models\Entities\Order::ACCEPTED)
+                                    <a href="{{route('quiz.pass')}}">
+
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>

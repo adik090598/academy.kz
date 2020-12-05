@@ -31,56 +31,32 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{$order->id}}</td>
-                                    <td><a href="{{route('order.get', ['id' => $order->id])}}">{{$order->user->name}}</a></td>
+                                    <td>
+                                       {{$order->user->name}}
+                                    </td>
                                     <td>{{$order->quiz->name}}</td>
                                     <td>{{$order->created_at}}</td>
                                     <td>{{$order->price ."тг."}}</td>
                                     <td>
-                                        @if($order->status==0)
+                                        @if($order->status == \App\Models\Entities\Order::PROCESS)
                                             <span class="badge bg-warning text-light">Күтілуде {{$order->status}}</span>
-                                        @elseif($order->status==1)
-                                            <span class="badge bg-secondary text-light">Қабылданды {{$order->status}}</span>
-                                        @elseif($order->status==2)
+                                        @elseif($order->status == \App\Models\Entities\Order::ACCEPTED)
+                                            <span
+                                                class="badge bg-secondary text-light">Қабылданды {{$order->status}}</span>
+                                        @elseif($order->status == \App\Models\Entities\Order::PASSED)
                                             <span class="badge bg-primary text-light">Тапсырды {{$order->status}}</span>
                                         @endif
                                     </td>
                                     <td class="d-inline-block">
-                                        <a href="#" class="btn btn-outline-success btn-sm">
-                                            <i class="ti ti-check"></i>
-                                        </a>
-                                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
-                                                data-target="#delete{{$order->id}}"><i class="ti-thumb-down"></i>
-                                        </button>
+                                        @if($order->status==0)
+                                            <form method="POST" action="{{route('order.accept', ['id' => $order->id])}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-success btn-sm">
+                                                    <i class="ti ti-check"></i></button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
-                                <div class="modal modal-backdrop" id="editquiz{{$order->id}}" tabindex="-1"
-                                     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title w-100" id="myModalLabel">Редактировать категорию</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{route('quiz.update')}}" method="post">
-                                                    <x-admin.input-form-group-list
-                                                        :errors="$errors"
-                                                        :elements="\App\Http\Forms\Web\V1\OrderWebForm::inputGroups($order)"/>
-                                                    <button type="submit" class="offset-md-4 col-md-4 btn btn-block btn-wide btn-primary text-uppercase">
-                                                        Сохранить <i class="ti ti-check"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger-soft btn-sm" data-dismiss="modal">
-                                                    <i class="ti ti-close"></i> Закрыть</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             @endforeach
                             </tbody>
                         </table>

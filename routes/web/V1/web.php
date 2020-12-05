@@ -117,12 +117,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
         //Orders
         Route::get('/orders', ['uses' => 'OrderController@index', 'as' => 'order.index']);
-        Route::get('/order/create', ['uses' => 'OrderController@create', 'as' => 'order.create']);
-        Route::get('/order/get', ['uses' => 'OrderController@index', 'as' => 'order.get']);
-        Route::get('/order/edit', ['uses' => 'OrderController@edit', 'as' => 'order.edit']);
-        Route::post('/order/store', ['uses' => 'OrderController@store', 'as' => 'order.store']);
-        Route::post('/order/update', ['uses' => 'OrderController@update', 'as' => 'order.update']);
-        Route::post('/order/delete', ['uses' => 'OrderController@delete', 'as' => 'order.delete']);
+        Route::post('/order/accept/{id}', ['uses' => 'OrderController@accept', 'as' => 'order.accept'])->where('id', '[0-9]+');
 
         //Questions
         Route::get('/question/{id}', ['uses' => 'QuestionController@index', 'as' => 'question.index'])->where('id', '[0-9]+');

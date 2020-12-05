@@ -58,6 +58,7 @@ class ProfileController extends WebBaseController
     {
         $orders = Order::with('quiz.subject')->where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
+            ->doesnthave('quizResult')
             ->get();
         $results = QuizResult::where('user_id', Auth::id())
             ->with('quiz.questions.answers', 'answers.answer.question', 'order')

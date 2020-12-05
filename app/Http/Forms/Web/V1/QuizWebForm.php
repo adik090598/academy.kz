@@ -58,12 +58,12 @@ class QuizWebForm implements WithForm
 
             FormUtil::input('first_place', '', 'Балл за первое место ( 15 > )',
                 'number', true, $value ? $value->first_place : ''),
-            FormUtil::input('first_place_sertificate', '', 'Сертификат за первое место',
+            FormUtil::input('first_place_certificate', '', 'Сертификат за первое место',
                 'file', !$value ? true : false, $value ? $value->first_place : ''),
 
             FormUtil::input('second_place', '', 'Балл за второе место ( 10 > )' ,
                 'number', true, $value ? $value->second_place : ''),
-            FormUtil::input('second_place_sertificate', '', 'Сертификат за второе место',
+            FormUtil::input('second_place_certificate', '', 'Сертификат за второе место',
                 'file', !$value ? true : false),
 
             FormUtil::input('third_place', '', 'Балл за третье место ( 5 > )',

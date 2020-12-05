@@ -67,14 +67,28 @@ class QuizController extends WebBaseController
         $quiz = $this->checkQuiz($request->id, true);
 
         Order::create([
-            'status' => 0,
+            'status' => Order::PROCESS,
             'quiz_id' => $quiz->id,
             'user_id' => Auth::id(),
             'price' => $quiz->price,
 //                'transaction_id' => 1
         ]);
-
         return redirect()->route('profile.quizzes');
+    }
+
+    public function startQuiz(Request $request)
+    {
+        $order = Order::where('id', $request->order_id)
+            ->where('status', Order::ACCEPTED)
+            ->first();
+        if (!$order) {
+            throw new WebServiceExplainedException('У вас нету оплаты по данному запросу');
+        }
+        $quiz_result = QuizResult::where('order_id', $order->id)->first();
+        if ($quiz_result) {
+            throw new WebServiceExplainedException('У вас не осталось попыток!');
+        }
+        return $this->frontPagesView('quiz.pass', compact('quiz'));
     }
 
     public function submit(SubmitQuizWebRequest $request)
@@ -157,22 +171,29 @@ class QuizController extends WebBaseController
             $quiz_result->result = $result;
             $quiz = Quiz::where('id', $request->quiz_id)->with('questions')->first();
             $certificate_type = QuizResult::DEFAULT;
+            $certificate_path = $quiz->default_certificate;
             if($user->role_id == Role::LEARNER_ID) {
                 if ($result >= $quiz->third_place && $result < $quiz->second_place) {
                     $certificate_type = QuizResult::THIRD_PLACE;
+                    $certificate_path = $quiz->third_place_certificate;
                 } else if ($result >= $quiz->second_place && $result < $quiz->first_place) {
                     $certificate_type = QuizResult::SECOND_PLACE;
+                    $certificate_path = $quiz->second_place_certificate;
                 } else if ($result >= $quiz->first_place) {
                     $certificate_type = QuizResult::FIRST_PLACE;
+                    $certificate_path = $quiz->first_place_certificate;
+
                 }
             } else {
                 $certificate_type = QuizResult::DEFAULT_TEACHER;
             }
             $quiz_result->certificate_type = $certificate_type;
+            $quiz_result->certificate_path = $certificate_path;
             $quiz_result->all_score = $quiz->questions->count();
 
+            $order->status = Order::PASSED;
             $quiz_result->save();
-
+            $order->save();
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollback();

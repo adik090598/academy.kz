@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\V1\Admin;
 
+use App\Exceptions\Web\WebServiceExplainedException;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\WebBaseController;
 use App\Http\Forms\Web\V1\OrderWebForm;
@@ -19,7 +20,23 @@ class OrderController extends WebBaseController
     public function index()
     {
         $orders = Order::orderBy('created_at', 'desc')->paginate(10);
-        $order_web_form = new OrderWebForm(null);
-        return $this->adminPagesView('order.index', compact('orders','order_web_form'));
+        return $this->adminPagesView('order.index', compact('orders'));
     }
+
+    public function accept($id) {
+        $order = $this->checkOrder($id);
+        $order->status = Order::ACCEPTED;
+        $order->save();
+        $this->edited();
+        return redirect()->route('order.index');
+    }
+
+    private function checkOrder($id) {
+        $order = Order::where('id', $id)->where('status', Order::PROCESS)->first();
+        if(!$order) {
+            throw new WebServiceExplainedException('Заявка не найдена!');
+        }
+        return $order;
+    }
+
 }

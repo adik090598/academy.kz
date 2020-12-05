@@ -21,4 +21,8 @@ class Order extends Model
     {
         return $this->belongsTo(Quiz::class,'quiz_id','id');
     }
+
+    public function quizResult() {
+        return $this->belongsTo(QuizResult::class, 'id', 'order_id');
+    }
 }
