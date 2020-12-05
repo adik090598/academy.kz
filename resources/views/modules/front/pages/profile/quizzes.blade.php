@@ -2,7 +2,45 @@
 
 @section('content')
     <div class="container pt-5" style="min-height: 766px;">
-
+        <div class="card-body">
+            @foreach($orders as $order)
+                <div class="card col-12 p-0 mb-4">
+                    <div class="card-body p-0">
+                        <div class="d-flex">
+                            <div class="col-5 col-lg-4 p-0">
+                                <img src="{{asset($order->quiz->image_path)}}" alt="" class="quiz-img">
+                            </div>
+                            <div class="col-7 col-lg-8 p-1 pr-3 d-block mt-1">
+                                <p class="quiz-detail quiz-detail-title">{{$order->quiz->name}}</p>
+                                <div class="d-block d-lg-flex">
+                                    <p class="quiz-detail"><i
+                                            class="fa fa-calendar"></i> {{$order->quiz->subject->name}}</p>
+                                </div>
+                                <p class="quiz-detail"><i
+                                        class="fa fa-money-bill-wave-alt"></i>
+                                    @if($order->price)
+                                        {{$order->price}}
+                                    @endif
+                                    тг
+                                </p>
+                                <p class="quiz-detail">
+                                    <b>
+                                        <i class="fa fa-check"></i>
+                                        Статус: {{$order->status}}
+                                    </b>
+                                </p>
+                                <button class="btn btn-link btn-block text-right stretched-link" type="button"
+                                        data-toggle="collapse"
+                                        data-target="#collapse{{$order->id}}" aria-expanded="true"
+                                        aria-controls="collapseOne">
+                                    Жауаптарды көру
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        <hr>
         <div class="card-body">
             @foreach($results as $result)
                 <div class="card col-12 p-0 mb-4">
@@ -89,8 +127,8 @@
                         @endif
                     </div>
                 </div>
-
             @endforeach
+
             @if($results->isEmpty())
                 <h4 class="text-center">Тесттар табылған жоқ!</h4>
             @endif

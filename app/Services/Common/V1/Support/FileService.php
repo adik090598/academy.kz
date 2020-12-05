@@ -22,7 +22,6 @@ interface FileService
 
     public function getFileByRelativePath($relative_path);
 
-
     public function store(UploadedFile $image, string $path): string;
 
     public function remove(string $path);

@@ -121,7 +121,6 @@ class QuestionController extends WebBaseController
             $answers = [];
             $now = now();
             foreach ($request->answers as $answer){
-
                 $answers[] = [
                     'question_id' => $question->id,
                     'answer' => $answer['text'],
@@ -129,13 +128,11 @@ class QuestionController extends WebBaseController
                     'created_at' => $now,
                     'updated_at' => $now
                 ];
-
             }
             $question->answers()->delete();
             Answer::insert($answers);
             DB::commit();
             $this->edited();
-            $question_web_form = QuestionWebForm::inputGroups($question);
             return redirect()->route('question.edit',['id' => $id]);
         }
         catch (\Exception $e){

@@ -564,6 +564,117 @@ footer a:hover {
     border-radius: 16px;
 }
 
+/**************** certificates *******************/
+
+.certificates .credentialing {
+    --bg-color: #b8f9d3;
+    --bg-color-light: #e2fced;
+    --text-color-hover: #4C5656;
+    --box-shadow-color: rgba(184, 249, 211, 0.48);
+}
+
+.certificates .card {
+    margin: 10px auto;
+    width: 220px;
+    height: 321px;
+    background: #fff;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 14px 26px rgba(0,0,0,0.04);
+    transition: all 0.3s ease-out;
+    text-decoration: none;
+}
+
+.certificates .card:hover {
+    transform: translateY(-5px) scale(1.005) translateZ(0);
+    box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+    0 24px 46px rgba(184, 249, 211, 0.48);
+}
+
+.certificates .card:hover .overlay {
+    opacity: 1;
+    transform: scale(4) translateZ(0);
+}
+
+.certificates .card:hover .circle {
+    color: #FFF249;
+    border-color: #FFF249;
+    border-width: 3px;
+    background: #00ADB0;
+}
+
+.certificates .card:hover .circle:after {
+    background: var(--bg-color-light);
+}
+
+.certificates .card:hover p {
+    color: var(--text-color-hover);
+}
+
+.certificates .card:active {
+    transform: scale(1) translateZ(0);
+    box-shadow: 0 15px 24px rgba(0,0,0,0.11),
+    0 15px 24px rgba(184, 249, 211, 0.48);
+}
+
+.certificates .card .description{
+    color: #323232;
+    margin: 10px 0;
+}
+
+.certificates .card p {
+    font-size: 17px;
+    color: #4C5656;
+    margin-top: 30px;
+    z-index: 1000;
+    transition: color 0.3s ease-out;
+}
+
+.certificates .circle {
+    width: 131px;
+    height: 131px;
+    border-radius: 50%;
+    background: #98ECF0;
+    color: #323232;
+    border: 2px solid #98ECF0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease-out;
+}
+
+.certificates .circle .certificate-type {
+    z-index: 2;
+    transform: translateZ(0);
+}
+
+.certificate-type h1,
+.certificate-type h5{
+    font-weight: 900;
+    margin: 0;
+}
+
+
+.certificates .overlay {
+    width: 118px;
+    position: absolute;
+    height: 118px;
+    border-radius: 50%;
+    background: #00ADB0;
+    top: 25%;
+    left: 50px;
+    z-index: 0;
+    opacity: 0;
+    transition: transform 0.3s ease-out;
+}
+
 /*********************mobile***********************/
 
 
@@ -616,108 +727,83 @@ footer a:hover {
         transition: 0.2s;
     }
 
+    /************ CERTIFICATES *************/
+
+    .certificates .card {
+        margin: 5px auto;
+        width: 45vw;
+        height: 65vw;
+    }
+
+    .certificates .card:hover {
+        transform: translateY(-5px) scale(1.005) translateZ(0);
+        box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+        0 24px 46px rgba(184, 249, 211, 0.48);
+    }
+
+    .certificates .card:hover .overlay {
+        opacity: 1;
+        transform: scale(4) translateZ(0);
+    }
+
+    .certificates .card:hover .circle {
+        color: #FFF249;
+        border-color: #FFF249;
+        border-width: 3px;
+        background: #00ADB0;
+    }
+
+    .certificates .card:hover .circle:after {
+        background: var(--bg-color-light);
+    }
+
+    .certificates .card:hover p {
+        color: var(--text-color-hover);
+    }
+
+    .certificates .card:active {
+        transform: scale(1) translateZ(0);
+        box-shadow: 0 15px 24px rgba(0,0,0,0.11),
+        0 15px 24px rgba(184, 249, 211, 0.48);
+    }
+
+    .certificates .card .description{
+        color: #323232;
+        margin: 10px 0;
+    }
+
+    .certificates .card .description h5{
+        font-size: calc(1.25rem + (1.5 - 0.5) * ((100vw - 576px) / (1600 - 576)));
+    }
+
+    .certificates .circle {
+        width: 131px;
+        height: 131px;
+        border-radius: 50%;
+        background: #98ECF0;
+        color: #323232;
+        border: 2px solid #98ECF0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s ease-out;
+    }
+
+    .certificates .circle .certificate-type {
+        z-index: 2;
+        transform: translateZ(0);
+    }
+
+    .certificate-type h5{
+        font-size: calc(1.25rem + (1.5rem - 1) * ((100vw - 768px) / (1600 - 768)));
+    }
+
+    .certificates .overlay {
+        top: 10%;
+        left: 25px;
+    }
 }
 
-.certificates .credentialing {
-    --bg-color: #B8F9D3;
-    --bg-color-light: #e2fced;
-    --text-color-hover: #4C5656;
-    --box-shadow-color: rgba(184, 249, 211, 0.48);
-}
 
-.certificates .card {
-    width: 220px;
-    height: 321px;
-    background: #fff;
-    border-top-right-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    box-shadow: 0 14px 26px rgba(0,0,0,0.04);
-    transition: all 0.3s ease-out;
-    text-decoration: none;
-}
-
-.certificates .card:hover {
-    transform: translateY(-5px) scale(1.005) translateZ(0);
-    box-shadow: 0 24px 36px rgba(0,0,0,0.11),
-    0 24px 46px var(--box-shadow-color);
-}
-
-.certificates .card:hover .overlay {
-    transform: scale(4) translateZ(0);
-}
-
-.certificates .card:hover .circle {
-    border-color: var(--bg-color-light);
-    background: var(--bg-color);
-}
-
-.certificates .card:hover .circle:after {
-    background: var(--bg-color-light);
-}
-
-.certificates .card:hover p {
-    color: var(--text-color-hover);
-}
-
-.certificates .card:active {
-    transform: scale(1) translateZ(0);
-    box-shadow: 0 15px 24px rgba(0,0,0,0.11),
-    0 15px 24px var(--box-shadow-color);
-}
-
-.certificates .card p {
-    font-size: 17px;
-    color: #4C5656;
-    margin-top: 30px;
-    z-index: 1000;
-    transition: color 0.3s ease-out;
-}
-
-.certificates .circle {
-    width: 131px;
-    height: 131px;
-    border-radius: 50%;
-    background: #fff;
-    border: 2px solid var(--bg-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s ease-out;
-}
-
-.certificates .circle:after {
-    content: "";
-    width: 118px;
-    height: 118px;
-    display: block;
-    position: absolute;
-    background: var(--bg-color);
-    border-radius: 50%;
-    top: 7px;
-    left: 7px;
-    transition: opacity 0.3s ease-out;
-}
-
-.certificates .circle svg {
-    z-index: 10000;
-    transform: translateZ(0);
-}
-
-.certificates .overlay {
-    width: 118px;
-    position: absolute;
-    height: 118px;
-    border-radius: 50%;
-    background: var(--bg-color);
-    top: 70px;
-    left: 50px;
-    z-index: 0;
-    transition: transform 0.3s ease-out;
-}

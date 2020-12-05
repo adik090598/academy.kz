@@ -30,9 +30,7 @@ class QuizController extends WebBaseController
             ->withCount('questions')
             ->has('questions')
             ->get();
-
         $subjects = Subject::all();
-
         return $this->frontPagesView('quiz.index', compact('quizzes', 'subjects'));
     }
 
@@ -69,18 +67,14 @@ class QuizController extends WebBaseController
         $quiz = $this->checkQuiz($request->id, true);
 
         Order::create([
-            'status' => 1,
+            'status' => 0,
             'quiz_id' => $quiz->id,
             'user_id' => Auth::id(),
             'price' => $quiz->price,
 //                'transaction_id' => 1
         ]);
 
-        foreach ($quiz->questions as $question) {
-            $question->answers = $question->hiddenAnswers;
-        }
-
-        return $this->frontPagesView('quiz.pass', compact('quiz'));
+        return redirect()->route('profile.quizzes');
     }
 
     public function submit(SubmitQuizWebRequest $request)
