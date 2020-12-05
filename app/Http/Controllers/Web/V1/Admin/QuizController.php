@@ -13,6 +13,7 @@ use App\Models\Entities\Category;
 use App\Models\Entities\Quiz;
 use App\Models\Entities\Question;
 use App\Models\Entities\Answer;
+use App\Models\Entities\QuizDocument;
 use App\Services\Common\V1\Support\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,13 +41,26 @@ class QuizController extends WebBaseController
 
     public function store(QuizWebRequest $request)
     {
+        $now = now();
+        $documents = [];
         try {
             $path = $this->fileService->store($request->image, Quiz::IMAGE_DIRECTORY);
+
+            $first_place_certificate_path = $this->fileService->store($request->first_place_certificate,
+                Quiz::CERTIFICATE_DIRECTORY);
+            $second_place_certificate_path = $this->fileService->store($request->second_place_certificate,
+                Quiz::CERTIFICATE_DIRECTORY);
+            $third_place_certificate_path = $this->fileService->store($request->third_place_certificate,
+                Quiz::CERTIFICATE_DIRECTORY);
+            $default_certificate_path = $this->fileService->store($request->default_certificate,
+                Quiz::CERTIFICATE_DIRECTORY);
+
             $category = Category::TESTS;
             if($request->start_date && $request->end_date) {
                 $category = Category::OLYMPICS;
             }
-            Quiz::create([
+            DB::beginTransaction();
+            $quiz = Quiz::create([
                 'name' => $request->name,
                 'image_path' => $path,
                 'description' => $request->description,
@@ -58,11 +72,38 @@ class QuizController extends WebBaseController
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
                 'first_place' => $request->first_place,
+                'first_place_certificate' => $first_place_certificate_path,
                 'second_place' => $request->second_place,
+                'second_place_certificate' => $second_place_certificate_path,
                 'third_place' => $request->third_place,
+                'third_place_certificate' => $third_place_certificate_path,
+                'default_certificate' => $default_certificate_path
             ]);
+            if($request->documents) {
+                foreach ($request->documents as $document) {
+                    $documents[] = [
+                        'quiz_id' => $quiz->id,
+                        'path' => $this->fileService->store($document, Quiz::DOCUMENT_DIRECTORY),
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                }
+                QuizDocument::insert($documents);
+            }
+            DB::commit();
         } catch (\Exception $exception) {
+            DB::rollBack();
             if($path) $this->fileService->remove($path);
+            if($first_place_certificate_path) $this->fileService->remove($first_place_certificate_path);
+            if($second_place_certificate_path) $this->fileService->remove($second_place_certificate_path);
+            if($third_place_certificate_path) $this->fileService->remove($third_place_certificate_path);
+            if($default_certificate_path) $this->fileService->remove($default_certificate_path);
+            if($documents) {
+                foreach ($documents as $document) {
+                    $this->fileService->remove($document['path']);
+                }
+            }
+
             throw new WebServiceExplainedException($exception->getMessage());
         }
         $this->added();
@@ -77,17 +118,50 @@ class QuizController extends WebBaseController
 
     public function update(QuizWebRequest $request)
     {
+        $now = now();
         $quiz = Quiz::find($request->id);
         $old_path = $quiz->image_path;
         $path = null;
+        $first_place_certificate_path = null;
+        $second_place_certificate_path = null;
+        $third_place_certificate_path = null;
+        $default_certificate_path = null;
         if($request->image) {
             $path = $this->fileService->updateWithRemoveOrStore($request->image, Quiz::IMAGE_DIRECTORY, $old_path);
         }
+        if($request->first_place_certificate) {
+            $first_place_certificate_path = $this->fileService->store($request->first_place_certificate,
+                Quiz::CERTIFICATE_DIRECTORY);
+        }
+        if($request->second_place_sertificate) {
+            $second_place_certificate_path = $this->fileService->store($request->second_place_sertificate,
+                Quiz::CERTIFICATE_DIRECTORY);
+        }
+        if($request->third_place_sertificate) {
+            $third_place_certificate_path = $this->fileService->store($request->third_place_sertificate,
+                Quiz::CERTIFICATE_DIRECTORY);
+        }
+        if($request->default_certificate) {
+            $default_certificate_path = $this->fileService->store($request->default_certificate,
+                Quiz::CERTIFICATE_DIRECTORY);
+        }
+
+        $first_place_certificate_path = $first_place_certificate_path ? $first_place_certificate_path
+            : $quiz->first_place_certficate;
+        $second_place_certificate_path = $second_place_certificate_path ? $second_place_certificate_path
+            : $quiz->second_place_certficate;
+        $third_place_certificate_path = $third_place_certificate_path ? $third_place_certificate_path
+            : $quiz->third_place_certficate;
+        $default_certificate_path = $default_certificate_path ? $default_certificate_path
+            : $quiz->default_certificate;
         try {
+
             $category = Category::TESTS;
             if($request->start_date && $request->end_date) {
                 $category = Category::OLYMPICS;
             }
+
+            DB::beginTransaction();
             $quiz->update([
                 'name' => $request->name,
                 'image_path' => $path ? $path : $old_path,
@@ -100,13 +174,52 @@ class QuizController extends WebBaseController
                 'role_id' => $request->role_id,
                 'end_date' => $request->end_date,
                 'first_place' => $request->first_place,
+                'first_place_certificate' => $first_place_certificate_path,
                 'second_place' => $request->second_place,
+                'second_place_certificate' => $second_place_certificate_path,
                 'third_place' => $request->third_place,
+                'third_place_certificate' => $third_place_certificate_path,
+                'default_certificate' => $default_certificate_path
             ]);
+
+            if($request->documents) {
+                foreach ($quiz->documents as $document) {
+                    $deleted_paths[] = $document->path;
+                }
+
+                $quiz->documents()->delete();
+
+                foreach ($request->documents as $document) {
+                    $documents[] = [
+                        'quiz_id' => $quiz->id,
+                        'path' => $this->fileService->store($document, Quiz::DOCUMENT_DIRECTORY),
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                }
+            }
+            QuizDocument::insert($documents);
+            $this->edited();
+            DB::commit();
+            foreach ($deleted_paths as $path) {
+                $this->fileService->remove($path);
+            }
             $this->edited();
             return redirect()->route('quiz.index');
         } catch (\Exception $exception) {
+
             if($path) $this->fileService->remove($path);
+            if($path) $this->fileService->remove($path);
+            if($first_place_certificate_path) $this->fileService->remove($first_place_certificate_path);
+            if($second_place_certificate_path) $this->fileService->remove($second_place_certificate_path);
+            if($third_place_certificate_path) $this->fileService->remove($third_place_certificate_path);
+            if($default_certificate_path) $this->fileService->remove($default_certificate_path);
+            if($documents) {
+                foreach ($documents as $document) {
+                    $this->fileService->remove($document['path']);
+                }
+            }
+
             throw new WebServiceExplainedException($exception->getMessage());
         }
     }

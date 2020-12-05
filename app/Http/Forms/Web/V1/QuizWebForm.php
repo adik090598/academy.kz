@@ -35,28 +35,47 @@ class QuizWebForm implements WithForm
             $array,
             FormUtil::input('name', 'Тест по физике', 'Название',
                 'text', false, $value ? $value->name : ''),
+
             FormUtil::input('image', '', 'Фото',
                 'file', !$value ? true : false),
+
             FormUtil::input('description', 'Описание для теста', 'Описание',
                 'text', true, $value ? $value->description : ''),
+
             FormUtil::input('duration', 'Время в минутах', 'Продолжительность теста',
                 'number', false, $value ? $value->duration : ''),
-            FormUtil::select('subject_id', '', 'Предмет',
-                true, $subject_selects),
-            FormUtil::select('role_id', '', 'Роль',
-                true, $role_selectes),
+            FormUtil::select('subject_id', '', 'Предмет', true, $subject_selects),
+
+            FormUtil::select('role_id', '', 'Роль', true, $role_selectes),
+
             FormUtil::input('price', '1800', 'Стоимость',
                 'number', false, $value ? $value->price : ''),
+
             FormUtil::input('start_date', '', 'Дата начало',
                 'date', false, $value ? $value->start_date : ''),
             FormUtil::input('end_date', '', 'Дата окончания',
                 'date', false, $value ? $value->end_date : ''),
+
             FormUtil::input('first_place', '', 'Балл за первое место ( 15 > )',
-                'number', false, $value ? $value->first_place : ''),
+                'number', true, $value ? $value->first_place : ''),
+            FormUtil::input('first_place_sertificate', '', 'Сертификат за первое место',
+                'file', !$value ? true : false, $value ? $value->first_place : ''),
+
             FormUtil::input('second_place', '', 'Балл за второе место ( 10 > )' ,
-                'number', false, $value ? $value->second_place : ''),
+                'number', true, $value ? $value->second_place : ''),
+            FormUtil::input('second_place_sertificate', '', 'Сертификат за второе место',
+                'file', !$value ? true : false),
+
             FormUtil::input('third_place', '', 'Балл за третье место ( 5 > )',
-                'number', false, $value ? $value->third_place : '')
+                'number', true, $value ? $value->third_place : ''),
+            FormUtil::input('third_place_certificate', '', 'Сертификат за третье место',
+                'file', !$value ? true : false),
+
+            FormUtil::input('default_certificate', '', 'Сертификат за участье',
+                'file', !$value ? true : false),
+
+            FormUtil::input('documents[]', '', 'Правила участия', 'file',
+                false, '',true, '', '', false)
         );
     }
 }

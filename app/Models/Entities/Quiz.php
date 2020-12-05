@@ -12,10 +12,12 @@ class Quiz extends Model
 
     public const IMAGE_DIRECTORY = "images/quizzes";
     public const DOCUMENT_DIRECTORY = "documents/quizzes";
+    public const CERTIFICATE_DIRECTORY = "images/certificates";
 
     protected $fillable = ['name', 'description', 'duration', 'price',
         'subject_id', 'image_path', 'category_id', 'start_date', 'end_date',
-        'first_place', 'second_place', 'third_place', 'role_id'];
+        'first_place', 'second_place', 'third_place', 'role_id',
+        'first_place_certificate', 'second_place_certificate', 'third_place_certificate', 'default_certificate'];
 
     public function questions()
     {

@@ -177,7 +177,8 @@
                     <div class="form-group">
                         <select class="form-control{{ isset($errors) && $errors->has('subject_id') ? ' is-invalid' : '' }}"
                                 name="subject_id" id="subject_id" hidden>
-                            @foreach($subjects as $subject)
+                            <option value="">Сабақ</option>
+                        @foreach($subjects as $subject)
                                 <option value="{{$subject->id}}">{{$subject->name}}</option>
                             @endforeach
                         </select>
