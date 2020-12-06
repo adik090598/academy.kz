@@ -14,10 +14,11 @@ use App\Models\Entities\QuizResultAnswer;
 use App\Models\Entities\Subject;
 use App\Models\Entities\Order;
 use App\Models\Entities\QuizResult;
-use Cassandra\Session;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class QuizController extends WebBaseController
 {
@@ -49,7 +50,6 @@ class QuizController extends WebBaseController
     }
 
     public function competitions() {
-        $now = now();
         $quizzes = Quiz::where('category_id', Category::COMPETITION)
             ->with('documents')
             ->get();
@@ -95,7 +95,16 @@ class QuizController extends WebBaseController
             $question->answers = $question->hiddenAnswers;
         }//        $check_exist = Session::get('');
        // $quiz = Quiz::find($order->quiz_id)->with('questions.answers')->get();
-        return $this->frontPagesView('quiz.pass', compact('quiz'));
+//        session()->forget('order'.$order->id);
+        $duration = session()->get('order'.$order->id);
+        if($duration) {
+            $quiz->duration = Carbon::now()->diffInSeconds($duration,false);
+            $quiz->duration = round($quiz->duration / 60, 2);
+        }
+        else {
+            session()->put('order'.$order->id, Carbon::now()->addMinutes($quiz->duration));
+        }
+        return $this->frontPagesView('quiz.pass', compact('quiz', 'order'));
     }
 
     public function submit(SubmitQuizWebRequest $request)
@@ -207,6 +216,7 @@ class QuizController extends WebBaseController
         }
 
         $this->makeToast('success', 'Олимпиада сәтті аяқталды!');
+        session()->forget('order'.$order->id);
         return redirect()->route('profile.quizzes');
     }
 
