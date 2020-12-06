@@ -15,8 +15,8 @@
             <div class="col-md-8">
                 <div class="col-md-12 clearfix">
                     <div class="btn-group float-right" role="group" aria-label="Basic example">
-                        <button type="button" id="orderBtn" class="btn btn-primary" data-toggle="collapse" data-target="#ordersCollapse" aria-expanded="false" aria-controls="ordersCollapse">Тапсырыстар</button>
-                        <button type="button" id="resultBtn" class="btn btn-outline-primary" data-toggle="collapse" data-target="#resultsCollapse" aria-expanded="false" aria-controls="resultsCollapse">Тест нәтиежелері</button>
+                        <button type="button" id="orderBtn" class="btn btn-primary" data-toggle="collapse" data-target="#ordersCollapse" aria-expanded="false" aria-controls="ordersCollapse">Тапсырыстар <span class="badge badge-info">{{$orders->count()}}</span></button>
+                        <button type="button" id="resultBtn" class="btn btn-outline-primary" data-toggle="collapse" data-target="#resultsCollapse" aria-expanded="false" aria-controls="resultsCollapse">Тест нәтиежелері <span class="badge badge-success">{{$results->count()}}</span></button>
                     </div>
                 </div>
                 <div class="card-body" id="ordersCollapse">
