@@ -26,7 +26,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <input type="hidden" name="answers[{{$key}}][check]" value="0">
-                                                <input type="checkbox" {{$answer->is_right ? "checked" : ""}} name="answers[{{ $key }}][check]" value="1" aria-label="Checkbox for following text input">
+                                                <input class="check-answer" type="checkbox" {{$answer->is_right ? "checked" : ""}} name="answers[{{ $key }}][check]" value="1" aria-label="Checkbox for following text input">
                                             </div>
                                         </div>
                                         <input type="text" name="answers[{{$key}}][text]" class="form-control" value="{{$answer->answer}}" aria-label="answer text">

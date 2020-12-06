@@ -30,6 +30,8 @@ class User extends Authenticatable
         'class_number', 'class_letter', 'school_id', 'subject_id'
     ];
 
+    public $fullname = 'surname'.'name'.'father_name';
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -54,6 +56,11 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    public function fullName()
+    {
+        return "{$this->surname} {$this->name} {$this->father_name}";
+    }
 
     public function role()
     {
