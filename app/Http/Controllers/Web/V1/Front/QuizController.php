@@ -98,11 +98,11 @@ class QuizController extends WebBaseController
             $question->answers = $question->hiddenAnswers;
         }//        $check_exist = Session::get('');
        // $quiz = Quiz::find($order->quiz_id)->with('questions.answers')->get();
-//        session()->forget('order'.$order->id);
+        //        session()->forget('order'.$order->id);
         $duration = session()->get('order'.$order->id);
         if($duration) {
             $quiz->duration = Carbon::now()->diffInSeconds($duration,false);
-            $quiz->duration = round($quiz->duration / 60, 2);
+            //$quiz->duration = round($quiz->duration / 60, 2);
         }
         else {
             session()->put('order'.$order->id, Carbon::now()->addMinutes($quiz->duration));

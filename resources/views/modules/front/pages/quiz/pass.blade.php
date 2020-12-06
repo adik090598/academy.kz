@@ -1006,7 +1006,7 @@
 
     function startTimer() {
         var e = {!! $quiz->duration !!};
-        return (secondsRemaining = 60 * e), 0 > secondsRemaining ||
+        return (secondsRemaining = e), 0 > secondsRemaining ||
         isNaN(e) ||
         "" === e
             ? (
