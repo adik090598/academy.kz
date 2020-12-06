@@ -20,7 +20,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="alert alert-warning">
-                                Тестті сатып алған жағдайда сізде 1 ғана мүмкіндік болады
+                                Тапсырыс берілгеннен кейін, тапсырып қабылданғанға дейін күтуіңіз қажет
                             </div>
                             <div class="quiz-details text-center">
                                 <div class="row">
@@ -30,7 +30,7 @@
                                     <div class="col-12 mt-1">
                                         <form action="{{route('quiz.pass', ['id' => $quiz->id])}}" method="post">
                                             @csrf
-                                            <button type="submit" class="checkout-btn">kaspi.kz арқылы төлем</button>
+                                            <button type="submit" class="checkout-btn">Тапсырыс беру</button>
                                         </form>
                                     </div>
                                 </div>

@@ -255,8 +255,9 @@ body{
     line-height: 22px;
 }
 .account{
-    position: fixed;
-    padding: 20px 20px;
+    width: 100%;
+    margin: 20px;
+    padding: 20px 0;
     height: 260px;
     background: #FFFFFF;
     box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25);

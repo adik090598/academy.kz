@@ -60,6 +60,20 @@ class ProfileController extends WebBaseController
             ->orderBy('created_at', 'desc')
             ->doesnthave('quizResult')
             ->get();
+
+        foreach ($orders as $order) {
+            switch ($order->status) {
+                case Order::PROCESS:
+                    $order->status_text = "Күтілуде";
+                    break;
+                case Order::ACCEPTED:
+                    $order->status_text = "Қабылданды";
+                    break;
+                default:
+                    $order->status_text = "Күтілуде";
+                    break;
+            }
+        }
         $results = QuizResult::where('user_id', Auth::id())
             ->with('quiz.questions.answers', 'answers.answer.question', 'order')
             ->orderBy('created_at', 'desc')
@@ -71,7 +85,6 @@ class ProfileController extends WebBaseController
             }
             $result->not_answered_questions = $result->quiz->questions->whereNotIn('id', $question_ids);
         }
-
         return $this->frontPagesView('profile.quizzes', compact('results','orders'));
     }
 

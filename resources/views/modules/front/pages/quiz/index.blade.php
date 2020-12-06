@@ -38,7 +38,7 @@
                                         </p>
                                         <div class="d-block d-lg-flex">
                                             <p class="quiz-detail"><i
-                                                    class="fa fa-calendar"></i> {{$quiz->subject->name}}</p>
+                                                    class="fas fa-tenge"></i>  {{ $quiz->price}}тг.</p>
                                             <a href="{{route('quiz.single' ,['id'=> $quiz->id])}}"
                                                class="btn btn-primary ml-auto float-right">Тапсырыс беру</a>
                                         </div>

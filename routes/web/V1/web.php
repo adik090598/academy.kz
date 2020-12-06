@@ -31,6 +31,7 @@ Route::group(['namespace' => 'Front'], function () {
         Route::get('/quizzes', ['uses' => 'QuizController@index', 'as' => 'front.quiz.index']);
         Route::get('/olympics', ['uses' => 'QuizController@olympics', 'as' => 'front.quiz.olympics']);
         Route::group(['middleware' => 'ROLE_OR:' . Role::TEACHER_ID . ',' . Role::LEARNER_ID], function () {
+
             Route::group(['prefix' => 'profile'], function () {
                 Route::get('/profile', ['as' => 'profile.profile', 'uses' => 'ProfileController@index']);
                 Route::post('/update', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
@@ -42,6 +43,7 @@ Route::group(['namespace' => 'Front'], function () {
             Route::group(['prefix' => 'quiz'], function () {
                 Route::get('/{id}', ['as' => 'quiz.single', 'uses' => 'QuizController@quiz'])->where('id', '[0-9]+');
                 Route::post('/pass/{id}', ['as' => 'quiz.pass', 'uses' => 'QuizController@pass',])->where('id', '[0-9]+');
+                Route::post('/start/{id}', ['as' => 'quiz.start', 'uses' => 'QuizController@start',]);
                 Route::post('/submit', ['as' => 'submit', 'uses' => 'QuizController@submit',]);
             });
         });
@@ -118,6 +120,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
         //Orders
         Route::get('/orders', ['uses' => 'OrderController@index', 'as' => 'order.index']);
         Route::post('/order/accept/{id}', ['uses' => 'OrderController@accept', 'as' => 'order.accept'])->where('id', '[0-9]+');
+
+        //QuizResult
+        Route::get('/results', ['uses' => 'QuizResultController@index', 'as' => 'result.index']);
+        Route::post('/result/{id}', ['uses' => 'QuizResultController@accept', 'as' => 'result.accept'])->where('id', '[0-9]+');
+
+
 
         //Questions
         Route::get('/question/{id}', ['uses' => 'QuestionController@index', 'as' => 'question.index'])->where('id', '[0-9]+');

@@ -28,7 +28,7 @@ class Sidebar extends BaseComponent
                 $this->navItem(route('quiz.index'), 'ti-check-box', 'Тесты'),
                 $this->navItem(route('competition.index'), 'ti-medall', 'Байкау'),
                 $this->navItem('#', 'ti-cup', 'Олимпиады'),
-                $this->navItem('#', 'ti-bar-chart', 'Результаты'),
+                $this->navItem(route('result.index'), 'ti-bar-chart', 'Результаты'),
                 $this->navItem(route('subject.index'), 'ti-book', 'Предметы'),
                 $this->navItem(route('region.index'), 'ti-map', 'Регионы'),
                 $this->navItem(route('city.index'), 'ti-location-pin', 'Города'),

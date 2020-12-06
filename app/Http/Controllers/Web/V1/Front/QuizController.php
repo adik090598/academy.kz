@@ -76,9 +76,9 @@ class QuizController extends WebBaseController
         return redirect()->route('profile.quizzes');
     }
 
-    public function startQuiz(Request $request)
+    public function start(Request $request)
     {
-        $order = Order::where('id', $request->order_id)
+        $order = Order::where('id', $request->id)
             ->where('status', Order::ACCEPTED)
             ->first();
         if (!$order) {
@@ -88,6 +88,7 @@ class QuizController extends WebBaseController
         if ($quiz_result) {
             throw new WebServiceExplainedException('У вас не осталось попыток!');
         }
+       // $quiz = Quiz::find($order->quiz_id)->with('questions.answers')->get();
         return $this->frontPagesView('quiz.pass', compact('quiz'));
     }
 
