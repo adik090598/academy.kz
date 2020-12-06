@@ -123,9 +123,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
         //QuizResult
         Route::get('/results', ['uses' => 'QuizResultController@index', 'as' => 'result.index']);
-        Route::post('/result/{id}', ['uses' => 'QuizResultController@accept', 'as' => 'result.accept'])->where('id', '[0-9]+');
-
-
+        Route::get('/result/{id}', ['uses' => 'QuizResultController@userResult', 'as' => 'result.user'])->where('id', '[0-9]+');
 
         //Questions
         Route::get('/question/{id}', ['uses' => 'QuestionController@index', 'as' => 'question.index'])->where('id', '[0-9]+');
