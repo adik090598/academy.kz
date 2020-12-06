@@ -14,6 +14,7 @@ use App\Models\Entities\QuizResultAnswer;
 use App\Models\Entities\Subject;
 use App\Models\Entities\Order;
 use App\Models\Entities\QuizResult;
+use Cassandra\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -56,9 +57,7 @@ class QuizController extends WebBaseController
 
     public function quiz(Request $request)
     {
-        $has_permission = false;
-        $quiz = $this->checkQuiz($request->id);
-        $order = Order::where('quiz_id', $request->id);
+        $quiz = $this->checkQuiz($request->id, true, false);
         return $this->frontPagesView('quiz.single', compact('quiz'));
     }
 
@@ -73,6 +72,7 @@ class QuizController extends WebBaseController
             'price' => $quiz->price,
 //                'transaction_id' => 1
         ]);
+        $this->makeToast('success', 'Қабылданды!');
         return redirect()->route('profile.quizzes');
     }
 
@@ -81,6 +81,7 @@ class QuizController extends WebBaseController
         $order = Order::where('id', $request->id)
             ->where('status', Order::ACCEPTED)
             ->first();
+
         if (!$order) {
             throw new WebServiceExplainedException('У вас нету оплаты по данному запросу');
         }
@@ -88,6 +89,10 @@ class QuizController extends WebBaseController
         if ($quiz_result) {
             throw new WebServiceExplainedException('У вас не осталось попыток!');
         }
+        $quiz = $this->checkQuiz($order->quiz_id, true);
+        foreach ($quiz->questions as $question) {
+            $question->answers = $question->hiddenAnswers;
+        }//        $check_exist = Session::get('');
        // $quiz = Quiz::find($order->quiz_id)->with('questions.answers')->get();
         return $this->frontPagesView('quiz.pass', compact('quiz'));
     }
@@ -201,18 +206,22 @@ class QuizController extends WebBaseController
             throw new WebServiceExplainedException('Системная ошибка! '. $exception->getMessage());
         }
 
-        $result = QuizResult::where('id', $quiz_result->id)
-            ->with('quiz', 'answers.answer.question', 'order')->first();
-
+        $this->makeToast('success', 'Олимпиада сәтті аяқталды!');
         return redirect()->route('profile.quizzes');
     }
 
-    private function checkQuiz($id, $hidden = false)
+    private function checkQuiz($id, $hidden = false, $with_questions = true)
     {
-        if ($hidden) {
-            $quiz = Quiz::where('id', $id)->with('questions.hiddenAnswers')->first();
-        } else {
-            $quiz = Quiz::where('id', $id)->with('questions.answers')->first();
+        if($with_questions) {
+            if ($hidden) {
+                $quiz = Quiz::where('id', $id)->with('questions.hiddenAnswers')->first();
+            } else {
+                $quiz = Quiz::where('id', $id)->with('questions.answers')->first();
+            }
+        }
+        else {
+            $quiz = Quiz::where('id', $id)->first();
+
         }
         if (!$quiz) throw new WebServiceExplainedException('Тест не найден!');
         return $quiz;

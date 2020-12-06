@@ -870,7 +870,7 @@
                     </div>
                 </div>
 
-                <form action="{{route('submit')}}" method="POST" id="submitForm">
+                <form action="{{route('quiz.submit')}}" method="POST" id="submitForm">
                     @csrf
                     <input type="hidden" name="quiz_id" value="{{$quiz->id}}">
                     <input type="hidden" name="answers" id="submitAnswers">

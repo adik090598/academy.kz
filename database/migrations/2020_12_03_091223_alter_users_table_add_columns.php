@@ -31,7 +31,7 @@ class AlterUsersTableAddColumns extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['school_id']);
             $table->dropForeign(['subject_id']);
-            $table->dropColumn(['class_number', 'class_letter', 'class_teacher', 'school_id', 'subject_id']);
+            $table->dropColumn(['class_number', 'class_letter', 'school_id', 'subject_id']);
         });
     }
 }

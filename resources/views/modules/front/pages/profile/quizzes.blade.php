@@ -52,10 +52,12 @@
                                             @endif
                                         </p>
                                         @if($order->status == \App\Models\Entities\Order::ACCEPTED)
-                                            <form action="{{route('quiz.start',['id'=>$order->quiz_id])}}" method="POST">
-                                                <button type="submit" class="btn btn-primary ml-auto float-right">Тапсыру</button>
-                                                @csrf
-                                            </form>
+{{--                                            <form action="{{route('quiz.start',['id' => $order->id])}}" method="POST">--}}
+{{--                                                <button type="submit" class="btn btn-primary ml-auto float-right">Тапсыру</button>--}}
+{{--                                                @csrf--}}
+{{--                                            </form>--}}
+                                            <a href="{{route('quiz.start',['id' => $order->id])}}"
+                                               class="btn btn-primary ml-auto float-right">Тапсыру</a>
                                         @endif
                                     </div>
                                 </div>

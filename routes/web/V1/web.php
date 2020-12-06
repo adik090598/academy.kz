@@ -42,9 +42,9 @@ Route::group(['namespace' => 'Front'], function () {
 
             Route::group(['prefix' => 'quiz'], function () {
                 Route::get('/{id}', ['as' => 'quiz.single', 'uses' => 'QuizController@quiz'])->where('id', '[0-9]+');
-                Route::post('/pass/{id}', ['as' => 'quiz.pass', 'uses' => 'QuizController@pass',])->where('id', '[0-9]+');
-                Route::post('/start/{id}', ['as' => 'quiz.start', 'uses' => 'QuizController@start',]);
-                Route::post('/submit', ['as' => 'submit', 'uses' => 'QuizController@submit',]);
+                Route::post('/pass/{id}', ['as' => 'quiz.pass', 'uses' => 'QuizController@pass'])->where('id', '[0-9]+');
+                Route::get('/start/{id}', ['as' => 'quiz.start', 'uses' => 'QuizController@start'])->where('id', '[0-9]+');
+                Route::post('/submit', ['as' => 'quiz.submit', 'uses' => 'QuizController@submit',]);
             });
         });
     });
