@@ -64,7 +64,7 @@ class ProfileController extends WebBaseController
         foreach ($orders as $order) {
             switch ($order->status) {
                 case Order::PROCESS:
-                    $order->status_text = "Күтілуде";
+                    $order->status_text = "Kaspi.kz арқылы төлем жүргізіңіз, төлеп қойсаңыз күте тұрыңыз";
                     break;
                 case Order::ACCEPTED:
                     $order->status_text = "Қабылданды";

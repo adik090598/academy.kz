@@ -1002,6 +1002,9 @@
         var a = t + ":" + n;
         (e.innerHTML = a), 0 === secondsRemaining &&
         (clearInterval(timerInterval), startBreak()), secondsRemaining--;
+        if(secondsRemaining==0 &&  {{ $quiz->duration }} === 0){
+            $("#submit").click();
+        }
     }
 
     function startTimer() {
@@ -1029,7 +1032,6 @@
     };
 
     $(document).ready(function() {
-
         var presentIndex=0;
         var clicked=0;
 

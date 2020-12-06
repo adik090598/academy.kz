@@ -79,10 +79,6 @@
                                         <p class="quiz-detail mt-lg-4"><i
                                                 class="fa fa-check"></i> {{$result->answers->count()}}
                                             сұрақ</p>
-                                        <div class="d-block d-lg-flex">
-                                            <p class="quiz-detail"><i
-                                                    class="fa fa-calendar"></i> {{$result->quiz->subject->name}}</p>
-                                        </div>
                                         <p class="quiz-detail"><i
                                                 class="fa fa-money-bill-wave-alt"></i>
                                             @if($result->order->price)
