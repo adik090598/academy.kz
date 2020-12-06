@@ -81,7 +81,7 @@ class RegisterController extends WebBaseController
             'father_name' => ['required', 'string'],
             'сlass_number' => ['numeric'],
             'сlass_letter' => ['string'],
-            'subject_id' => ['numeric', 'exists:subjects,id'],
+            'subject_id' => ['numeric', 'exists:subjects,id', 'nullable'],
             'school_id' => ['numeric', 'exists:schools,id'],
             'role_id' => ['required', Rule::in([Role::LEARNER_ID, Role::TEACHER_ID])],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
