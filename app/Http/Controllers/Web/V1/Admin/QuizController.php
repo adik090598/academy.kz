@@ -124,11 +124,13 @@ class QuizController extends WebBaseController
         $old_path = $quiz->image_path;
         $path = null;
         $deleted_paths = [];
+        $documents = [];
 
         $first_place_certificate_path = null;
         $second_place_certificate_path = null;
         $third_place_certificate_path = null;
         $default_certificate_path = null;
+
         if($request->image) {
             $path = $this->fileService->updateWithRemoveOrStore($request->image, Quiz::IMAGE_DIRECTORY, $old_path);
         }
@@ -150,11 +152,11 @@ class QuizController extends WebBaseController
         }
 
         $first_place_certificate_path = $first_place_certificate_path ? $first_place_certificate_path
-            : $quiz->first_place_certficate;
+            : $quiz->first_place_certificate;
         $second_place_certificate_path = $second_place_certificate_path ? $second_place_certificate_path
-            : $quiz->second_place_certficate;
+            : $quiz->second_place_certificate;
         $third_place_certificate_path = $third_place_certificate_path ? $third_place_certificate_path
-            : $quiz->third_place_certficate;
+            : $quiz->third_place_certificate;
         $default_certificate_path = $default_certificate_path ? $default_certificate_path
             : $quiz->default_certificate;
         try {

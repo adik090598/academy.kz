@@ -120,7 +120,29 @@ class ProfileController extends WebBaseController
         if (!$result) {
             throw new WebServiceExplainedException('Сертификат не найден!');
         }
-        return $this->frontPagesView('certificates.certificate', compact('result'));
+        $result->is_default = false;
+        if(!in_array($result->certificate_type, [QuizResult::FIRST_PLACE,
+            QuizResult::SECOND_PLACE,
+            QuizResult::THIRD_PLACE]
+        )) {
+            $result->is_default = true;
+        }
+        $result->landscape = true;
+
+        $data = getimagesize($result->certificate_path);
+
+        $width = $data[0];
+        $height = $data[1];
+
+        if($width < $height) {
+            $result->landscape = false;
+        }
+        if(!$result->landscape) {
+            return $this->frontPagesView('certificates.certificate', compact('result'));
+        }else {
+            return $this->frontPagesView('certificates.certificate_landscape', compact('result'));
+        }
+
     }
 
 }

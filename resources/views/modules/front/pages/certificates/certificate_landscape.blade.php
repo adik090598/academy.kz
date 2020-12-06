@@ -10,7 +10,7 @@
     <style>
 
         @page {
-            size: A4;
+            size: landscape;
         }
 
         @page :first {
@@ -56,7 +56,7 @@
 
         body {
             position: relative;
-            width: 27.8cm;
+            width: 30.8cm;
             height: 100%;
         }
 
@@ -65,8 +65,8 @@
             top: 0;
             left: 0;
             object-fit: cover;
-            width: 27.7cm;
-            height: 39.5cm;
+            width: 30.7cm;
+            height: 24.0cm;
         }
 
         .container {
@@ -77,7 +77,7 @@
 
         .inner-container {
             position: relative;
-            padding-top: 675px;
+            padding-top: 422px;
         }
 
         .place {
@@ -113,12 +113,12 @@
 
 <div class="container" id="section-to-print">
     <img class="image" src="{{asset($result->certificate_path)}}">
-    <div class="inner-container">
-        <p class="place">{{$result->city}} қаласы, {{$result->area}}</p>
-        <p class="school">{{$result->school}}</p>
-        <p class="class-educated">{{$result->class_number}} "{{$result->class_letter}}"</p>
-        <p class="fullname">{{$result->surname .' '. $result->name .' '. $result->father_name}}</p>
-    </div>
+        <div class="inner-container">
+{{--            <p class="place">{{$result->city}} қаласы, {{$result->area}}</p>--}}
+            {{--            <p class="school">{{$result->school}}</p>--}}
+            {{--            <p class="class-educated">{{$result->class_number}} "{{$result->class_letter}}"</p>--}}
+            <p class="fullname">{{$result->surname .' '. $result->name .' '. $result->father_name}}</p>
+        </div>
 </div>
 </body>
 <script type="text/javascript">
