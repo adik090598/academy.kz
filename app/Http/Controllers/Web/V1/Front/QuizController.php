@@ -37,6 +37,14 @@ class QuizController extends WebBaseController
         return $this->frontPagesView('quiz.index', compact('quizzes', 'subjects'));
     }
 
+
+    public function quiz(Request $request)
+    {
+        $quiz = $this->checkQuiz($request->id, true, false,true);
+        return $this->frontPagesView('quiz.single', compact('quiz'));
+    }
+
+
     public function olympics() {
         $now = now();
         $quizzes = Quiz::where('start_date', '<=', $now)
@@ -56,11 +64,6 @@ class QuizController extends WebBaseController
         return $this->frontPagesView('quiz.competition', compact('quizzes'));
     }
 
-    public function quiz(Request $request)
-    {
-        $quiz = $this->checkQuiz($request->id, true, false);
-        return $this->frontPagesView('quiz.single', compact('quiz'));
-    }
 
     public function pass(Request $request)
     {
@@ -220,7 +223,7 @@ class QuizController extends WebBaseController
         return redirect()->route('profile.quizzes');
     }
 
-    private function checkQuiz($id, $hidden = false, $with_questions = true)
+    private function checkQuiz($id, $hidden = false, $with_questions = true, $with_documents = true)
     {
         if($with_questions) {
             if ($hidden) {
@@ -229,9 +232,11 @@ class QuizController extends WebBaseController
                 $quiz = Quiz::where('id', $id)->with('questions.answers')->first();
             }
         }
+        elseif($with_documents){
+            $quiz = Quiz::where('id', $id)->with('documents')->first();
+        }
         else {
             $quiz = Quiz::where('id', $id)->first();
-
         }
         if (!$quiz) throw new WebServiceExplainedException('Тест не найден!');
         return $quiz;

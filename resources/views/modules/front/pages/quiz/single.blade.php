@@ -17,6 +17,12 @@
                     <div class="row">
                         <div class="quiz-description col-md-7 col-lg-7 col-xl-7">
                             <p>{{$quiz->description}}</p>
+
+                                @foreach($quiz->documents as $document)
+                                    <a href="{{$document->path}}" ><i class="fas fa-file"></i> Ережелерді жүктеп алу</a>
+                                    <br>
+                                @endforeach
+
                         </div>
                         <div class="col-md-5">
                             <div class="alert alert-warning">
