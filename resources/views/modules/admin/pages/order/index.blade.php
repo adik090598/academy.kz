@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>{{$order->id}}</td>
                                     <td>
-                                       {{$order->user->name}}
+                                       {{$order->user->fullName()}}
                                     </td>
                                     <td>{{$order->quiz->name}}</td>
                                     <td>{{$order->created_at}}</td>

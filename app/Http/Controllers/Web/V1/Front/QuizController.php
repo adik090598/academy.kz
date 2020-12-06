@@ -31,6 +31,7 @@ class QuizController extends WebBaseController
             ->withCount('questions')
             ->has('questions')
             ->get();
+
         $subjects = Subject::all();
         return $this->frontPagesView('quiz.index', compact('quizzes', 'subjects'));
     }
@@ -111,7 +112,6 @@ class QuizController extends WebBaseController
             ->first();
         if (!$order) {
             throw new WebServiceExplainedException('У вас нету оплаты по данному запросу');
-
         }
         $quiz_result = QuizResult::where('order_id', $order->id)->first();
         if ($quiz_result) {

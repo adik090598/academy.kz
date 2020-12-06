@@ -26,7 +26,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <input type="hidden" name="answers[{{$key}}][check]" value="0">
-                                                <input type="checkbox" {{$answer->is_right ? "checked" : ""}} name="answers[{{ $key }}][check]" value="1" aria-label="Checkbox for following text input">
+                                                <input class="check-answer" type="checkbox" {{$answer->is_right ? "checked" : ""}} name="answers[{{ $key }}][check]" value="1" aria-label="Checkbox for following text input">
                                             </div>
                                         </div>
                                         <input type="text" name="answers[{{$key}}][text]" class="form-control" value="{{$answer->answer}}" aria-label="answer text">
@@ -69,6 +69,11 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
+
+        $(document).on('click', 'input[type="checkbox"]', function() {
+            $('input[type="checkbox"]').not(this).prop('checked', false);
+        });
+
         var max_fields  = 10; //maximum input boxes allowed
         var wrapper = $('.answer_box'); //Fields wrapper
         var add_button = $('.add_field_button'); //Add button ID

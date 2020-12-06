@@ -36,14 +36,16 @@
                                         <p class="quiz-detail"><i class="fa fa-clock"></i> {{$quiz->duration}}
                                             минут
                                         </p>
+                                        <p class="quiz-detail"><i class="fas fa-file"></i><a href="{{$quiz->document_path}}" class=""> Тест ережесі</a>
+                                        </p>
                                         <div class="d-block d-lg-flex">
                                             <p class="quiz-detail"><i
-                                                    class="fas fa-tenge"></i>  {{ $quiz->price}}тг.</p>
+                                                    class="fas fa-tenge"></i>  {{$quiz->price}}тг.</p>
                                             <a href="{{route('quiz.single' ,['id'=> $quiz->id])}}"
                                                class="btn btn-primary ml-auto float-right">Тапсырыс беру</a>
                                         </div>
-                                        <a href="{{route('quiz.single' ,['id'=> $quiz->id])}}"
-                                           class="stretched-link"></a>
+{{--                                        <a href="#{{route('quiz.single' ,['id'=> $quiz->id])}}"--}}
+{{--                                           class="stretched-link"></a>--}}
                                     </div>
                                 </div>
                             </div>

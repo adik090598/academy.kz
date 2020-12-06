@@ -1,6 +1,7 @@
 <?php
 
 namespace App\View\Components\Admin;
+use App\Models\Entities\Order;
 use App\View\BaseComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -20,20 +21,24 @@ class Sidebar extends BaseComponent
 
     public function navList()
     {
+        $new_orders = Order::where('status', 0)->get();
 
         if ($this->user->isAdmin()) {
             return [
                 $this->navItem(route('admin.index'), 'ti-home', 'Главная'),
-                $this->navItem(route('order.index'), 'ti-email', 'Заявки'),
+                $this->navItem(route('order.index'), 'ti-email', $new_orders->count() ? 'Заявки ('.$new_orders->count().')' : 'Заявки'),
                 $this->navItem(route('quiz.index'), 'ti-check-box', 'Тесты'),
                 $this->navItem(route('competition.index'), 'ti-medall', 'Байкау'),
                 $this->navItem('#', 'ti-cup', 'Олимпиады'),
                 $this->navItem(route('result.index'), 'ti-bar-chart', 'Результаты'),
                 $this->navItem(route('subject.index'), 'ti-book', 'Предметы'),
-                $this->navItem(route('region.index'), 'ti-map', 'Регионы'),
-                $this->navItem(route('city.index'), 'ti-location-pin', 'Города'),
-                $this->navItem(route('area.index'), 'ti-map-alt', 'Район'),
-                $this->navItem(route('school.index'), 'ti-briefcase', 'Школа'),
+                $this->navItem('#', 'ti-map', 'Локализация',
+                [   $this->navItem(route('region.index'), 'ti-map', 'Регионы'),
+                    $this->navItem(route('city.index'), 'ti-location-pin', 'Города'),
+                    $this->navItem(route('area.index'), 'ti-map-alt', 'Район'),
+                    $this->navItem(route('school.index'), 'ti-briefcase', 'Школа'),
+                ]
+                ),
             ];
         } else {
             return [
