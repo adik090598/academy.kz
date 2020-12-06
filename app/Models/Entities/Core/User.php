@@ -30,8 +30,6 @@ class User extends Authenticatable
         'class_number', 'class_letter', 'school_id', 'subject_id'
     ];
 
-    public $fullname = 'surname'.'name'.'father_name';
-
     /**
      * The attributes that should be hidden for arrays.
      *
