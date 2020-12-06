@@ -7,6 +7,7 @@
             <li class="breadcrumb-item active" aria-current="page">Тест</li>
         </ol>
     </nav>
+
     <div class="row">
         <div class="col-md-12 mb-5">
             <div class="card h-100">
@@ -26,7 +27,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <input type="hidden" name="answers[0][check]" value="0">
-                                        <input class="check-answer" type="checkbox" name="answers[0][check]"  value="1" aria-label="Checkbox for following text input">
+                                        <input class="check" type="checkbox" name="answers[0][check]"  value="1" aria-label="Checkbox for following text input">
                                     </div>
                                 </div>
                                 <input type="text" name="answers[0][text]" required class="form-control" aria-label="answer text">
@@ -49,11 +50,9 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('.check-answer').click(function() {
-                alert("asd");
-                $('input:checkbox').not(this).prop('checked', false);
-            });
+
+        $(document).on('click', 'input[type="checkbox"]', function() {
+            $('input[type="checkbox"]').not(this).prop('checked', false);
         });
 
         var max_fields  = 10; //maximum input boxes allowed
@@ -69,7 +68,7 @@
                                     <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <input type="hidden" name="answers[${x}][check]" value="0">
-                                        <input class="check-answer" type="checkbox" name="answers[${x}][check]" value="1" aria-label="Checkbox for following text input">
+                                        <input class="check" type="checkbox" name="answers[${x}][check]" value="1" aria-label="Checkbox for following text input">
                                     </div>
                                     </div>
                                     <input type="text" name="answers[${x}][text]" class="form-control" aria-label="answer text">
@@ -80,12 +79,12 @@
                                     </div>
                                     </div>`); //add input box
                 x++;
-            }
+            }n
+
         });
         $(wrapper).on("click",".remove-date", function(e){ //user click on remove text
             e.preventDefault(); $(this).closest('div.removeMe').remove(); x--;
         })
         CKEDITOR.replace( 'description' );
-
     </script>
 @endsection

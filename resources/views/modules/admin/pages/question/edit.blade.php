@@ -69,6 +69,11 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
+
+        $(document).on('click', 'input[type="checkbox"]', function() {
+            $('input[type="checkbox"]').not(this).prop('checked', false);
+        });
+
         var max_fields  = 10; //maximum input boxes allowed
         var wrapper = $('.answer_box'); //Fields wrapper
         var add_button = $('.add_field_button'); //Add button ID
