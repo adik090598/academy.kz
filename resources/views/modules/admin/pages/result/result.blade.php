@@ -25,23 +25,22 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Вопрос</th>
-                                <th>Ответы</th>
+                                <th>Ответ участника</th>
+                                <th>Все ответы</th>
                                 <th>Балл</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($result->answers as $answer)
-                                <tr>
+                                <tr  style="background: {{ $answer->is_right ? "#AFEDD7" : "#FFD1C9" }}">
                                     <td>{{ $answer->answer->question->id }}</td>
                                     <td style="max-width: 100px">{!! $answer->answer->question->question_text !!}</td>
+                                    <td style="max-width: 100px">{!! $answer->answer->answer !!}</td>
                                     <td>
                                         <ul style="list-style: none">
                                             @foreach($answer->answer->question->answers as $option)
                                                 <li>
-                                                    @if($option->is_right)
-                                                        <i class="ti-check"></i>
-                                                    @endif
-                                                        {{$option->answer}}
+                                                    <h3><span class="badge {{ $option->is_right ? "badge-primary" : "badge-light" }} ">{{$option->answer}}</span></h3>
                                                 </li>
                                             @endforeach
                                         </ul>
